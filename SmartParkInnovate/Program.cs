@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddApplicationDbContext(builder.Configuration);
@@ -33,6 +31,3 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 await app.RunAsync();
-
-
-ViewComponent 
