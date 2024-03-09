@@ -1,12 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SmartParkInnovate.Infrastructure.Data.Models
 {
-    internal class Worker
+    public class Worker : IdentityUser
     {
+        public Worker()
+        {
+            this.Vehicles = new List<Vehicle>();
+        }
+
+
+        [Required]
+        public int DepartmentId { get; set; }
+
+        [ForeignKey(nameof(Worker))]
+        public Department Department { get; set; }
+
+
+        [InverseProperty(nameof(Worker))]
+        public ICollection<Vehicle> Vehicles { get; set; }    
     }
 }
