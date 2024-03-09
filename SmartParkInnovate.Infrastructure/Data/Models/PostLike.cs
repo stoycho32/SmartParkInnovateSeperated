@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SmartParkInnovate.Infrastructure.Data.Models
 {
-    internal class PostLike
+    public class PostLike
     {
+        [Key]
+        public int Id { get; set; }
+
+        [Required]
+        public int OwnerId { get; set; }
+
+        [ForeignKey(nameof(OwnerId))]
+        public Worker Owner { get; set; }
     }
 }
