@@ -25,6 +25,12 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
         [Required]
         public DateTime PostDate { get; init; }
 
+        [Required]
+        public string OwnerId { get; set; }
+
+        [ForeignKey(nameof(OwnerId))]
+        public Worker Owner { get; set; }
+
 
         [InverseProperty(nameof(Post))]
         public ICollection<PostLike> Likes { get; set; }

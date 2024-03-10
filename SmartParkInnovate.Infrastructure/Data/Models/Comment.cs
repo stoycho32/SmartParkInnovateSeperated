@@ -25,7 +25,7 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
 
 
         [Required]
-        public int OwnerId { get; set; }
+        public string OwnerId { get; set; }
 
         [ForeignKey(nameof(OwnerId))]
         public Worker Owner { get; set; }
