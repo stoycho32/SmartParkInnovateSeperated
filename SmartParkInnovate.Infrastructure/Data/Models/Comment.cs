@@ -36,6 +36,7 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
 
         [Required]
         public int PostId { get; set; }
+
         [ForeignKey(nameof(PostId))]
         public Post Post { get; set; }
     }

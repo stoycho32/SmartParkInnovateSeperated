@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SmartParkInnovate.Infrastructure.Data.Models;
+using System.Reflection.Emit;
 
 namespace SmartParkInnovate.Data
 {
@@ -22,6 +23,21 @@ namespace SmartParkInnovate.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+           // builder.Entity<Worker>()
+           //     .HasMany(c => c.Vehicles)
+           //     .WithOne(c => c.Worker)
+           //     .OnDelete(DeleteBehavior.Restrict);
+           //
+           // builder.Entity<Vehicle>()
+           //     .HasOne(c => c.Worker)
+           //     .WithMany(c => c.Vehicles)
+           //     .OnDelete(DeleteBehavior.Restrict);
+
+            foreach (var relationship in builder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                relationship.DeleteBehavior = DeleteBehavior.Restrict;
+            }
+
             base.OnModelCreating(builder);
         }
     }
