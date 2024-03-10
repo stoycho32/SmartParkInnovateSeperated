@@ -9,10 +9,10 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
         public int Id { get; set; }
 
         [Required]
-        public string OwnerId { get; set; }
+        public string WorkerId { get; set; }
 
-        [ForeignKey(nameof(OwnerId))]
-        public Worker Owner { get; set; }
+        [ForeignKey(nameof(WorkerId))]
+        public Worker Worker { get; set; }
 
 
         [Required]

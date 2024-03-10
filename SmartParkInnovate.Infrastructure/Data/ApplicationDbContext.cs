@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using SmartParkInnovate.Infrastructure.Data.Models;
 
 namespace SmartParkInnovate.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<Worker>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -11,13 +12,16 @@ namespace SmartParkInnovate.Data
 
         }
 
-
+        public DbSet<Worker> Workers { get; set; }
+        public DbSet<Vehicle> Vehicles { get; set; }
+        public DbSet<ParkingSpot> parkingSpots { get; set; }
+        public DbSet<ParkingSpotOccupation> ParkingSpotOccupations { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<PostLike> PostLikes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-
-
-
             base.OnModelCreating(builder);
         }
     }

@@ -12,14 +12,7 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
         }
 
 
-        [Required]
-        public int DepartmentId { get; set; }
-
-        [ForeignKey(nameof(Worker))]
-        public Department Department { get; set; }
-
-
         [InverseProperty(nameof(Worker))]
-        public ICollection<Vehicle> Vehicles { get; set; }    
+        public ICollection<Vehicle> Vehicles { get; set; }
     }
 }
