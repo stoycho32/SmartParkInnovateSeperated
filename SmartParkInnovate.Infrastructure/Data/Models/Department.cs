@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SmartParkInnovate.Infrastructure.Data.Constants;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 
@@ -16,7 +17,7 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
 
 
         [Required]
-        [StringLength(100, MinimumLength = 3, ErrorMessage = "Department name must be between 3 and 100 characters long.")]
+        [StringLength(100, MinimumLength = DepartmentNameMinLength, ErrorMessage = ErrorMessages.DepartmentNameLength)]
         public string Name { get; set; } = null!;
 
 

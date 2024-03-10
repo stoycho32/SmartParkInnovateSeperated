@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SmartParkInnovate.Infrastructure.Data.Constants
+﻿namespace SmartParkInnovate.Infrastructure.Data.Constants
 {
-    internal class DataConstants
+    public static class DataConstants
     {
+        public const int DepartmentNameMinLength = 3;
+        public const int DepartmentNameMaxLength = 100;
+
+
+
     }
 }

@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SmartParkInnovate.Infrastructure.Data.Constants
+﻿namespace SmartParkInnovate.Infrastructure.Data.Constants
 {
-    internal class ErrorMessages
+    public static class ErrorMessages
     {
+        public const string DepartmentNameLength
+            = "Department name must be between 3 and 100 characters long.";
+
+
     }
 }
