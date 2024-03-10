@@ -30,7 +30,7 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
         public Vehicle Vehicle { get; set; }
 
         [Required]
-        public DateTime EnterDate { get; set; }
+        public DateTime EnterDate { get; init; }
 
         [Required]
         public DateTime? ExitDate { get; set; }
