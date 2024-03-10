@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SmartParkInnovate.Infrastructure.Data.Constants;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SmartParkInnovate.Infrastructure.Data.Models
@@ -18,7 +19,9 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
 
 
         [Required]
-        [StringLength(int.MaxValue, MinimumLength = 1, ErrorMessage = "Post body cannot be empty.")]
+        [StringLength(DataConstants.CommentBodyMaxValue,
+            MinimumLength = DataConstants.CommentBodyMinValue,
+            ErrorMessage = ErrorMessages.PostBodyErrorMessage)]
         public string PostBody { get; set; } = null!;
 
 

@@ -17,7 +17,9 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
 
 
         [Required]
-        [StringLength(100, MinimumLength = DepartmentNameMinLength, ErrorMessage = ErrorMessages.DepartmentNameLength)]
+        [StringLength(DataConstants.DepartmentNameMaxLength,
+            MinimumLength = DataConstants.DepartmentNameMinLength,
+            ErrorMessage = ErrorMessages.DepartmentNameLengthErrorMessage)]
         public string Name { get; set; } = null!;
 
 
