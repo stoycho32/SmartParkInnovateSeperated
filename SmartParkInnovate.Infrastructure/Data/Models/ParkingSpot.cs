@@ -7,7 +7,6 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
     {
         public ParkingSpot()
         {
-            this.IsReserved = false;
             this.IsOccupied = false;
         }
 
@@ -16,15 +15,7 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
 
 
         [Required]
-        public bool IsReserved { get; set; }
-        [Required]
         public bool IsOccupied { get; set; }
-
-
-        public int? ReservationVehicleId { get; set; }
-
-        [ForeignKey(nameof(ReservationVehicleId))]
-        public Vehicle? ReservationVehicle { get; set; }
 
 
         public int? OccupationVehicleId { get; set; }
