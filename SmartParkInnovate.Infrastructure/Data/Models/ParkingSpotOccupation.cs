@@ -7,10 +7,8 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
     {
         public ParkingSpotOccupation()
         {
-            this.EnterDate = DateTime.Now;
-            this.ExitDate = null;
+            this.EnterDateTime = DateTime.Now;
         }
-
 
         [Key]
         public int Id { get; set; }
@@ -30,9 +28,8 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
         public Vehicle Vehicle { get; set; }
 
         [Required]
-        public DateTime EnterDate { get; init; }
+        public DateTime EnterDateTime { get; init; }
 
-        [Required]
-        public DateTime? ExitDate { get; set; }
+        public DateTime? ExitDateTime { get; set; }
     }
 }

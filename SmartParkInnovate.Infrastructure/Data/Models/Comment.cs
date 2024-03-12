@@ -1,6 +1,7 @@
-﻿using SmartParkInnovate.Infrastructure.Data.Constants;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static SmartParkInnovate.Infrastructure.Data.Constants.DataConstants;
+using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages;
 
 namespace SmartParkInnovate.Infrastructure.Data.Models
 {
@@ -17,9 +18,7 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
 
 
         [Required]
-        [StringLength(DataConstants.CommentBodyMaxValue,
-            MinimumLength = DataConstants.CommentBodyMinValue,
-            ErrorMessage = ErrorMessages.CommentBodyErrorMessage)]
+        [StringLength(CommentBodyMaxValue, MinimumLength = CommentBodyMinValue, ErrorMessage = CommentBodyErrorMessage)]
         public string CommentBody { get; set; } = null!;
 
 
