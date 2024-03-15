@@ -1,22 +1,20 @@
-﻿using SmartParkInnovate.Core.Contracts;
+﻿using Microsoft.AspNetCore.Identity;
+using SmartParkInnovate.Core.Contracts;
+using SmartParkInnovate.Infrastructure.Repository;
+using System.Runtime.CompilerServices;
 
 namespace SmartParkInnovate.Core.Services
 {
     public class ParkingService : IParkingService
     {
+        private IRepository repository;
 
-
-        public Task Details()
+        public ParkingService(IRepository repository)
         {
-            throw new NotImplementedException();
+            this.repository = repository;
         }
 
-        public Task Disable()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task Enable()
+        public Task Use()
         {
             throw new NotImplementedException();
         }
@@ -26,7 +24,17 @@ namespace SmartParkInnovate.Core.Services
             throw new NotImplementedException();
         }
 
-        public Task Use()
+        public Task Details()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Enable()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Disable()
         {
             throw new NotImplementedException();
         }
