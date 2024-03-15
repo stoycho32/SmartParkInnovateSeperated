@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SmartParkInnovate.Core.Contracts
+﻿namespace SmartParkInnovate.Core.Contracts
 {
-    internal interface IParkingService
+    public interface IParkingService
     {
+        public Task Use();
+
+        public Task Exit();
+
+        public Task Details();
+
+        public Task Enable();
+
+        public Task Disable();
+
     }
 }
