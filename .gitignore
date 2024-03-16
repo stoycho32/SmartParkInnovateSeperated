@@ -361,3 +361,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/SmartParkInnovate.Infrastructure/Repository/Repository.cs
+/SmartParkInnovate.Infrastructure/Repository/IRepository.cs
+/SmartParkInnovate.Core/Services/ParkingService.cs
+/SmartParkInnovate/Controllers/ParkingController.cs
+/SmartParkInnovate/Controllers/ParkingController.cs
+/SmartParkInnovate/Controllers/ParkingController.cs
