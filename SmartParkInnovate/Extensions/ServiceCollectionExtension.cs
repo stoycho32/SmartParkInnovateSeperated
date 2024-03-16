@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SmartParkInnovate.Core.Contracts;
 using SmartParkInnovate.Data;
 using SmartParkInnovate.Infrastructure.Data.Models;
 using SmartParkInnovate.Infrastructure.Repository;
@@ -20,6 +21,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 options.UseSqlServer(connectionString));
 
             services.AddScoped<IRepository, Repository>();
+
+            services.AddScoped<IParkingService, IParkingService>();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
