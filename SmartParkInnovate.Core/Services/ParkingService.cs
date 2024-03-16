@@ -7,7 +7,7 @@ namespace SmartParkInnovate.Core.Services
 {
     public class ParkingService : IParkingService
     {
-        private IRepository repository;
+        private readonly IRepository repository;
 
         public ParkingService(IRepository repository)
         {
