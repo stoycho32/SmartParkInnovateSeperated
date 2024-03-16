@@ -119,7 +119,7 @@ namespace SmartParkInnovate.Core.Services
             throw new NotImplementedException();
         }
 
-        public async Task All()
+        public Task All()
         {
             this.repository.AllAsync<ParkingSpot>();
         }
