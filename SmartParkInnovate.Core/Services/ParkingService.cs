@@ -3,6 +3,7 @@ using SmartParkInnovate.Core.Contracts;
 using SmartParkInnovate.Core.Models.ParkingSpot;
 using SmartParkInnovate.Infrastructure.Data.Models;
 using SmartParkInnovate.Infrastructure.Repository;
+using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages;
 
 namespace SmartParkInnovate.Core.Services
 {
@@ -73,7 +74,7 @@ namespace SmartParkInnovate.Core.Services
 
             if (parkingSpot == null)
             {
-                throw new ArgumentException("Invalid Parking Spot");
+                throw new ArgumentException(string.Format(ParkingSpotErrorMessages.InvalidParkingSpotErrorMessage));
             }
 
             if (!parkingSpot.IsOccupied && parkingSpot.OccupationVehicle == null)

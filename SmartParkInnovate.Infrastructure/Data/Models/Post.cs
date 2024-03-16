@@ -22,7 +22,9 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
 
 
         [Required]
-        [StringLength(CommentBodyMaxValue, MinimumLength = CommentBodyMinValue, ErrorMessage = PostBodyErrorMessage)]
+        [StringLength(PostDataConstants.PostBodyMaxValue,
+            MinimumLength = PostDataConstants.PostBodyMaxValue,
+            ErrorMessage = PostErrorMessages.PostBodyErrorMessage)]
         public string PostBody { get; set; } = null!;
 
 

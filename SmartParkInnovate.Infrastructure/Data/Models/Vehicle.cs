@@ -14,12 +14,15 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
 
 
         [Required]
-        [StringLength(VehicleMakeMaxLength, MinimumLength = VehicleMakeMinLength)]
+        [StringLength(VehicleDataConstants.VehicleMakeMaxLength,
+            MinimumLength = VehicleDataConstants.VehicleMakeMinLength)]
         public string Make { get; set; } = null!;
 
 
         [Required]
-        [StringLength(VehicleModelMaxLength, MinimumLength = VehicleModelMinLength, ErrorMessage = VehicleModelLengthErrorMessage)]
+        [StringLength(VehicleDataConstants.VehicleModelMaxLength,
+            MinimumLength = VehicleDataConstants.VehicleModelMinLength,
+            ErrorMessage = VehicleErrorMessages.VehicleModelLengthErrorMessage)]
         public string Model { get; set; } = null!;
 
 

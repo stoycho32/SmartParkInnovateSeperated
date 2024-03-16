@@ -18,7 +18,9 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
 
 
         [Required]
-        [StringLength(CommentBodyMaxValue, MinimumLength = CommentBodyMinValue, ErrorMessage = CommentBodyErrorMessage)]
+        [StringLength(CommentDataConstants.CommentBodyMaxValue,
+            MinimumLength = CommentDataConstants.CommentBodyMinValue,
+            ErrorMessage = CommentErrorMessages.CommentBodyErrorMessage)]
         public string CommentBody { get; set; } = null!;
 
 
