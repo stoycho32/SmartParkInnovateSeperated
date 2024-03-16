@@ -25,29 +25,29 @@ namespace SmartParkInnovate.Core.Services
 
             if (parkingSpot == null)
             {
-                throw new ArgumentException("Invalid Parking Spot");
+                throw new ArgumentException(string.Format(ParkingSpotErrorMessages.InvalidParkingSpotErrorMessage));
             }
 
             if (!parkingSpot.IsEnabled)
             {
-                throw new InvalidOperationException("Parking Spot Is Not Available");
+                throw new InvalidOperationException(string.Format(ParkingSpotErrorMessages.ParkingSpotIsDisabledErrorMessage));
             }
 
             if (parkingSpot.IsOccupied)
             {
-                throw new InvalidOperationException("Parking Spot Is Already In Use");
+                throw new InvalidOperationException(string.Format(ParkingSpotErrorMessages.ParkingSpotAlreadyInUseErrorMessage));
             }
 
             if (worker == null)
             {
-                throw new ArgumentException("Invalid Credentials");
+                throw new ArgumentException(WorkerErrorMessages.InvalidWorkerErrorMessage);
             }
 
             vehicle = worker.Vehicles.FirstOrDefault(c => c.LicensePlate == licensePlate);
 
             if (vehicle == null)
             {
-                throw new ArgumentException("Invalid Vehicle");
+                throw new ArgumentException(string.Format(VehicleErrorMessages.InvalidVehicleErrorMessage));
             }
 
             parkingSpot.IsOccupied = true;
@@ -79,12 +79,12 @@ namespace SmartParkInnovate.Core.Services
 
             if (!parkingSpot.IsOccupied && parkingSpot.OccupationVehicle == null)
             {
-                throw new InvalidOperationException("Parking Spot Is Not Occupied");
+                throw new InvalidOperationException(string.Format(ParkingSpotErrorMessages.ParkingSpotNotOccupiedErrorMessage));
             }
 
             if (!parkingSpot.IsEnabled)
             {
-                throw new InvalidOperationException("Parking Spot Is Not Available. Cannot Be Exited");
+                throw new InvalidOperationException(ParkingSpotErrorMessages.ParkingSpotIsDisabledErrorMessage);
             }
 
             int? vehicleId = parkingSpot.OccupationVehicle.Id;
@@ -94,7 +94,7 @@ namespace SmartParkInnovate.Core.Services
 
             if (occupation == null)
             {
-                throw new ArgumentException("Something Unexpected Occurred");
+                throw new ArgumentException(string.Format(GeneralErrorMessages.SomethingUnexpectedOccuredErrorMessage));
             }
 
             parkingSpot.IsOccupied = false;

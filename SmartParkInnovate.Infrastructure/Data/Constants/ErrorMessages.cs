@@ -9,6 +9,7 @@
 
         public static class VehicleErrorMessages
         {
+            public const string InvalidVehicleErrorMessage = "Invalid Vehicle";
             public const string VehicleMakeLengthErrorMessage = "Car make must be between 2 and 50 characters long.";
             public const string VehicleModelLengthErrorMessage = "Car model name must be between 3 and 50 characters long.";
         }
@@ -26,7 +27,15 @@
         public static class ParkingSpotErrorMessages
         {
             public const string InvalidParkingSpotErrorMessage = "Invalid Parking Spot";
-
+            public const string ParkingSpotNotOccupiedErrorMessage = "Parking Spot Is Not Occupied";
+            public const string ParkingSpotIsDisabledErrorMessage = "Parking Spot Is Disabled";
+            public const string ParkingSpotAlreadyInUseErrorMessage = "Parking Spot Is Already In Use";
         }
+
+        public static class WorkerErrorMessages
+        {
+            public const string InvalidWorkerErrorMessage = "Invalid Credentials";
+        }
+
     }
 }
