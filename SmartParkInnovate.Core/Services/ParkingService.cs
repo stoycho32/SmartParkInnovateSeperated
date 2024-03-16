@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
-using SmartParkInnovate.Core.Contracts;
+﻿using SmartParkInnovate.Core.Contracts;
 using SmartParkInnovate.Infrastructure.Data.Models;
 using SmartParkInnovate.Infrastructure.Repository;
-using System.Runtime.CompilerServices;
 
 namespace SmartParkInnovate.Core.Services
 {
@@ -28,12 +26,12 @@ namespace SmartParkInnovate.Core.Services
 
             if (!parkingSpot.IsEnabled)
             {
-                throw new ArgumentException("Parking Spot Is Not Enabled");
+                throw new InvalidOperationException("Parking Spot Is Not Available");
             }
 
             if (parkingSpot.IsOccupied)
             {
-                throw new ArgumentException("Parking Spot Is Already In Use");
+                throw new InvalidOperationException("Parking Spot Is Already In Use");
             }
 
             if (worker == null)
@@ -45,6 +43,21 @@ namespace SmartParkInnovate.Core.Services
             {
                 throw new ArgumentException("Invalid Vehicle");
             }
+
+            parkingSpot.IsOccupied = true;
+            parkingSpot.OccupationVehicleId = vehicle.Id;
+            parkingSpot.OccupationVehicle = vehicle;
+
+            ParkingSpotOccupation occupation = new ParkingSpotOccupation()
+            {
+                ParkingSpotId = parkingSpot.Id,
+                ParkingSpot = parkingSpot,
+                VehicleId = vehicle.Id,
+                Vehicle = vehicle
+            };
+
+            await this.repository.AddAsync<ParkingSpotOccupation>(occupation);
+            await this.repository.SaveChangesAsync();
         }
 
         public Task Exit()
