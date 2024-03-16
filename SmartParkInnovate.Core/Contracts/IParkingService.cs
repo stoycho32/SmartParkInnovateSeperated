@@ -4,7 +4,7 @@
     { 
         public Task Use(int id, string userId, string licensePlate);
 
-        public Task Exit(int id, string userId, string licensePlate);
+        public Task Exit(int id, string userId);
 
         public Task Details();
 

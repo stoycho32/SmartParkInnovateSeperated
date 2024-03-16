@@ -65,7 +65,7 @@ namespace SmartParkInnovate.Core.Services
             await this.repository.SaveChangesAsync();
         }
 
-        public async Task Exit(int id, string userId, string licensePlate)
+        public async Task Exit(int id, string userId)
         {
             ParkingSpot? parkingSpot = await this.repository.GetByIdAsync<ParkingSpot>(id);
             Worker? worker = await this.repository.GetByIdAsync<Worker>(userId);
@@ -87,7 +87,7 @@ namespace SmartParkInnovate.Core.Services
 
             int? vehicleId = parkingSpot.OccupationVehicle.Id;
 
-            ParkingSpotOccupation? occupation = await this.repository.All<ParkingSpotOccupation>()
+            ParkingSpotOccupation? occupation = await this.repository.AllAsync<ParkingSpotOccupation>()
                 .FirstOrDefaultAsync(c => c.ParkingSpotId == id && c.Vehicle.Id == vehicleId && c.ExitDateTime == null);
 
             if (occupation == null)
@@ -119,9 +119,9 @@ namespace SmartParkInnovate.Core.Services
             throw new NotImplementedException();
         }
 
-        public Task All()
+        public async Task All()
         {
-            throw new NotImplementedException();
+            this.repository.AllAsync<ParkingSpot>();
         }
 
         public Task NotOccupied()
