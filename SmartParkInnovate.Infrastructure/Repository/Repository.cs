@@ -25,20 +25,20 @@ namespace SmartParkInnovate.Infrastructure.Repository
 
         public async Task AddAsync<T>(T entity) where T : class
         {
-            await DbSet<T>().
+            await DbSet<T>().AddAsync(entity);
         }
 
         public async Task<T?> GetByIdAsync<T>(object id) where T : class
         {
-            throw new NotImplementedException();
+            return await DbSet<T>().FindAsync(id);
         }
 
-        public Task<int> SaveChangesAsync()
+        public async Task<int> SaveChangesAsync()
         {
-            throw new NotImplementedException();
+            return await this.context.SaveChangesAsync();
         }
 
-        private IQueryable<T> DbSet<T>() where T : class
+        private DbSet<T> DbSet<T>() where T : class
         {
             return this.context.Set<T>();
         }
