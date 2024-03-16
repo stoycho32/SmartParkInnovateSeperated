@@ -1,4 +1,6 @@
-﻿namespace SmartParkInnovate.Core.Contracts
+﻿using SmartParkInnovate.Core.Models.ParkingSpot;
+
+namespace SmartParkInnovate.Core.Contracts
 {
     public interface IParkingService
     { 
@@ -12,7 +14,7 @@
 
         public Task Disable();
 
-        public Task All();
+        public Task<List<ParkingSpotViewModel>> All();
 
         public Task NotOccupied();
 
