@@ -13,7 +13,7 @@ namespace SmartParkInnovate.Infrastructure.Repository
         }
 
         
-        public IQueryable<T> All<T>() where T : class
+        public IQueryable<T> AllAsync<T>() where T : class
         {
             return this.DbSet<T>();
         }
