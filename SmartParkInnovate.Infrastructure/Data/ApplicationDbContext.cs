@@ -15,7 +15,7 @@ namespace SmartParkInnovate.Data
 
         public DbSet<Worker> Workers { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
-        public DbSet<ParkingSpot> parkingSpots { get; set; }
+        public DbSet<ParkingSpot> ParkingSpots { get; set; }
         public DbSet<ParkingSpotOccupation> ParkingSpotOccupations { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Post> Posts { get; set; }
@@ -23,16 +23,6 @@ namespace SmartParkInnovate.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-           // builder.Entity<Worker>()
-           //     .HasMany(c => c.Vehicles)
-           //     .WithOne(c => c.Worker)
-           //     .OnDelete(DeleteBehavior.Restrict);
-           //
-           // builder.Entity<Vehicle>()
-           //     .HasOne(c => c.Worker)
-           //     .WithMany(c => c.Vehicles)
-           //     .OnDelete(DeleteBehavior.Restrict);
-
             foreach (var relationship in builder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
             {
                 relationship.DeleteBehavior = DeleteBehavior.Restrict;
