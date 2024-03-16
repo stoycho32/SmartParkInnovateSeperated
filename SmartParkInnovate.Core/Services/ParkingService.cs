@@ -122,7 +122,7 @@ namespace SmartParkInnovate.Core.Services
         
         public async Task<List<ParkingSpotViewModel>> All()
         {
-            Task<List<ParkingSpotViewModel>> parkingSpots = this.repository.All<ParkingSpot>()
+            List<ParkingSpotViewModel> parkingSpots = await this.repository.All<ParkingSpot>()
                 .Select(c => new ParkingSpotViewModel()
                 {
                     Id = c.Id,
@@ -133,7 +133,7 @@ namespace SmartParkInnovate.Core.Services
                 }).ToListAsync();
 
 
-            return await parkingSpots;
+            return parkingSpots;
         }
 
         public Task NotOccupied()
