@@ -1,4 +1,5 @@
-﻿using SmartParkInnovate.Core.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using SmartParkInnovate.Core.Contracts;
 using SmartParkInnovate.Infrastructure.Data.Models;
 using SmartParkInnovate.Infrastructure.Repository;
 
@@ -56,16 +57,51 @@ namespace SmartParkInnovate.Core.Services
                 ParkingSpotId = parkingSpot.Id,
                 ParkingSpot = parkingSpot,
                 VehicleId = vehicle.Id,
-                Vehicle = vehicle
+                Vehicle = vehicle,
+                ExitDateTime = null
             };
 
             await this.repository.AddAsync<ParkingSpotOccupation>(occupation);
             await this.repository.SaveChangesAsync();
         }
 
-        public Task Exit()
+        public async Task Exit(int id, string userId, string licensePlate)
         {
-            throw new NotImplementedException();
+            ParkingSpot? parkingSpot = await this.repository.GetByIdAsync<ParkingSpot>(id);
+            Worker? worker = await this.repository.GetByIdAsync<Worker>(userId);
+
+            if (parkingSpot == null)
+            {
+                throw new ArgumentException("Invalid Parking Spot");
+            }
+
+            if (!parkingSpot.IsOccupied && parkingSpot.OccupationVehicle == null)
+            {
+                throw new InvalidOperationException("Parking Spot Is Not Occupied");
+            }
+
+            if (!parkingSpot.IsEnabled)
+            {
+                throw new InvalidOperationException("Parking Spot Is Not Available. Cannot Be Exited");
+            }
+
+            int? vehicleId = parkingSpot.OccupationVehicle.Id;
+
+            ParkingSpotOccupation? occupation = await this.repository.All<ParkingSpotOccupation>()
+                .FirstOrDefaultAsync(c => c.ParkingSpotId == id && c.Vehicle.Id == vehicleId && c.ExitDateTime == null);
+
+            if (occupation == null)
+            {
+                throw new ArgumentException("Something Unexpected Occurred");
+            }
+
+            parkingSpot.IsOccupied = false;
+            parkingSpot.OccupationVehicleId = null;
+            parkingSpot.OccupationVehicle = null;
+
+            occupation.ExitDateTime = DateTime.Now;
+
+            await this.repository.SaveChangesAsync();
         }
 
         public Task Details()
