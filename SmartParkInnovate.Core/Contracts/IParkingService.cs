@@ -2,7 +2,7 @@
 {
     public interface IParkingService
     {
-        public Task Use();
+        public Task Use(int id, string userId, string licensePlate);
 
         public Task Exit();
 
