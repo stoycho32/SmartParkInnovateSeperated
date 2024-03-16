@@ -17,7 +17,8 @@ namespace SmartParkInnovate.Core.Services
         {
             ParkingSpot? parkingSpot = await this.repository.GetByIdAsync<ParkingSpot>(id);
             Worker? worker = await this.repository.GetByIdAsync<Worker>(userId);
-            Vehicle? vehicle = worker.Vehicles.FirstOrDefault(c => c.LicensePlate == licensePlate);
+
+            Vehicle? vehicle = null;
 
             if (parkingSpot == null)
             {
@@ -39,7 +40,9 @@ namespace SmartParkInnovate.Core.Services
                 throw new ArgumentException("Invalid Credentials");
             }
 
-            if(vehicle == null)
+            vehicle = worker.Vehicles.FirstOrDefault(c => c.LicensePlate == licensePlate);
+
+            if (vehicle == null)
             {
                 throw new ArgumentException("Invalid Vehicle");
             }
@@ -76,6 +79,21 @@ namespace SmartParkInnovate.Core.Services
         }
 
         public Task Disable()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task All()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task NotOccupied()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Occupied()
         {
             throw new NotImplementedException();
         }

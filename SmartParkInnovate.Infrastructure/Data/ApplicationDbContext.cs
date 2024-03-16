@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SmartParkInnovate.Infrastructure.Data.Models;
-using System.Reflection.Emit;
+using SmartParkInnovate.Infrastructure.Data.SeedDB;
 
 namespace SmartParkInnovate.Data
 {
@@ -27,6 +27,8 @@ namespace SmartParkInnovate.Data
             {
                 relationship.DeleteBehavior = DeleteBehavior.Restrict;
             }
+
+            builder.ApplyConfiguration(new ParkingSpotConfiguration());
 
             base.OnModelCreating(builder);
         }
