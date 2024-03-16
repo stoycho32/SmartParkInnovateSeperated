@@ -16,8 +16,8 @@ namespace SmartParkInnovate.Core.Contracts
 
         public Task<List<ParkingSpotViewModel>> All();
 
-        public Task NotOccupied();
+        public Task<List<ParkingSpotViewModel>> NotOccupied();
 
-        public Task Occupied();
+        public Task<List<ParkingSpotViewModel>> Occupied();
     }
 }

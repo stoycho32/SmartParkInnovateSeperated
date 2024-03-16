@@ -136,14 +136,38 @@ namespace SmartParkInnovate.Core.Services
             return parkingSpots;
         }
 
-        public Task NotOccupied()
+        public async Task<List<ParkingSpotViewModel>> NotOccupied()
         {
-            throw new NotImplementedException();
+            List<ParkingSpotViewModel> parkingSpots = await this.repository.All<ParkingSpot>()
+                .Where(c => c.IsOccupied == false)
+                .Select(c => new ParkingSpotViewModel()
+                {
+                    Id = c.Id,
+                    IsEnabled = c.IsEnabled,
+                    IsOccupied = c.IsOccupied,
+                    OccupationVehicleId = c.OccupationVehicleId,
+                    OccupationVehicle = c.OccupationVehicle
+                }).ToListAsync();
+
+
+            return parkingSpots;
         }
 
-        public Task Occupied()
+        public async Task<List<ParkingSpotViewModel>> Occupied()
         {
-            throw new NotImplementedException();
+            List<ParkingSpotViewModel> parkingSpots = await this.repository.All<ParkingSpot>()
+                .Where(c => c.IsOccupied == true)
+                .Select(c => new ParkingSpotViewModel()
+                {
+                    Id = c.Id,
+                    IsEnabled = c.IsEnabled,
+                    IsOccupied = c.IsOccupied,
+                    OccupationVehicleId = c.OccupationVehicleId,
+                    OccupationVehicle = c.OccupationVehicle
+                }).ToListAsync();
+
+
+            return parkingSpots;
         }
     }
 }
