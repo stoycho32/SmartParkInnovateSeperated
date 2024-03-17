@@ -37,5 +37,10 @@
             public const string InvalidWorkerErrorMessage = "Invalid Credentials";
         }
 
+        public static class GeneralErrorMessages
+        {
+            public const string SomethingUnexpectedOccuredErrorMessage = "Something Unexpected Occured";
+        }
+
     }
 }
