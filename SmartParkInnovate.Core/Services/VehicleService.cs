@@ -11,7 +11,5 @@ namespace SmartParkInnovate.Core.Services
             this.repository = repository;
         }
 
-
-
     }
 }
