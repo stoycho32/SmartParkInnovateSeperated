@@ -4,24 +4,31 @@
 @inject UserManager<Worker> UserManager
 
 <ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User))
-{
-    <li class="nav-item">
-            <a class="nav-link text-light" style="color: #CCE5EA" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name.ToString()</a>
-    </li>
-    <li class="nav-item">
-        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <p class="nav-link text-light" style="color: #CCE5EA">Hello @User.Identity.Name!</p>
+        </li>
+        <li class="nav-item">
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                 <button type="submit" class="nav-link btn btn-link text-light" style="color: #DE3939 !important">Logout</button>
-        </form>
-    </li>
-}
-else
-{
-    <li class="nav-item">
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
             <a class="nav-link text-light" style="color:#CCE5EA" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
-    <li class="nav-item">
+        </li>
+        <li class="nav-item">
             <a class="nav-link text-light" style="color:#CCE5EA" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </li>
-}
+        </li>
+    }
 </ul>
+
+
+
+
+
+@* <a class="nav-link text-light" style="color: #CCE5EA" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name</a>
+           *@
