@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SmartParkInnovate.Core.Contracts;
 
 namespace SmartParkInnovate.Controllers
 {
+    [Authorize]
     public class ParkingController : Controller
     {
         private readonly IParkingService parkingService;
@@ -13,10 +15,17 @@ namespace SmartParkInnovate.Controllers
         }
 
 
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> ParkingSpots()
         {
-            var parkingSpots = await this.parkingService.All();
-            return View(nameof(All));
+            if (User.Identity.IsAuthenticated)
+            {
+                var parkingSpots = await this.parkingService.All();
+                return View(nameof(ParkingSpots));
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
         }
     }
 }
