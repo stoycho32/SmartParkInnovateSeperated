@@ -19,8 +19,8 @@ namespace SmartParkInnovate.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                var parkingSpots = await this.parkingService.All();
-                return View(nameof(ParkingSpots));
+                List<Core.Models.ParkingSpot.ParkingSpotViewModel> parkingSpots = await this.parkingService.All();
+                return View(parkingSpots);
             }
             else
             {

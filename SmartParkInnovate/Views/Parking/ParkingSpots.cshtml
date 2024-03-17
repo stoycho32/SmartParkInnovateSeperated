@@ -1,15 +1,35 @@
 ﻿@using SmartParkInnovate.Core.Models.ParkingSpot;
 
-@model ParkingSpotViewModel
+@model IEnumerable<ParkingSpotViewModel>
 
+<br />
+<body style="background-color: #4C98CF">
+    <div class="card-deck">
+        @foreach (var spot in @Model)
+        {
+            @if(!spot.IsOccupied)
+            {
+                <div class="card" style="background-color: limegreen">
+                    <div class="card-body">
+                        <h5 class="card-title">Spot Number: @spot.Id</h5>
+                        <p class="card-text">Spot Is Available</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="card" style="background-color: red">
+                    <div class="card-body">
+                        <h5 class="card-title">Spot Number: @spot.Id</h5>
+                        <p class="card-text">Spot Is Occupied</p>
+                        <p class="card-text">@spot.OccupationVehicle.LicensePlate</p>
+                        <p class="card-text">@spot.OccupationVehicle.Worker.UserName</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</body>
 
-@if(User.Identity.IsAuthenticated)
-{
-    <body style="background-color: #4C98CF">
-
-    </body>
-}
-else
-{
-    
-}
