@@ -13,8 +13,8 @@
                     {
                         <div class="card" style="background-color: #41CAC6;">
                             <div class="card-body">
-                                <h5 class="card-title">Spot: @spot.Id</h5>
-                                <p class="card-text">Spot Is Available</p>
+                                <h5 class="card-title" style="color: #CCE5EA; font-size: 25px">Spot: @spot.Id</h5>
+                                <p class="card-text" style="color: #CCE5EA; font-size: 20px">Spot Is Available</p>
                                 <div class="d-flex justify-content-between">
                                     <a asp-controller="Parking" asp-action="Use" asp-route-id="@spot.Id" class="btn btn-success p-3 fw-bold rounded-pill" style="width: 130px; background-color: #3BBD6E; border: none; box-shadow: none">Use</a>
                                     <a asp-controller="Parking" asp-action="Details" asp-route-id="@spot.Id" class="btn btn-success p-3 fw-bold rounded-pill" style="width: 130px; background-color: #A9BD39; border: none; box-shadow: none">Details</a>
@@ -26,10 +26,10 @@
                     {
                         <div class="card" style="background-color: #ED4366;">
                             <div class="card-body">
-                                <h5 class="card-title">Spot Number: @spot.Id</h5>
-                                <p class="card-text">Spot Is Occupied</p>
-                                <p class="card-text">@spot.OccupationVehicle.LicensePlate</p>
-                                <p class="card-text">@spot.OccupationVehicle.Worker.UserName</p>
+                                <h5 class="card-title" style="color: #CCE5EA">Spot Number: @spot.Id</h5>
+                                <p class="card-text" style="color: #CCE5EA">Spot Is Occupied</p>
+                                <p class="card-text" style="color: #CCE5EA">@spot.OccupationVehicle.LicensePlate</p>
+                                <p class="card-text" style="color: #CCE5EA">@spot.OccupationVehicle.Worker.UserName</p>
                                 <a asp-controller="Parking" asp-action="Details" asp-route-id="@spot.Id" class="btn btn-success p-3 fw-bold rounded-pill" style="width: 130px; background-color: #A9BD39; border: none; box-shadow: none">Details</a>
                             </div>
                         </div>
