@@ -77,14 +77,14 @@ namespace SmartParkInnovate.Core.Services
                 throw new ArgumentException(string.Format(ParkingSpotErrorMessages.InvalidParkingSpotErrorMessage));
             }
 
-            if (!parkingSpot.IsEnabled)
-            {
-                throw new InvalidOperationException(ParkingSpotErrorMessages.ParkingSpotIsDisabledErrorMessage);
-            }
-
             if (!parkingSpot.IsOccupied && parkingSpot.OccupationVehicle == null)
             {
                 throw new InvalidOperationException(string.Format(ParkingSpotErrorMessages.ParkingSpotNotOccupiedErrorMessage));
+            }
+
+            if (!parkingSpot.IsEnabled)
+            {
+                throw new InvalidOperationException(ParkingSpotErrorMessages.ParkingSpotIsDisabledErrorMessage);
             }
 
             int? vehicleId = parkingSpot.OccupationVehicle.Id;
