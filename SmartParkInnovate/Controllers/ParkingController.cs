@@ -14,7 +14,7 @@ namespace SmartParkInnovate.Controllers
             this.parkingService = parkingService;
         }
 
-
+        [HttpGet]
         public async Task<IActionResult> ParkingSpots()
         {
             if (User.Identity.IsAuthenticated)
@@ -26,6 +26,18 @@ namespace SmartParkInnovate.Controllers
             {
                 return RedirectToAction("Login");
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> UseSpot()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UseSpot(int parkingSpotId, string userId)
+        {
+            return RedirectToAction();
         }
     }
 }

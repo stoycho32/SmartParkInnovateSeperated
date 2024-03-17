@@ -1,6 +1,6 @@
 ﻿using SmartParkInnovate.Infrastructure.Data.Attributes;
 
-namespace SmartParkInnovate.Core.Models.Vehicle
+namespace SmartParkInnovate.Core.Models.VehicleModel
 {
     public class VehicleFormModel
     {

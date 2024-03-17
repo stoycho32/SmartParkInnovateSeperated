@@ -39,36 +39,3 @@
         </div>
     </div>
 </body>
-
-
-
-
-
-@*<div class="card-deck">
-    @foreach (var spot in @Model)
-    {
-        @if (!spot.IsOccupied)
-        {
-            <div class="card" style="background-color: #41CAC6; width:200px">
-                <div class="card-body">
-                    <h5 class="card-title">Spot: @spot.Id</h5>
-                    <p class="card-text">Spot Is Available</p>
-                    <a asp-controller="Seminar" asp-action="Details" asp-route-id="@spot.Id" class="btn btn-success mb-2 w-100 p-3 fw-bold; rounded-pill">Use</a>
-                    <a asp-controller="Seminar" asp-action="Details" asp-route-id="@spot.Id" class="btn btn-success mb-2 w-100 p-3 fw-bold; rounded-pill">Use</a>
-                </div>
-            </div>
-        }
-        else
-        {
-            <div class="card" style="background-color: #ED4366; width:200px">
-                <div class="card-body">
-                    <h5 class="card-title">Spot Number: @spot.Id</h5>
-                    <p class="card-text">Spot Is Occupied</p>
-                    <p class="card-text">@spot.OccupationVehicle.LicensePlate</p>
-                    <p class="card-text">@spot.OccupationVehicle.Worker.UserName</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        }
-    }
-</div>*@
