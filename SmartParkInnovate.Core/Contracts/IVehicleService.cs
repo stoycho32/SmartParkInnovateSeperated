@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SmartParkInnovate.Core.Contracts
+﻿namespace SmartParkInnovate.Core.Contracts
 {
-    internal interface IVehicleService
+    public interface IVehicleService
     {
+
     }
 }

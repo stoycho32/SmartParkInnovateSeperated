@@ -1,9 +1,4 @@
 ﻿using SmartParkInnovate.Infrastructure.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SmartParkInnovate.Core.Services
 {
@@ -15,5 +10,8 @@ namespace SmartParkInnovate.Core.Services
         {
             this.repository = repository;
         }
+
+
+
     }
 }
