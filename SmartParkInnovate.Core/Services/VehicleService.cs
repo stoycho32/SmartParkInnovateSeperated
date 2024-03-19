@@ -61,7 +61,7 @@ namespace SmartParkInnovate.Core.Services
             return vehicles;
         }
 
-        public Task Details(int id)
+        public Task Details(int id, string userId)
         {
             throw new NotImplementedException();
         }
