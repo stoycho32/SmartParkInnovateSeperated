@@ -4,8 +4,7 @@ using SmartParkInnovate.Core.Contracts;
 
 namespace SmartParkInnovate.Controllers
 {
-    [Authorize]
-    public class ParkingController : Controller
+    public class ParkingController : BaseController
     {
         private readonly IParkingService parkingService;
 
