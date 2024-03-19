@@ -31,6 +31,7 @@
             public const string ParkingSpotNotOccupiedErrorMessage = "Parking Spot Is Not Occupied";
             public const string ParkingSpotIsDisabledErrorMessage = "Parking Spot Is Disabled";
             public const string ParkingSpotAlreadyInUseErrorMessage = "Parking Spot Is Already In Use";
+            public const string ParkingSpotWasNotUsed = "The Parking Spot Was Not Used And It Cannot Be Exited";
         }
 
         public static class WorkerErrorMessages
