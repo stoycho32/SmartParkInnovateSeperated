@@ -29,6 +29,11 @@ namespace SmartParkInnovate.Core.Services
                 throw new ArgumentException(string.Format(ParkingSpotErrorMessages.InvalidParkingSpotErrorMessage));
             }
 
+            if (worker == null)
+            {
+                throw new ArgumentException(WorkerErrorMessages.InvalidWorkerErrorMessage);
+            }
+
             if (!parkingSpot.IsEnabled)
             {
                 throw new InvalidOperationException(string.Format(ParkingSpotErrorMessages.ParkingSpotIsDisabledErrorMessage));
@@ -37,11 +42,6 @@ namespace SmartParkInnovate.Core.Services
             if (parkingSpot.IsOccupied)
             {
                 throw new InvalidOperationException(string.Format(ParkingSpotErrorMessages.ParkingSpotAlreadyInUseErrorMessage));
-            }
-
-            if (worker == null)
-            {
-                throw new ArgumentException(WorkerErrorMessages.InvalidWorkerErrorMessage);
             }
 
             vehicle = worker.Vehicles.FirstOrDefault(c => c.LicensePlate == vehicleModel.LicensePlate);
@@ -78,6 +78,11 @@ namespace SmartParkInnovate.Core.Services
                 throw new ArgumentException(string.Format(ParkingSpotErrorMessages.InvalidParkingSpotErrorMessage));
             }
 
+            if (!parkingSpot.IsEnabled)
+            {
+                throw new InvalidOperationException(ParkingSpotErrorMessages.ParkingSpotIsDisabledErrorMessage);
+            }
+
             if (worker == null)
             {
                 throw new ArgumentException(string.Format(WorkerErrorMessages.InvalidWorkerErrorMessage));
@@ -88,19 +93,14 @@ namespace SmartParkInnovate.Core.Services
                 throw new InvalidOperationException(string.Format(ParkingSpotErrorMessages.ParkingSpotNotOccupiedErrorMessage));
             }
 
-            if (!parkingSpot.IsEnabled)
-            {
-                throw new InvalidOperationException(ParkingSpotErrorMessages.ParkingSpotIsDisabledErrorMessage);
-            }
-
             int? vehicleId = parkingSpot.OccupationVehicle.Id;
 
             ParkingSpotOccupation? occupation = await this.repository.All<ParkingSpotOccupation>()
-                .FirstOrDefaultAsync(c => c.ParkingSpotId == id && c.Vehicle.Id == vehicleId && c.ExitDateTime == null);
+                .FirstOrDefaultAsync(c => c.ParkingSpotId == parkingSpot.Id && c.Vehicle.Id == vehicleId && c.ExitDateTime == null);
 
             if (occupation == null)
             {
-                throw new ArgumentException(string.Format(GeneralErrorMessages.SomethingUnexpectedOccuredErrorMessage));
+                throw new ArgumentException(string.Format(ParkingSpotErrorMessages.ParkingSpotWasNotUsed));
             }
 
             parkingSpot.IsOccupied = false;
