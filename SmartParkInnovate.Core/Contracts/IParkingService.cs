@@ -1,10 +1,11 @@
 ﻿using SmartParkInnovate.Core.Models.ParkingSpot;
+using SmartParkInnovate.Core.Models.VehicleModel;
 
 namespace SmartParkInnovate.Core.Contracts
 {
     public interface IParkingService
     { 
-        public Task Use(int id, string userId, string licensePlate);
+        public Task Use(int id, string userId, VehicleViewModel vehicleModel);
 
         public Task Exit(int id, string userId);
 

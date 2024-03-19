@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartParkInnovate.Core.Contracts;
 using SmartParkInnovate.Core.Models.ParkingSpot;
+using SmartParkInnovate.Core.Models.VehicleModel;
 using SmartParkInnovate.Infrastructure.Data.Models;
 using SmartParkInnovate.Infrastructure.Repository;
 using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages;
@@ -16,7 +17,7 @@ namespace SmartParkInnovate.Core.Services
             this.repository = repository;
         }
 
-        public async Task Use(int id, string userId, string licensePlate)
+        public async Task Use(int id, string userId, VehicleViewModel vehicleModel)
         {
             ParkingSpot? parkingSpot = await this.repository.GetByIdAsync<ParkingSpot>(id);
             Worker? worker = await this.repository.GetByIdAsync<Worker>(userId);
@@ -43,7 +44,7 @@ namespace SmartParkInnovate.Core.Services
                 throw new ArgumentException(WorkerErrorMessages.InvalidWorkerErrorMessage);
             }
 
-            vehicle = worker.Vehicles.FirstOrDefault(c => c.LicensePlate == licensePlate);
+            vehicle = worker.Vehicles.FirstOrDefault(c => c.LicensePlate == vehicleModel.LicensePlate);
 
             if (vehicle == null)
             {
