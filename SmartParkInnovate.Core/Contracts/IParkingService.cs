@@ -9,7 +9,7 @@ namespace SmartParkInnovate.Core.Contracts
 
         public Task Exit(int id, string userId);
 
-        public Task Details(int id);
+        public Task<ParkingSpotDetailsViewModel> Details(int id);
 
         public Task Enable();
 

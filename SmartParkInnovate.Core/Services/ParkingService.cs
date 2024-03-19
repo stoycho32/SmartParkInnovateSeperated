@@ -112,8 +112,16 @@ namespace SmartParkInnovate.Core.Services
             await this.repository.SaveChangesAsync();
         }
 
-        public async Task Details(int id)
+        public async Task<ParkingSpotDetailsViewModel> Details(int id)
         {
+            ParkingSpot? parkingSpot = await this.repository.GetByIdAsync<ParkingSpot>(id);
+
+            if (parkingSpot == null)
+            {
+
+            }
+
+
             throw new NotImplementedException();
         }
 
