@@ -9,6 +9,12 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
 {
     public class Vehicle : IDeletable
     {
+        public Vehicle()
+        {
+            this.IsDeleted = false;
+            DeletedOn = null;
+        }
+
         [Key]
         public int Id { get; set; }
 
