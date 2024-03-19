@@ -3,6 +3,7 @@ using SmartParkInnovate.Core.Contracts;
 using SmartParkInnovate.Core.Models.VehicleModel;
 using SmartParkInnovate.Infrastructure.Data.Models;
 using SmartParkInnovate.Infrastructure.Repository;
+using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages;
 
 namespace SmartParkInnovate.Core.Services
 {
@@ -15,9 +16,31 @@ namespace SmartParkInnovate.Core.Services
             this.repository = repository;
         }
 
-        public Task Add()
+        public async Task Add(string userId, VehicleViewModel vehicleModel)
         {
-            throw new NotImplementedException();
+            if (await this.repository.GetByIdAsync<Vehicle>(vehicleModel.LicensePlate) != null)
+            {
+                throw new InvalidOperationException(string.Format(VehicleErrorMessages.VehicleAlreadyExistsErrorMessage));
+            }
+
+            Worker? worker = await this.repository.GetByIdAsync<Worker>(userId);
+
+            if (worker == null)
+            {
+                throw new ArgumentException(WorkerErrorMessages.InvalidWorkerErrorMessage);
+            }
+
+            Vehicle vehicle = new Vehicle()
+            {
+                Make = vehicleModel.Make,
+                Model = vehicleModel.Model,
+                LicensePlate = vehicleModel.LicensePlate,
+                WorkerId = worker.Id,
+                Worker = worker
+            };
+
+            await this.repository.AddAsync(vehicle);
+            await this.repository.SaveChangesAsync();
         }
 
         public async Task<List<VehicleViewModel>> All()
@@ -38,17 +61,17 @@ namespace SmartParkInnovate.Core.Services
             return vehicles;
         }
 
-        public Task Details()
+        public Task Details(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task MyVehicles()
+        public Task MyVehicles(string userId)
         {
             throw new NotImplementedException();
         }
 
-        public Task Remove()
+        public Task Remove(int id, string userId)
         {
             throw new NotImplementedException();
         }
