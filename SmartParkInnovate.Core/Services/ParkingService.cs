@@ -112,7 +112,7 @@ namespace SmartParkInnovate.Core.Services
             await this.repository.SaveChangesAsync();
         }
 
-        public Task Details()
+        public Task Details(int id)
         {
             throw new NotImplementedException();
         }
