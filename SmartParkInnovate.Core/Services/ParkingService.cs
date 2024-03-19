@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartParkInnovate.Core.Contracts;
 using SmartParkInnovate.Core.Models.ParkingSpot;
+using SmartParkInnovate.Core.Models.ParkingSpotOccupationsViewModel;
 using SmartParkInnovate.Core.Models.VehicleModel;
 using SmartParkInnovate.Infrastructure.Data.Models;
 using SmartParkInnovate.Infrastructure.Repository;
@@ -118,11 +119,28 @@ namespace SmartParkInnovate.Core.Services
 
             if (parkingSpot == null)
             {
-
+                throw new ArgumentException(string.Format(ParkingSpotErrorMessages.InvalidParkingSpotErrorMessage));
             }
 
+            ParkingSpotDetailsViewModel? model = new ParkingSpotDetailsViewModel()
+            {
+                Id = parkingSpot.Id,
+                IsEnabled = parkingSpot.IsEnabled,
+                IsOccupied = parkingSpot.IsOccupied,
+                OccupationVehicleId = parkingSpot.OccupationVehicleId,
+                OccupationVehicle = parkingSpot.OccupationVehicle,
+                ParkingSpotOccupations = parkingSpot.ParkingSpotOccupations
+                .Select(c => new ParkingSpotOccupationViewModel()
+                { 
+                    VehicleId = c.VehicleId,
+                    Vehicle = c.Vehicle,
+                    EnterDateTime = c.EnterDateTime,
+                    ExitDateTime = c.ExitDateTime
+                }).ToList()
+            };
 
-            throw new NotImplementedException();
+
+            return model;
         }
 
         public Task Enable()
