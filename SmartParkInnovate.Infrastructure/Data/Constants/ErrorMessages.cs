@@ -12,6 +12,7 @@
             public const string InvalidVehicleErrorMessage = "Invalid Vehicle";
             public const string VehicleMakeLengthErrorMessage = "Car make must be between 2 and 50 characters long.";
             public const string VehicleModelLengthErrorMessage = "Car model name must be between 3 and 50 characters long.";
+            public const string VehicleAlreadyExistsErrorMessage = "Vehicle already exists";
         }
 
         public static class CommentErrorMessages
