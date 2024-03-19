@@ -9,6 +9,7 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
         {
             this.IsOccupied = false;
             this.IsEnabled = true;
+            this.ParkingSpotOccupations = new List<ParkingSpotOccupation>();
         }
 
         [Key]
@@ -25,5 +26,9 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
 
         [ForeignKey(nameof(OccupationVehicleId))]
         public Vehicle? OccupationVehicle { get; set; }
+
+
+        [InverseProperty(nameof(ParkingSpot))]
+        public ICollection<ParkingSpotOccupation> ParkingSpotOccupations { get; set; }
     }
 }
