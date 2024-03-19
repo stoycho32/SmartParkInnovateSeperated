@@ -64,7 +64,7 @@ namespace SmartParkInnovate.Core.Services
                 ExitDateTime = null
             };
 
-            await this.repository.AddAsync<ParkingSpotOccupation>(occupation);
+            parkingSpot.ParkingSpotOccupations.Add(occupation);
             await this.repository.SaveChangesAsync();
         }
 
@@ -95,8 +95,8 @@ namespace SmartParkInnovate.Core.Services
 
             int? vehicleId = parkingSpot.OccupationVehicle.Id;
 
-            ParkingSpotOccupation? occupation = await this.repository.All<ParkingSpotOccupation>()
-                .FirstOrDefaultAsync(c => c.ParkingSpotId == parkingSpot.Id && c.Vehicle.Id == vehicleId && c.ExitDateTime == null);
+            ParkingSpotOccupation? occupation = parkingSpot.ParkingSpotOccupations
+                .FirstOrDefault(c => c.ParkingSpotId == parkingSpot.Id && c.Vehicle.Id == vehicleId && c.ExitDateTime == null);
 
             if (occupation == null)
             {
