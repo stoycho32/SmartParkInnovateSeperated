@@ -4,7 +4,7 @@ using SmartParkInnovate.Infrastructure.Data.Models;
 
 namespace SmartParkInnovate.Infrastructure.Data.SeedDB
 {
-    public class ParkingSpotOccupationsConfiguration : IEntityTypeConfiguration<ParkingSpotOccupation>
+    internal class ParkingSpotOccupationsConfiguration : IEntityTypeConfiguration<ParkingSpotOccupation>
     {
         public void Configure(EntityTypeBuilder<ParkingSpotOccupation> builder)
         {
