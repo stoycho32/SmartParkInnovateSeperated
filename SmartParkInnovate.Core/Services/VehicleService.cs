@@ -15,7 +15,7 @@ namespace SmartParkInnovate.Core.Services
             this.repository = repository;
         }
 
-        public Task Add(string make, string model, string licensePlate, string userId)
+        public Task Add()
         {
             throw new NotImplementedException();
         }
