@@ -112,7 +112,7 @@ namespace SmartParkInnovate.Core.Services
             await this.repository.SaveChangesAsync();
         }
 
-        public Task Details(int id)
+        public async Task Details(int id)
         {
             throw new NotImplementedException();
         }
@@ -126,7 +126,7 @@ namespace SmartParkInnovate.Core.Services
         {
             throw new NotImplementedException();
         }
-        
+
         public async Task<List<ParkingSpotViewModel>> All()
         {
             List<ParkingSpotViewModel> parkingSpots = await this.repository.All<ParkingSpot>()
