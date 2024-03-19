@@ -1,4 +1,6 @@
-﻿namespace SmartParkInnovate.Core.Contracts
+﻿using SmartParkInnovate.Core.Models.VehicleModel;
+
+namespace SmartParkInnovate.Core.Contracts
 {
     public interface IVehicleService
     {
@@ -8,7 +10,7 @@
 
         public Task Details();
 
-        public Task All();
+        public Task<List<VehicleViewModel>> All();
 
         public Task MyVehicles();
     }

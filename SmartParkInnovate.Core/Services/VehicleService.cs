@@ -1,4 +1,7 @@
-﻿using SmartParkInnovate.Core.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using SmartParkInnovate.Core.Contracts;
+using SmartParkInnovate.Core.Models.VehicleModel;
+using SmartParkInnovate.Infrastructure.Data.Models;
 using SmartParkInnovate.Infrastructure.Repository;
 
 namespace SmartParkInnovate.Core.Services
@@ -17,9 +20,22 @@ namespace SmartParkInnovate.Core.Services
             throw new NotImplementedException();
         }
 
-        public Task All()
+        public async Task<List<VehicleViewModel>> All()
         {
-            throw new NotImplementedException();
+            List<VehicleViewModel> vehicles = await this.repository.All<Vehicle>()
+                .Select(c => new VehicleViewModel()
+                {
+                    Id = c.Id,
+                    Make = c.Make,
+                    Model = c.Model,
+                    LicensePlate = c.LicensePlate,
+                    WorkerId = c.WorkerId,
+                    Worker = c.Worker,
+                    IsDeleted = c.IsDeleted,
+                    DeletedOn = c.DeletedOn
+                }).ToListAsync();
+
+            return vehicles;
         }
 
         public Task Details()
