@@ -13,6 +13,7 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
         {
             this.IsDeleted = false;
             DeletedOn = null;
+            this.ParkingSpotOccupations = new List<ParkingSpotOccupation>();
         }
 
         [Key]
@@ -42,6 +43,10 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
 
         [ForeignKey(nameof(WorkerId))]
         public Worker Worker { get; set; }
+
+
+        [InverseProperty(nameof(Vehicle))]
+        public ICollection<ParkingSpotOccupation> ParkingSpotOccupations { get; set; }
 
 
         public bool IsDeleted { get; set; }
