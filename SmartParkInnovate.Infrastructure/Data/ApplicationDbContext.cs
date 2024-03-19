@@ -28,6 +28,7 @@ namespace SmartParkInnovate.Data
                 relationship.DeleteBehavior = DeleteBehavior.Restrict;
             }
 
+            builder.ApplyConfiguration(new ParkingSpotOccupationsConfiguration());
             builder.ApplyConfiguration(new ParkingSpotConfiguration());
             builder.ApplyConfiguration(new WorkerConfiguration());
 
