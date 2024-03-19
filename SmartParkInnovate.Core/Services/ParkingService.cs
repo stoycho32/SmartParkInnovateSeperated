@@ -78,6 +78,11 @@ namespace SmartParkInnovate.Core.Services
                 throw new ArgumentException(string.Format(ParkingSpotErrorMessages.InvalidParkingSpotErrorMessage));
             }
 
+            if (worker == null)
+            {
+                throw new ArgumentException(string.Format(WorkerErrorMessages.InvalidWorkerErrorMessage));
+            }
+
             if (!parkingSpot.IsOccupied && parkingSpot.OccupationVehicle == null)
             {
                 throw new InvalidOperationException(string.Format(ParkingSpotErrorMessages.ParkingSpotNotOccupiedErrorMessage));
@@ -134,7 +139,6 @@ namespace SmartParkInnovate.Core.Services
                     OccupationVehicle = c.OccupationVehicle
                 }).ToListAsync();
 
-
             return parkingSpots;
         }
 
@@ -151,7 +155,6 @@ namespace SmartParkInnovate.Core.Services
                     OccupationVehicle = c.OccupationVehicle
                 }).ToListAsync();
 
-
             return parkingSpots;
         }
 
@@ -167,7 +170,6 @@ namespace SmartParkInnovate.Core.Services
                     OccupationVehicleId = c.OccupationVehicleId,
                     OccupationVehicle = c.OccupationVehicle
                 }).ToListAsync();
-
 
             return parkingSpots;
         }
