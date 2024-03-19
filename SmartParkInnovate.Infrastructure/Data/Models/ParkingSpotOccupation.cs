@@ -10,10 +10,6 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
             this.EnterDateTime = DateTime.Now;
         }
 
-        [Key]
-        public int Id { get; set; }
-
-
         [Required]
         public int ParkingSpotId { get; set; }
 
@@ -29,6 +25,7 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
 
         [Required]
         public DateTime EnterDateTime { get; init; }
+
 
         public DateTime? ExitDateTime { get; set; }
     }
