@@ -29,6 +29,7 @@ namespace SmartParkInnovate.Data
             }
 
             builder.ApplyConfiguration(new ParkingSpotConfiguration());
+            builder.ApplyConfiguration(new WorkerConfiguration());
 
             base.OnModelCreating(builder);
         }
