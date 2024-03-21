@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartParkInnovate.Core.Contracts;
-using SmartParkInnovate.Core.Models.ParkingSpot;
 using SmartParkInnovate.Core.Models.VehicleModel;
-using SmartParkInnovate.Infrastructure.Data.Constants;
 using SmartParkInnovate.Infrastructure.Data.Models;
 using SmartParkInnovate.Infrastructure.Repository;
 using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages;
