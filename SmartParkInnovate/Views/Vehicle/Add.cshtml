@@ -1,0 +1,29 @@
+﻿@model VehicleFormModel
+
+
+
+<body style="background-color: #4C98CF">
+    <div class="row d-flex align-items-center justify-content-center">
+        <form asp-action="Add" method="post" style="width: 600px">
+            <h2 class="text-center" style="color: #CCE5EA">Please Enter Car Details</h2>
+        <br />
+            <div>
+                <div class="mb-3">
+                    <input asp-for="@Model.Make" class="form-control" style="background-color: #CCE5EA" aria-required="true" placeholder="Car Make" />
+                    <span asp-validation-for="@Model.Make" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <input asp-for="@Model.Model" class="form-control" style="background-color: #CCE5EA" aria-required="true" placeholder="Car Model" />
+                    <span asp-validation-for="@Model.Model" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <input asp-for="@Model.LicensePlate" class="form-control" style="background-color: #CCE5EA" aria-required="true" placeholder="License Plate" />
+                    <span asp-validation-for="@Model.LicensePlate" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <input class="btn btn-success p-3 fw-bold rounded-pill" style="width: 580px; background-color: #3BBD6E; border: none; box-shadow: none" type="submit" value="Add" />
+            </div>
+        </form>
+    </div>
+</body>

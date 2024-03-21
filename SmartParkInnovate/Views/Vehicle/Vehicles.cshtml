@@ -1,0 +1,27 @@
+﻿@model List<VehicleViewModel>
+
+<body style="background-color: #4C98CF">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-3" style="color: #CCE5EA">Vehicles</h1>
+            <br />
+            <a asp-controller="Vehicle" asp-action="Add" class="btn btn-success p-3 fw-bold rounded-pill" style="width: 130px; background-color: #3BBD6E; border: none; box-shadow: none">Add Vehicle</a>
+            <br />
+            <br />
+            @if (Model.Count > 0)
+            {
+                foreach(var vehicle in @Model)
+                {
+                    <ul class="list-group">
+                        <li class="list-group-item" style="background-color: #CCE5EA;">@vehicle.Make @vehicle.Model @vehicle.LicensePlate @vehicle.Worker.UserName</li>
+                    </ul>
+                }
+            }
+            else
+            {
+                <br />
+                <p style="color: #CCE5EA">Currently, There Are No Vehicles Added</p>
+            }
+        </div>
+    </div>
+</body>
