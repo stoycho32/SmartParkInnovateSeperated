@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartParkInnovate.Core.Contracts;
+using SmartParkInnovate.Core.Models.ParkingSpot;
 using SmartParkInnovate.Core.Models.VehicleModel;
 using SmartParkInnovate.Infrastructure.Data.Models;
 using SmartParkInnovate.Infrastructure.Repository;
@@ -63,12 +64,18 @@ namespace SmartParkInnovate.Core.Services
             return vehicles;
         }
 
-        public Task Details(int id, string userId)
+        public async Task<VehicleViewModel> Details(int id, string userId)
         {
-            throw new NotImplementedException();
+            var vehicle = await this.repository.All<Vehicle>()
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            if (vehicle == null)
+            {
+
+            }
         }
 
-        public Task MyVehicles(string userId)
+        public async Task<List<VehicleViewModel>> MyVehicles(string userId)
         {
             throw new NotImplementedException();
         }
