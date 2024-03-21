@@ -2,6 +2,7 @@
 using SmartParkInnovate.Core.Contracts;
 using SmartParkInnovate.Core.Models.ParkingSpot;
 using SmartParkInnovate.Core.Models.VehicleModel;
+using SmartParkInnovate.Infrastructure.Data.Constants;
 using SmartParkInnovate.Infrastructure.Data.Models;
 using SmartParkInnovate.Infrastructure.Repository;
 using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages;
@@ -71,18 +72,56 @@ namespace SmartParkInnovate.Core.Services
 
             if (vehicle == null)
             {
-
+                throw new ArgumentException(string.Format(VehicleErrorMessages.InvalidVehicleErrorMessage));
             }
+
+            VehicleViewModel model = new VehicleViewModel()
+            {
+                Id = vehicle.Id,
+                Make = vehicle.Make,
+                Model = vehicle.Model,
+                LicensePlate = vehicle.LicensePlate,
+                WorkerId = vehicle.WorkerId,
+                Worker = vehicle.Worker,
+                IsDeleted = vehicle.IsDeleted,
+                DeletedOn = vehicle.DeletedOn
+            };
+
+            return model;
         }
 
-        public async Task<List<VehicleViewModel>> MyVehicles(string userId)
+        public List<VehicleViewModel> MyVehicles(string userId)
         {
-            throw new NotImplementedException();
+            List<VehicleViewModel> vehicles = this.repository.AllAsReadOnly<Vehicle>()
+                .Select(c => new VehicleViewModel()
+                {
+                    Id= c.Id,
+                    Make = c.Make,
+                    Model = c.Model,
+                    LicensePlate = c.LicensePlate,
+                    WorkerId = c.WorkerId,
+                    Worker = c.Worker,
+                    IsDeleted = c.IsDeleted,
+                    DeletedOn = c.DeletedOn
+                }).Where(c => c.WorkerId == userId)
+                .ToList();
+
+            return vehicles;
         }
 
-        public Task Remove(int id, string userId)
+        public async Task Remove(int id, string userId)
         {
-            throw new NotImplementedException();
+            var vehicleToRemove = await this.repository.GetByIdAsync<Vehicle>(id);
+
+            if (vehicleToRemove == null)
+            {
+                throw new ArgumentException(string.Format(VehicleErrorMessages.InvalidVehicleErrorMessage));
+            }
+
+            vehicleToRemove.IsDeleted = true;
+            vehicleToRemove.DeletedOn = DateTime.Now;
+
+            await this.repository.SaveChangesAsync();
         }
     }
 }
