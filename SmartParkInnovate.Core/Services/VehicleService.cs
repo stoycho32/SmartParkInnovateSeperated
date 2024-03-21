@@ -18,9 +18,12 @@ namespace SmartParkInnovate.Core.Services
 
         public async Task Add(string userId, VehicleViewModel vehicleModel)
         {
-            if (await this.repository
-                .All<Vehicle>()
-                .FirstOrDefaultAsync(c => c.LicensePlate == vehicleModel.LicensePlate) != null)
+            bool isVehicleAlreadyAdded = await this.repository
+                .All<Vehicle>().FirstOrDefaultAsync(c => c.LicensePlate == vehicleModel.LicensePlate) != null;
+
+
+
+            if (isVehicleAlreadyAdded)
             {
                 throw new InvalidOperationException(string.Format(VehicleErrorMessages.VehicleAlreadyExistsErrorMessage));
             }
