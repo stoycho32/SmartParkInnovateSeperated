@@ -39,11 +39,11 @@
                     {
                         if(occupation.ExitDateTime == null)
                         {
-                            <li class="list-group-item">@occupation.EnterDateTime @occupation.Vehicle.Worker.UserName @occupation.Vehicle.LicensePlate Not Exited</li>
+                            <li class="list-group-item">@occupation.EnterDateTime @occupation.VehicleLicensePlate @occupation.VehicleOwner Not Exited</li>
                         }
                         else
                         {
-                            <li class="list-group-item">@occupation.EnterDateTime @occupation.Vehicle.Worker.UserName @occupation.Vehicle.LicensePlate @occupation.ExitDateTime</li>
+                            <li class="list-group-item">@occupation.EnterDateTime @occupation.VehicleOwner @occupation.VehicleLicensePlate @occupation.ExitDateTime</li>
                         }
                     }
                 </ul>

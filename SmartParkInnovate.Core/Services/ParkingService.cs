@@ -133,7 +133,8 @@ namespace SmartParkInnovate.Core.Services
                 .Select(c => new ParkingSpotOccupationViewModel()
                 { 
                     VehicleId = c.VehicleId,
-                    Vehicle = c.Vehicle,
+                    VehicleLicensePlate = c.Vehicle.LicensePlate,
+                    VehicleOwner = c.Vehicle.Worker.UserName,
                     EnterDateTime = c.EnterDateTime,
                     ExitDateTime = c.ExitDateTime
                 }).ToList()

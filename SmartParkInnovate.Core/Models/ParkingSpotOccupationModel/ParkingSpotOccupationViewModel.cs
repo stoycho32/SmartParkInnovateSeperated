@@ -9,12 +9,14 @@ namespace SmartParkInnovate.Core.Models.ParkingSpotOccupationsViewModel
         [Required]
         public int VehicleId { get; set; }
 
-        [ForeignKey(nameof(VehicleId))]
-        public Vehicle Vehicle { get; set; }
+        [Required]
+        public string VehicleLicensePlate { get; set; }
+
+        [Required]
+        public string VehicleOwner { get; set; }
 
         [Required]
         public DateTime EnterDateTime { get; init; }
-
 
         public DateTime? ExitDateTime { get; set; }
     }
