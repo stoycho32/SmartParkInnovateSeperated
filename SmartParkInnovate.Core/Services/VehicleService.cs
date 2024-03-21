@@ -16,7 +16,7 @@ namespace SmartParkInnovate.Core.Services
             this.repository = repository;
         }
 
-        public async Task Add(string userId, VehicleViewModel vehicleModel)
+        public async Task Add(string userId, VehicleFormModel vehicleModel)
         {
             bool isVehicleAlreadyAdded = await this.repository
                 .All<Vehicle>().FirstOrDefaultAsync(c => c.LicensePlate == vehicleModel.LicensePlate) != null;
