@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SmartParkInnovate.Core.Contracts;
+using SmartParkInnovate.Core.Models.ParkingSpot;
 
 namespace SmartParkInnovate.Controllers
 {
@@ -24,6 +25,14 @@ namespace SmartParkInnovate.Controllers
             {
                 return RedirectToAction("Login");
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            ParkingSpotDetailsViewModel parkingSpot = await this.parkingService.Details(id);
+
+            return View(parkingSpot);
         }
     }
 }

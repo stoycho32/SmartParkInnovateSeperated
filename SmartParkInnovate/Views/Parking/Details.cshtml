@@ -1,0 +1,59 @@
+﻿@model ParkingSpotDetailsViewModel
+
+
+<body style="background-color: #4C98CF">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-3" style="color: #CCE5EA">Parking Spot Number: @Model.Id</h1>
+            @if (Model.IsEnabled == true)
+            {
+                <p class="lead" style="color: #CCE5EA">The Parking Spot Is Enabled</p>
+            }
+            else
+            {
+                <p class="lead" style="color: #CB4040">The Parking Spot Is Disabled</p>
+            }
+            @if (Model.IsOccupied == false)
+            {
+                <p class="lead" style="color: #CCE5EA">The Parking Spot Is Not Occupied At The Moment</p>
+            }
+            else
+            {
+                <p class="lead" style="color: #CB4040">The Parking Spot Is Occupied At The Moment</p>
+                <p class="lead" style="color: #CB4040">Occupied By: @Model.OccupationVehicle.LicensePlate</p>
+                <p class="lead" style="color: #CB4040">Car Owner: @Model.OccupationVehicle.Worker.UserName</p>
+            }
+        </div>
+    </div>
+
+
+    @if (@Model.ParkingSpotOccupations.Count > 0)
+    {
+        <div>
+            <div class="card" style="width: 18rem;">
+                <div class="card-header">
+                    Parking Spot Occupation History
+                </div>
+                <ul class="list-group list-group-flush">
+                    @foreach (var occupation in Model.ParkingSpotOccupations)
+                    {
+                        if(occupation.ExitDateTime == null)
+                        {
+                            <li class="list-group-item">@occupation.EnterDateTime @occupation.Vehicle.Worker.UserName @occupation.Vehicle.LicensePlate Not Exited</li>
+                        }
+                        else
+                        {
+                            <li class="list-group-item">@occupation.EnterDateTime @occupation.Vehicle.Worker.UserName @occupation.Vehicle.LicensePlate @occupation.ExitDateTime</li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    }
+    else
+    {
+        <br />
+        <p style="color: #CCE5EA">This Parking Spot Does Not Have Any Previous Occupations</p>
+    }
+
+</body>
