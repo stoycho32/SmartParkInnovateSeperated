@@ -41,6 +41,7 @@ namespace SmartParkInnovate.Core.Services
                 Worker = worker
             };
 
+            worker.Vehicles.Add(vehicle);
             await this.repository.AddAsync<Vehicle>(vehicle);
             await this.repository.SaveChangesAsync();
         }
