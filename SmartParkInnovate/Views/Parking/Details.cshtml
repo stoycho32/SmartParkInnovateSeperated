@@ -21,33 +21,41 @@
             {
                 <p class="lead" style="color: #CB4040">The Parking Spot Is Occupied At The Moment</p>
                 <p class="lead" style="color: #CB4040">Occupied By: @Model.OccupationVehicleLicensePlate</p>
-                <p class="lead" style="color: #CB4040">Car Owner: @Model.</p>
+                <p class="lead" style="color: #CB4040">Car Owner: @Model.OccupationVehicleOwner</p>
             }
         </div>
     </div>
 
 
-    @if (@Model.ParkingSpotOccupations.Count > 0)
+    @if (@Model.ParkingSpotOccupations.Count() > 0)
     {
         <div>
-            <div class="card" style="width: 18rem;">
-                <div class="card-header">
-                    Parking Spot Occupation History
-                </div>
-                <ul class="list-group list-group-flush">
-                    @foreach (var occupation in Model.ParkingSpotOccupations)
+            <br />
+            <p class="text-left" style="color: #CCE5EA">Vehicles: @Model.ParkingSpotOccupations.Count()</p>
+            <table class="table table-borderless" style="border: none; box-shadow: none; color: #CCE5EA">
+                <thead>
+                    <tr class="font-weight-bold">
+                        <th scope="col">Vehicle Make</th>
+                        <th scope="col">Vehicle Model</th>
+                        <th scope="col">License Plate</th>
+                        <th scope="col">Owner</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Count > 0)
                     {
-                        if(occupation.ExitDateTime == null)
+                        foreach (var vehicle in @Model)
                         {
-                            <li class="list-group-item">@occupation.EnterDateTime @occupation.VehicleLicensePlate @occupation.VehicleOwner Not Exited</li>
-                        }
-                        else
-                        {
-                            <li class="list-group-item">@occupation.EnterDateTime @occupation.VehicleOwner @occupation.VehicleLicensePlate @occupation.ExitDateTime</li>
+                            <tr>
+                                <td>@vehicle.Make</td>
+                                <td>@vehicle.Model</td>
+                                <td>@vehicle.LicensePlate</td>
+                                <td>@vehicle.WorkerUserName</td>
+                            </tr>
                         }
                     }
-                </ul>
-            </div>
+                </tbody>
+            </table>
         </div>
     }
     else

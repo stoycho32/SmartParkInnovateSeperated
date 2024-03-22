@@ -127,13 +127,15 @@ namespace SmartParkInnovate.Core.Services
                 Id = parkingSpot.Id,
                 IsEnabled = parkingSpot.IsEnabled,
                 IsOccupied = parkingSpot.IsOccupied,
-                OccupationVehicleId = parkingSpot.OccupationVehicleId,
+                OccupationVehicleId = parkingSpot.OccupationVehicleId,                
                 OccupationVehicleLicensePlate = parkingSpot.OccupationVehicle.LicensePlate,
                 OccupationVehicleOwner = parkingSpot.OccupationVehicle.Worker.UserName,
                 ParkingSpotOccupations = parkingSpot.ParkingSpotOccupations
                 .Select(c => new ParkingSpotOccupationViewModel()
                 { 
                     VehicleId = c.VehicleId,
+                    VehicleMake = c.Vehicle.Make,
+                    VehicleModel = c.Vehicle.Model,
                     VehicleLicensePlate = c.Vehicle.LicensePlate,
                     VehicleOwner = c.Vehicle.Worker.UserName,
                     EnterDateTime = c.EnterDateTime,
