@@ -1,14 +1,15 @@
-﻿using SmartParkInnovate.Infrastructure.Data.Attributes;
-using System.ComponentModel.DataAnnotations;
+﻿using SmartParkInnovate.Core.Models.WorkerModel;
+using SmartParkInnovate.Infrastructure.Data.Attributes;
+using SmartParkInnovate.Infrastructure.Data.Constants;
 using static SmartParkInnovate.Infrastructure.Data.Constants.DataConstants;
 using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages;
+using System.ComponentModel.DataAnnotations;
+using SmartParkInnovate.Core.Models.ParkingSpotOccupationModel;
 
 namespace SmartParkInnovate.Core.Models.VehicleModel
 {
-    public class VehicleViewModel
+    public class VehicleDetailsViewModel
     {
-        public int Id { get; set; }
-
         [Required]
         [StringLength(VehicleDataConstants.VehicleMakeMaxLength,
             MinimumLength = VehicleDataConstants.VehicleMakeMinLength)]
@@ -31,7 +32,7 @@ namespace SmartParkInnovate.Core.Models.VehicleModel
 
         public string WorkerUserName { get; set; }
 
-
+        public ICollection<VehicleOccupationViewModel> Occupations { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime? DeletedOn { get; set; }
     }

@@ -1,5 +1,4 @@
-﻿using SmartParkInnovate.Infrastructure.Data.Models;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using SmartParkInnovate.Core.Models.VehicleModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace SmartParkInnovate.Core.Models.ParkingSpot
@@ -17,6 +16,6 @@ namespace SmartParkInnovate.Core.Models.ParkingSpot
 
         public int? OccupationVehicleId { get; set; }
 
-        public Vehicle? OccupationVehicle { get; set; }
+        public string? OccupationVehicleLicensePlate { get; set; }
     }
 }
