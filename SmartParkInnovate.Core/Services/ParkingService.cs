@@ -137,7 +137,7 @@ namespace SmartParkInnovate.Core.Services
                     VehicleMake = c.Vehicle.Make,
                     VehicleModel = c.Vehicle.Model,
                     VehicleLicensePlate = c.Vehicle.LicensePlate,
-                    VehicleOwner = c.Vehicle.Worker.UserName,
+                    WorkerUserName = c.Vehicle.Worker.UserName,
                     EnterDateTime = c.EnterDateTime,
                     ExitDateTime = c.ExitDateTime
                 }).ToList()
