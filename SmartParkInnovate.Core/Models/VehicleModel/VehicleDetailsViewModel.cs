@@ -1,10 +1,8 @@
-﻿using SmartParkInnovate.Core.Models.WorkerModel;
+﻿using SmartParkInnovate.Core.Models.ParkingSpotOccupationModel;
 using SmartParkInnovate.Infrastructure.Data.Attributes;
-using SmartParkInnovate.Infrastructure.Data.Constants;
+using System.ComponentModel.DataAnnotations;
 using static SmartParkInnovate.Infrastructure.Data.Constants.DataConstants;
 using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages;
-using System.ComponentModel.DataAnnotations;
-using SmartParkInnovate.Core.Models.ParkingSpotOccupationModel;
 
 namespace SmartParkInnovate.Core.Models.VehicleModel
 {
