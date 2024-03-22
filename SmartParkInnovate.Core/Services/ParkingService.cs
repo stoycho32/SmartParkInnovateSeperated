@@ -128,7 +128,8 @@ namespace SmartParkInnovate.Core.Services
                 IsEnabled = parkingSpot.IsEnabled,
                 IsOccupied = parkingSpot.IsOccupied,
                 OccupationVehicleId = parkingSpot.OccupationVehicleId,
-                OccupationVehicle = parkingSpot.OccupationVehicle,
+                OccupationVehicleLicensePlate = parkingSpot.OccupationVehicle.LicensePlate,
+                OccupationVehicleOwner = parkingSpot.OccupationVehicle.Worker.UserName,
                 ParkingSpotOccupations = parkingSpot.ParkingSpotOccupations
                 .Select(c => new ParkingSpotOccupationViewModel()
                 { 
@@ -163,7 +164,7 @@ namespace SmartParkInnovate.Core.Services
                     IsEnabled = c.IsEnabled,
                     IsOccupied = c.IsOccupied,
                     OccupationVehicleId = c.OccupationVehicleId,
-                    OccupationVehicle = c.OccupationVehicle
+                    OccupationVehicleLicensePlate = c.OccupationVehicle.LicensePlate
                 }).ToListAsync();
 
             return parkingSpots;
@@ -179,7 +180,7 @@ namespace SmartParkInnovate.Core.Services
                     IsEnabled = c.IsEnabled,
                     IsOccupied = c.IsOccupied,
                     OccupationVehicleId = c.OccupationVehicleId,
-                    OccupationVehicle = c.OccupationVehicle
+                    OccupationVehicleLicensePlate = c.OccupationVehicle.LicensePlate
                 }).ToListAsync();
 
             return parkingSpots;
@@ -195,7 +196,7 @@ namespace SmartParkInnovate.Core.Services
                     IsEnabled = c.IsEnabled,
                     IsOccupied = c.IsOccupied,
                     OccupationVehicleId = c.OccupationVehicleId,
-                    OccupationVehicle = c.OccupationVehicle
+                    OccupationVehicleLicensePlate = c.OccupationVehicle.LicensePlate
                 }).ToListAsync();
 
             return parkingSpots;

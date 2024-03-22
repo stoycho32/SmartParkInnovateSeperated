@@ -59,7 +59,7 @@ namespace SmartParkInnovate.Core.Services
                     Model = c.Model,
                     LicensePlate = c.LicensePlate,
                     WorkerId = c.WorkerId,
-                    Worker = c.Worker,
+                    WorkerUserName = c.Worker.UserName,
                     IsDeleted = c.IsDeleted,
                     DeletedOn = c.DeletedOn
                 }).ToListAsync();
@@ -70,6 +70,7 @@ namespace SmartParkInnovate.Core.Services
         public async Task<VehicleViewModel> Details(int id, string userId)
         {
             var vehicle = await this.repository.All<Vehicle>()
+                .Include(c => c.ParkingSpotOccupations)
                 .FirstOrDefaultAsync(c => c.Id == id);
 
             if (vehicle == null)
@@ -84,7 +85,7 @@ namespace SmartParkInnovate.Core.Services
                 Model = vehicle.Model,
                 LicensePlate = vehicle.LicensePlate,
                 WorkerId = vehicle.WorkerId,
-                Worker = vehicle.Worker,
+                WorkerUserName = vehicle.Worker.UserName,
                 IsDeleted = vehicle.IsDeleted,
                 DeletedOn = vehicle.DeletedOn
             };
@@ -102,7 +103,7 @@ namespace SmartParkInnovate.Core.Services
                     Model = c.Model,
                     LicensePlate = c.LicensePlate,
                     WorkerId = c.WorkerId,
-                    Worker = c.Worker,
+                    WorkerUserName = c.Worker.UserName,
                     IsDeleted = c.IsDeleted,
                     DeletedOn = c.DeletedOn
                 }).Where(c => c.WorkerId == userId)
