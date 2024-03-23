@@ -13,6 +13,9 @@
             public const string VehicleMakeLengthErrorMessage = "Car make must be between 2 and 50 characters long.";
             public const string VehicleModelLengthErrorMessage = "Car model name must be between 3 and 50 characters long.";
             public const string VehicleAlreadyExistsErrorMessage = "Vehicle already exists";
+            public const string VehicleDoesNotBelongToWorker = "You Do Not Have Access To This Vehicle";
+            public const string VehicleAlreadyDeletedErrorMessage = "Vehicle Is Already Deleted";
+            public const string VehicleIsNotDeletedErrorMessage = "Vehicle Is Not Deleted";
         }
 
         public static class CommentErrorMessages
@@ -32,6 +35,7 @@
             public const string ParkingSpotIsDisabledErrorMessage = "Parking Spot Is Disabled";
             public const string ParkingSpotAlreadyInUseErrorMessage = "Parking Spot Is Already In Use";
             public const string ParkingSpotWasNotUsed = "The Parking Spot Was Not Used And It Cannot Be Exited";
+            public const string ParkingSpotAlreadyEnabledErrorMessage = "Parking Spot Is Already Enabled";
         }
 
         public static class WorkerErrorMessages
