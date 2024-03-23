@@ -3,6 +3,7 @@ using SmartParkInnovate.Core.Contracts;
 using SmartParkInnovate.Core.Models.ParkingSpot;
 using SmartParkInnovate.Core.Models.ParkingSpotOccupationsViewModel;
 using SmartParkInnovate.Core.Models.VehicleModel;
+using SmartParkInnovate.Core.Models.WorkerModel;
 using SmartParkInnovate.Infrastructure.Data.Models;
 using SmartParkInnovate.Infrastructure.Repository;
 using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages;
@@ -94,7 +95,12 @@ namespace SmartParkInnovate.Core.Services
                 throw new InvalidOperationException(string.Format(ParkingSpotErrorMessages.ParkingSpotNotOccupiedErrorMessage));
             }
 
-            int? vehicleId = parkingSpot.OccupationVehicle.Id;
+            int vehicleId = parkingSpot.OccupationVehicle.Id;
+
+            if (worker.Vehicles.FirstOrDefault(c => c.Id == vehicleId) == null)
+            {
+                throw new ArgumentException(string.Format(VehicleErrorMessages.InvalidVehicleErrorMessage));
+            }
 
             ParkingSpotOccupation? occupation = parkingSpot.ParkingSpotOccupations
                 .FirstOrDefault(c => c.ParkingSpotId == parkingSpot.Id && c.Vehicle.Id == vehicleId && c.ExitDateTime == null);
@@ -113,6 +119,44 @@ namespace SmartParkInnovate.Core.Services
             await this.repository.SaveChangesAsync();
         }
 
+        public async Task Enable(int id)
+        {
+            ParkingSpot? parkingSpot = await this.repository.GetByIdAsync<ParkingSpot>(id);
+
+            if (parkingSpot == null)
+            {
+                throw new ArgumentException(string.Format(ParkingSpotErrorMessages.InvalidParkingSpotErrorMessage));
+            }
+
+            if (parkingSpot.IsEnabled)
+            {
+                throw new InvalidOperationException(string.Format(ParkingSpotErrorMessages.ParkingSpotAlreadyEnabledErrorMessage));
+            }
+
+            parkingSpot.IsEnabled = true;
+
+            await this.repository.SaveChangesAsync();
+        }
+
+        public async Task Disable(int id)
+        {
+            ParkingSpot? parkingSpot = await this.repository.GetByIdAsync<ParkingSpot>(id);
+
+            if (parkingSpot == null)
+            {
+                throw new ArgumentException(string.Format(ParkingSpotErrorMessages.InvalidParkingSpotErrorMessage));
+            }
+
+            if (!parkingSpot.IsEnabled)
+            {
+                throw new InvalidOperationException(string.Format(ParkingSpotErrorMessages.ParkingSpotAlreadyEnabledErrorMessage));
+            }
+
+            parkingSpot.IsEnabled = false;
+
+            await this.repository.SaveChangesAsync();
+        }
+
         public async Task<ParkingSpotDetailsViewModel> Details(int id)
         {
             ParkingSpot? parkingSpot = await this.repository.GetByIdAsync<ParkingSpot>(id);
@@ -127,34 +171,25 @@ namespace SmartParkInnovate.Core.Services
                 Id = parkingSpot.Id,
                 IsEnabled = parkingSpot.IsEnabled,
                 IsOccupied = parkingSpot.IsOccupied,
-                OccupationVehicleId = parkingSpot.OccupationVehicleId,                
-                OccupationVehicleLicensePlate = parkingSpot.OccupationVehicle.LicensePlate,
-                OccupationVehicleOwner = parkingSpot.OccupationVehicle.Worker.UserName,
+                OccupationVehicleId = (parkingSpot.OccupationVehicleId == null) ? null : parkingSpot.OccupationVehicleId,
+                OccupationVehicle = parkingSpot.OccupationVehicle == null ? null : new ParkingSpotDetailsVehicleViewModel()
+                {
+                    Make = parkingSpot.OccupationVehicle.Make,
+                    Model = parkingSpot.OccupationVehicle.Model,
+                    LicensePlate = parkingSpot.OccupationVehicle.LicensePlate,
+                    WorkerId = parkingSpot.OccupationVehicle.Worker.Id,
+                    WorkerUserName = parkingSpot.OccupationVehicle.Worker.UserName
+                },
                 ParkingSpotOccupations = parkingSpot.ParkingSpotOccupations
                 .Select(c => new ParkingSpotOccupationViewModel()
-                { 
+                {
                     VehicleId = c.VehicleId,
-                    VehicleMake = c.Vehicle.Make,
-                    VehicleModel = c.Vehicle.Model,
-                    VehicleLicensePlate = c.Vehicle.LicensePlate,
-                    WorkerUserName = c.Vehicle.Worker.UserName,
-                    EnterDateTime = c.EnterDateTime,
-                    ExitDateTime = c.ExitDateTime
+                    OccupationVehicleLicensePlate = c.Vehicle.LicensePlate,
+                    OccupationVehicleWorkerUserName = c.Vehicle.Worker.UserName
                 }).ToList()
             };
 
-
             return model;
-        }
-
-        public Task Enable()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task Disable()
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<List<ParkingSpotViewModel>> All()
@@ -165,8 +200,9 @@ namespace SmartParkInnovate.Core.Services
                     Id = c.Id,
                     IsEnabled = c.IsEnabled,
                     IsOccupied = c.IsOccupied,
-                    OccupationVehicleId = c.OccupationVehicleId,
-                    OccupationVehicleLicensePlate = c.OccupationVehicle.LicensePlate
+                    OccupationVehicleId = (c.OccupationVehicleId == null) ? null : c.OccupationVehicleId,
+                    OccupationVehicleLicensePlate = (c.OccupationVehicle == null) ? null : c.OccupationVehicle.LicensePlate,
+                    OccupationVehicleWorkerUserName = (c.OccupationVehicle == null) ? null : c.OccupationVehicle.Worker.UserName,
                 }).ToListAsync();
 
             return parkingSpots;
@@ -181,8 +217,9 @@ namespace SmartParkInnovate.Core.Services
                     Id = c.Id,
                     IsEnabled = c.IsEnabled,
                     IsOccupied = c.IsOccupied,
-                    OccupationVehicleId = c.OccupationVehicleId,
-                    OccupationVehicleLicensePlate = c.OccupationVehicle.LicensePlate
+                    OccupationVehicleId = (c.OccupationVehicleId == null) ? null : c.OccupationVehicleId,
+                    OccupationVehicleLicensePlate = (c.OccupationVehicle == null) ? null : c.OccupationVehicle.LicensePlate,
+                    OccupationVehicleWorkerUserName = (c.OccupationVehicle == null) ? null : c.OccupationVehicle.Worker.UserName,
                 }).ToListAsync();
 
             return parkingSpots;
@@ -197,8 +234,9 @@ namespace SmartParkInnovate.Core.Services
                     Id = c.Id,
                     IsEnabled = c.IsEnabled,
                     IsOccupied = c.IsOccupied,
-                    OccupationVehicleId = c.OccupationVehicleId,
-                    OccupationVehicleLicensePlate = c.OccupationVehicle.LicensePlate
+                    OccupationVehicleId = (c.OccupationVehicleId == null) ? null : c.OccupationVehicleId,
+                    OccupationVehicleLicensePlate = (c.OccupationVehicle == null) ? null : c.OccupationVehicle.LicensePlate,
+                    OccupationVehicleWorkerUserName = (c.OccupationVehicle == null) ? null : c.OccupationVehicle.Worker.UserName,
                 }).ToListAsync();
 
             return parkingSpots;
