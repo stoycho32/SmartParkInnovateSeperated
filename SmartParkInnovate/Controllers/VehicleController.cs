@@ -42,12 +42,25 @@ namespace SmartParkInnovate.Controllers
         [HttpGet]
         public async Task<IActionResult> Vehicles()
         {
-            var vehicles = await this.vehicleService.All();
+            List<VehicleViewModel> vehicles = await this.vehicleService.All();
 
             return View(vehicles);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Remove(int id)
+        {
+            await this.vehicleService.Remove(id);
+            
+            return RedirectToAction(nameof(Vehicles));
+        }
 
+        [HttpPost]
+        public async Task<IActionResult> Return (int id)
+        {
+            await this.vehicleService.Return(id);
 
+            return RedirectToAction(nameof(Vehicles));
+        }
     }
 }
