@@ -29,6 +29,7 @@
                                 <h5 class="card-title" style="color: #CCE5EA">Spot Number: @spot.Id</h5>
                                 <p class="card-text" style="color: #CCE5EA">Spot Is Occupied</p>
                                 <p class="card-text" style="color: #CCE5EA">@spot.OccupationVehicleLicensePlate</p>
+                                <p class="card-text" style="color: #CCE5EA">@spot.OccupationVehicleWorkerUserName</p>
                                 <a asp-controller="Parking" asp-action="Details" asp-route-id="@spot.Id" class="btn btn-success p-3 fw-bold rounded-pill" style="width: 130px; background-color: #A9BD39; border: none; box-shadow: none">Details</a>
                             </div>
                         </div>

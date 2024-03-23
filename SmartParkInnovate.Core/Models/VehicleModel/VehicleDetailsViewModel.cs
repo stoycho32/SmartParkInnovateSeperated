@@ -1,4 +1,5 @@
 ﻿using SmartParkInnovate.Core.Models.ParkingSpotOccupationModel;
+using SmartParkInnovate.Core.Models.WorkerModel;
 using SmartParkInnovate.Infrastructure.Data.Attributes;
 using System.ComponentModel.DataAnnotations;
 using static SmartParkInnovate.Infrastructure.Data.Constants.DataConstants;
@@ -26,11 +27,12 @@ namespace SmartParkInnovate.Core.Models.VehicleModel
         public string LicensePlate { get; set; } = null!;
 
         [Required]
-        public string WorkerId { get; set; }
+        public int WorkerId { get; set; }
 
-        public string WorkerUserName { get; set; }
+        public string? WorkerUserName { get; set; }
 
         public ICollection<VehicleOccupationViewModel> Occupations { get; set; }
+
         public bool IsDeleted { get; set; }
         public DateTime? DeletedOn { get; set; }
     }

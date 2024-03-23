@@ -1,23 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SmartParkInnovate.Core.Models.VehicleModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace SmartParkInnovate.Core.Models.ParkingSpotOccupationsViewModel
 {
     public class ParkingSpotOccupationViewModel
     {
         [Required]
-        public int VehicleId { get; set; }
+        public int? VehicleId { get; set; }
 
-        [Required]
-        public string VehicleMake { get; set; }
+        public string OccupationVehicleLicensePlate { get; set; }
 
-        [Required]
-        public string VehicleModel { get; set; }
-
-        [Required]
-        public string VehicleLicensePlate { get; set; }
-
-        [Required]
-        public string WorkerUserName { get; set; }
+        public string OccupationVehicleWorkerUserName { get; set; }
 
         [Required]
         public DateTime EnterDateTime { get; init; }

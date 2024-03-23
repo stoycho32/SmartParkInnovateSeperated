@@ -17,5 +17,7 @@ namespace SmartParkInnovate.Core.Models.ParkingSpot
         public int? OccupationVehicleId { get; set; }
 
         public string? OccupationVehicleLicensePlate { get; set; }
+
+        public string? OccupationVehicleWorkerUserName { get; set; }
     }
 }

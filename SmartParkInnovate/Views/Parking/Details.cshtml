@@ -20,8 +20,10 @@
             else
             {
                 <p class="lead" style="color: #CB4040">The Parking Spot Is Occupied At The Moment</p>
-                <p class="lead" style="color: #CB4040">Occupied By: @Model.OccupationVehicleLicensePlate</p>
-                <p class="lead" style="color: #CB4040">Car Owner: @Model.OccupationVehicleOwner</p>
+                <p class="lead" style="color: #CB4040">Occupied By: @Model.OccupationVehicle.LicensePlate</p>
+                <p class="lead" style="color: #CB4040">Car Owner: @Model.OccupationVehicle.WorkerUserName</p>
+                <p class="lead" style="color: #CB4040">Car Make: @Model.OccupationVehicle.Make</p>
+                <p class="lead" style="color: #CB4040">Car Owner: @Model.OccupationVehicle.Model</p>
             }
         </div>
     </div>
@@ -35,8 +37,6 @@
             <table class="table table-borderless" style="border: none; box-shadow: none; color: #CCE5EA">
                 <thead>
                     <tr class="font-weight-bold">
-                        <th scope="col">Vehicle Make</th>
-                        <th scope="col">Vehicle Model</th>
                         <th scope="col">License Plate</th>
                         <th scope="col">Owner</th>
                         <th scope="col">Enter DateTime</th>
@@ -47,11 +47,17 @@
                     @foreach (var vehicle in @Model.ParkingSpotOccupations)
                     {
                         <tr>
-                            <td>@vehicle.VehicleMake</td>
-                            <td>@vehicle.VehicleModel</td>
-                            <td>@vehicle.VehicleLicensePlate</td>
-                            <td>@vehicle.WorkerUserName</td>
-                            <td>@vehicle.WorkerUserName</td>
+                            <td>@vehicle.OccupationVehicleLicensePlate</td>
+                            <td>@vehicle.OccupationVehicleWorkerUserName</td>
+                            <td>@vehicle.EnterDateTime</td>
+                            @if (vehicle.ExitDateTime != null)
+                            {
+                                <td>@vehicle.ExitDateTime</td>
+                            }
+                            else
+                            {
+                                <td>Not Exited Yet</td>
+                            }
                         </tr>
                     }
                 </tbody>
