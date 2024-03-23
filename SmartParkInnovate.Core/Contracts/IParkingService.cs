@@ -11,9 +11,9 @@ namespace SmartParkInnovate.Core.Contracts
 
         public Task<ParkingSpotDetailsViewModel> Details(int id);
 
-        public Task Enable();
+        public Task Enable(int id);
 
-        public Task Disable();
+        public Task Disable(int id);
 
         public Task<List<ParkingSpotViewModel>> All();
 
