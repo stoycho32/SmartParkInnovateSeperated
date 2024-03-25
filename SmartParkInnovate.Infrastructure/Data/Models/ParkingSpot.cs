@@ -22,12 +22,6 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
         public bool IsOccupied { get; set; }
 
 
-        public int? OccupationVehicleId { get; set; }
-
-        [ForeignKey(nameof(OccupationVehicleId))]
-        public Vehicle? OccupationVehicle { get; set; }
-
-
         [InverseProperty(nameof(ParkingSpot))]
         public ICollection<ParkingSpotOccupation> ParkingSpotOccupations { get; set; }
     }
