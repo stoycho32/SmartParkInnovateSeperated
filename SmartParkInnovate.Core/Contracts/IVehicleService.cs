@@ -6,7 +6,7 @@ namespace SmartParkInnovate.Core.Contracts
     {
         public Task Add(string userId, VehicleFormModel vehicleModel);
 
-        public Task<VehicleViewModel> Details(int id);
+        public Task<VehicleDetailsViewModel> Details(int id);
 
         public Task<List<VehicleViewModel>> All();
 
