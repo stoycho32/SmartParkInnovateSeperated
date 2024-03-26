@@ -9,6 +9,9 @@ namespace SmartParkInnovate.Core.Models.VehicleModel
     public class VehicleDetailsViewModel
     {
         [Required]
+        public int Id { get; set; }
+
+        [Required]
         [StringLength(VehicleDataConstants.VehicleMakeMaxLength,
             MinimumLength = VehicleDataConstants.VehicleMakeMinLength)]
         public string Make { get; set; } = null!;
