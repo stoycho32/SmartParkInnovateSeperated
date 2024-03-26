@@ -5,7 +5,7 @@ namespace SmartParkInnovate.Core.Contracts
 {
     public interface IParkingService
     { 
-        public Task Use(int id, string userId, VehicleViewModel vehicleModel);
+        public Task Use(int id, string userId, UseSpotVehicleFormModel vehicleModel);
 
         public Task Exit(int id, string userId);
 
@@ -16,9 +16,5 @@ namespace SmartParkInnovate.Core.Contracts
         public Task Disable(int id);
 
         public Task<List<ParkingSpotViewModel>> All();
-
-        public Task<List<ParkingSpotViewModel>> NotOccupied();
-
-        public Task<List<ParkingSpotViewModel>> Occupied();
     }
 }
