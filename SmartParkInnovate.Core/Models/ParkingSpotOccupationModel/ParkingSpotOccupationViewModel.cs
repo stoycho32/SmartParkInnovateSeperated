@@ -8,9 +8,11 @@ namespace SmartParkInnovate.Core.Models.ParkingSpotOccupationsViewModel
         [Required]
         public int? VehicleId { get; set; }
 
-        public string OccupationVehicleLicensePlate { get; set; }
+        [Required]
+        public string OccupationVehicleLicensePlate { get; set; } = null!;
 
-        public string OccupationVehicleWorkerUserName { get; set; }
+        [Required]
+        public string OccupationVehicleWorkerUserName { get; set; } = null!;
 
         [Required]
         public DateTime EnterDateTime { get; init; }
