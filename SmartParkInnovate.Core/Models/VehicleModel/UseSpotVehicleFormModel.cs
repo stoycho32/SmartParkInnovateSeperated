@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SmartParkInnovate.Core.Models.VehicleModel
 {
-    public class UseSpotVehicleModel
+    public class UseSpotVehicleFormModel
     {
         [Required]
         [LicensePlateFormat]
