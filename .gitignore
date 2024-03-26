@@ -367,3 +367,4 @@ FodyWeavers.xsd
 /SmartParkInnovate/Controllers/ParkingController.cs
 /SmartParkInnovate/Controllers/ParkingController.cs
 /SmartParkInnovate/Controllers/ParkingController.cs
+/SmartParkInnovate.Core/Models/ParkingSpotModel/ParkingSpotDetailsViewModel.cs
