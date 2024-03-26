@@ -6,11 +6,7 @@ namespace SmartParkInnovate.Core.Models.ParkingSpot
 {
     public class ParkingSpotDetailsViewModel
     {
-        public ParkingSpotDetailsViewModel()
-        {
-            this.ParkingSpotOccupations = new List<ParkingSpotOccupationViewModel>();
-        }
-
+        [Required]
         public int Id { get; set; }
 
         [Required]
@@ -19,10 +15,8 @@ namespace SmartParkInnovate.Core.Models.ParkingSpot
         [Required]
         public bool IsOccupied { get; set; }
 
-        public int? OccupationVehicleId { get; set; }
+        public int OccupationsCount { get; set; }
 
-        public ParkingSpotDetailsVehicleViewModel? OccupationVehicle { get; set; }
-
-        public ICollection<ParkingSpotOccupationViewModel> ParkingSpotOccupations { get; set; }
+        public ICollection<ParkingSpotOccupationViewModel> ParkingSpotOccupations { get; set; } = new List<ParkingSpotOccupationViewModel>();
     }
 }

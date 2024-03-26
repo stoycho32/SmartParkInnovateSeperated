@@ -12,12 +12,5 @@ namespace SmartParkInnovate.Core.Models.ParkingSpot
 
         [Required]
         public bool IsOccupied { get; set; }
-
-
-        public int? OccupationVehicleId { get; set; }
-
-        public string? OccupationVehicleLicensePlate { get; set; }
-
-        public string? OccupationVehicleWorkerUserName { get; set; }
     }
 }
