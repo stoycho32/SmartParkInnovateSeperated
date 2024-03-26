@@ -1,7 +1,5 @@
 ﻿using SmartParkInnovate.Infrastructure.Data.Attributes;
-using SmartParkInnovate.Infrastructure.Data.Models;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using static SmartParkInnovate.Infrastructure.Data.Constants.DataConstants;
 using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages;
 
