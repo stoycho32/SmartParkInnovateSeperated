@@ -16,6 +16,7 @@
             public const string VehicleDoesNotBelongToWorker = "You Do Not Have Access To This Vehicle";
             public const string VehicleAlreadyDeletedErrorMessage = "Vehicle Is Already Deleted";
             public const string VehicleIsNotDeletedErrorMessage = "Vehicle Is Not Deleted";
+            public const string VehicleAlreadyParkedErrorMessage = "Vehicle Is Already Parked On a Spot";
         }
 
         public static class CommentErrorMessages
