@@ -28,9 +28,10 @@ namespace SmartParkInnovate.Core.Models.VehicleModel
         [Required]
         public string WorkerUserName { get; set; } = null!;
 
-        public ICollection<VehicleOccupationViewModel> Occupations { get; set; } = new List<VehicleOccupationViewModel>();
-
+        [Required]
         public bool IsDeleted { get; set; }
         public DateTime? DeletedOn { get; set; }
+
+        public ICollection<VehicleOccupationViewModel> Occupations { get; set; } = new List<VehicleOccupationViewModel>();
     }
 }
