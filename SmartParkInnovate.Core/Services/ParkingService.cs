@@ -168,6 +168,7 @@ namespace SmartParkInnovate.Core.Services
                 .Include(c => c.ParkingSpotOccupations)
                 .ThenInclude(c => c.Vehicle)
                 .ThenInclude(c => c.Worker)
+                .Where(c => c.Id == id)
                 .Select(c => new ParkingSpotDetailsViewModel()
                 {
                     Id = id,
@@ -182,10 +183,7 @@ namespace SmartParkInnovate.Core.Services
                         EnterDateTime = p.EnterDateTime,
                         ExitDateTime = p.ExitDateTime
                     }).ToList()
-
-                })
-                .FirstOrDefaultAsync(c => c.Id == id);
-
+                }).FirstOrDefaultAsync();
 
             if (model == null)
             {

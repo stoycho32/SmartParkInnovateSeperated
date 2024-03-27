@@ -5,6 +5,7 @@
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <h1 class="display-3" style="color: #CCE5EA">Parking Spot Number: @Model.Id</h1>
+            <br />
             @if (Model.IsEnabled == true)
             {
                 <p class="lead" style="color: #CCE5EA">The Parking Spot Is Enabled</p>
@@ -19,21 +20,17 @@
             }
             else
             {
-                <p class="lead" style="color: #CB4040">The Parking Spot Is Occupied At The Moment</p>
-                <p class="lead" style="color: #CB4040">Occupied By: @Model.OccupationVehicle.LicensePlate</p>
-                <p class="lead" style="color: #CB4040">Car Owner: @Model.OccupationVehicle.WorkerUserName</p>
-                <p class="lead" style="color: #CB4040">Car Make: @Model.OccupationVehicle.Make</p>
-                <p class="lead" style="color: #CB4040">Car Owner: @Model.OccupationVehicle.Model</p>
+                <p class="lead" style="color: #E39797">The Parking Spot Is Occupied At The Moment</p>
             }
         </div>
     </div>
 
+    <br />
 
+    <h1 style="color: #CCE5EA">Parking Spot History</h1>
     @if (@Model.ParkingSpotOccupations.Count() > 0)
     {
         <div>
-            <br />
-            <p class="text-left" style="color: #CCE5EA">Vehicles: @Model.ParkingSpotOccupations.Count()</p>
             <table class="table table-borderless" style="border: none; box-shadow: none; color: #CCE5EA">
                 <thead>
                     <tr class="font-weight-bold">
