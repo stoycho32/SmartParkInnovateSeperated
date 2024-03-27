@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SmartParkInnovate.Core.Contracts;
 using SmartParkInnovate.Core.Models.ParkingSpot;
+using SmartParkInnovate.Core.Models.ParkingSpotModel;
 using SmartParkInnovate.Core.Models.VehicleModel;
 using System.Security.Claims;
 
@@ -18,14 +19,15 @@ namespace SmartParkInnovate.Controllers
         [HttpGet]
         public async Task<IActionResult> ParkingSpots()
         {
-            List<Core.Models.ParkingSpot.ParkingSpotViewModel> parkingSpots = await this.parkingService.All();
+            List<ParkingSpotViewModel> parkingSpots = await this.parkingService.All();
             return View(parkingSpots);
         }
 
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
-            ParkingSpotDetailsViewModel parkingSpot = await this.parkingService.Details(id);
+            string userId = User.Id();
+            ParkingSpotDetailsModel parkingSpot = await this.parkingService.Details(id, userId);
 
             return View(parkingSpot);
         }
@@ -58,10 +60,20 @@ namespace SmartParkInnovate.Controllers
             {
                 return BadRequest();
             }
-            catch(InvalidOperationException ioe)
+            catch (InvalidOperationException ioe)
             {
                 return BadRequest();
             }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ExitSpot(int id)
+        {
+            string userId = User.Id();
+
+            await this.parkingService.Exit(id, userId);
+
+            return RedirectToAction(nameof(ParkingSpots));
         }
     }
 }

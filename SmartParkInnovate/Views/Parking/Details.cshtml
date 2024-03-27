@@ -1,12 +1,12 @@
-﻿@model ParkingSpotDetailsViewModel
+﻿@model ParkingSpotDetailsModel
 
 
 <body style="background-color: #4C98CF">
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
-            <h1 class="display-3" style="color: #CCE5EA">Parking Spot Number: @Model.Id</h1>
+            <h1 class="display-3" style="color: #CCE5EA">Parking Spot Number: @Model.ParkingSpotDetailsViewModel.Id</h1>
             <br />
-            @if (Model.IsEnabled == true)
+            @if (Model.ParkingSpotDetailsViewModel.IsEnabled == true)
             {
                 <p class="lead" style="color: #CCE5EA">The Parking Spot Is Enabled</p>
             }
@@ -14,7 +14,7 @@
             {
                 <p class="lead" style="color: #CB4040">The Parking Spot Is Disabled</p>
             }
-            @if (Model.IsOccupied == false)
+            @if (Model.ParkingSpotDetailsViewModel.IsOccupied == false)
             {
                 <p class="lead" style="color: #CCE5EA">The Parking Spot Is Not Occupied At The Moment</p>
             }
@@ -28,7 +28,7 @@
     <br />
 
     <h1 style="color: #CCE5EA">Parking Spot History</h1>
-    @if (@Model.ParkingSpotOccupations.Count() > 0)
+    @if (@Model.ParkingSpotDetailsViewModel.ParkingSpotOccupations.Count() > 0)
     {
         <div>
             <table class="table table-borderless" style="border: none; box-shadow: none; color: #CCE5EA">
@@ -41,15 +41,30 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var vehicle in @Model.ParkingSpotOccupations)
+                    @foreach (var vehicle in @Model.ParkingSpotDetailsViewModel.ParkingSpotOccupations)
                     {
                         <tr>
-                            <td>@vehicle.OccupationVehicleLicensePlate</td>
-                            <td>@vehicle.OccupationVehicleWorkerUserName</td>
-                            <td>@vehicle.EnterDateTime</td>
+                            <td style="font-size: 20px">@vehicle.OccupationVehicleLicensePlate</td>
+                            <td style="font-size: 20px">@vehicle.OccupationVehicleWorkerUserName</td>
+                            <td style="font-size: 20px">@vehicle.EnterDateTime</td>
                             @if (vehicle.ExitDateTime != null)
                             {
                                 <td>@vehicle.ExitDateTime</td>
+                            }
+                            else if (vehicle.OccupationVehicleWorkerId == Model.CurrentUserId)
+                            {
+                                <td>
+                                    <form asp-controller="Parking" asp-action="ExitSpot" method="post">
+                                        <input type="hidden" name="id" value="@Model.ParkingSpotDetailsViewModel.Id" />
+                                        <button type="submit" class="btn btn-success p-3 fw-bold rounded-pill d-flex justify-content-center align-items-center"
+                                                style="width: 130px; height: 1px; background-color: #ED8396; border: none; box-shadow: none; line-height: normal; padding: 0;">Exit
+                                        </button>
+                                    </form>
+                                </td>
+
+                                @* <td><a asp-controller="Parking" asp-action="ExitSpot" asp-route-id="@Model.ParkingSpotDetailsViewModel.Id"
+                    class="btn btn-success p-3 fw-bold rounded-pill d-flex justify-content-center align-items-center"
+                    style="width: 130px; height: 1px; background-color: #ED8396; border: none; box-shadow: none; line-height: normal; padding: 0;">Exit</a></td>*@
                             }
                             else
                             {
@@ -66,5 +81,4 @@
         <br />
         <p style="color: #CCE5EA">This Parking Spot Does Not Have Any Previous Occupations</p>
     }
-
 </body>

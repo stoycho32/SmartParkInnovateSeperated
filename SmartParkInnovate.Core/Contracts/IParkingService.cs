@@ -1,4 +1,5 @@
 ﻿using SmartParkInnovate.Core.Models.ParkingSpot;
+using SmartParkInnovate.Core.Models.ParkingSpotModel;
 using SmartParkInnovate.Core.Models.VehicleModel;
 
 namespace SmartParkInnovate.Core.Contracts
@@ -9,7 +10,7 @@ namespace SmartParkInnovate.Core.Contracts
 
         public Task Exit(int id, string userId);
 
-        public Task<ParkingSpotDetailsViewModel> Details(int id);
+        public Task<ParkingSpotDetailsModel> Details(int id, string userId);
 
         public Task Enable(int id);
 
