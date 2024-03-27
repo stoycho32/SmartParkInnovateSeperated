@@ -44,12 +44,12 @@
                     @foreach (var vehicle in @Model.ParkingSpotDetailsViewModel.ParkingSpotOccupations)
                     {
                         <tr>
-                            <td style="font-size: 20px">@vehicle.OccupationVehicleLicensePlate</td>
-                            <td style="font-size: 20px">@vehicle.OccupationVehicleWorkerUserName</td>
-                            <td style="font-size: 20px">@vehicle.EnterDateTime</td>
+                            <td style="font-size: 18px">@vehicle.OccupationVehicleLicensePlate</td>
+                            <td style="font-size: 18px">@vehicle.OccupationVehicleWorkerUserName</td>
+                            <td style="font-size: 18px">@vehicle.EnterDateTime</td>
                             @if (vehicle.ExitDateTime != null)
                             {
-                                <td>@vehicle.ExitDateTime</td>
+                                <td style="font-size: 18px">@vehicle.ExitDateTime</td>
                             }
                             else if (vehicle.OccupationVehicleWorkerId == Model.CurrentUserId)
                             {
@@ -68,7 +68,7 @@
                             }
                             else
                             {
-                                <td>Not Exited Yet</td>
+                                <td style="font-size: 18px">Not Exited Yet</td>
                             }
                         </tr>
                     }
