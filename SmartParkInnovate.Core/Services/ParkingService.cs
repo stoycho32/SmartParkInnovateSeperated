@@ -3,7 +3,6 @@ using SmartParkInnovate.Core.Contracts;
 using SmartParkInnovate.Core.Models.ParkingSpot;
 using SmartParkInnovate.Core.Models.ParkingSpotOccupationsViewModel;
 using SmartParkInnovate.Core.Models.VehicleModel;
-using SmartParkInnovate.Core.Models.WorkerModel;
 using SmartParkInnovate.Infrastructure.Data.Models;
 using SmartParkInnovate.Infrastructure.Repository;
 using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages;
@@ -19,10 +18,13 @@ namespace SmartParkInnovate.Core.Services
             this.repository = repository;
         }
 
-        public async Task Use(int id, string userId, VehicleViewModel vehicleModel)
+        public async Task Use(int id, string userId, UseSpotVehicleFormModel vehicleModel)
         {
             ParkingSpot? parkingSpot = await this.repository.GetByIdAsync<ParkingSpot>(id);
-            Worker? worker = await this.repository.GetByIdAsync<Worker>(userId);
+            Worker? worker = await this.repository.All<Worker>()
+                .Include(c => c.Vehicles)
+                .ThenInclude(c => c.ParkingSpotOccupations)
+                .FirstOrDefaultAsync(c => c.Id == userId);
 
             Vehicle? vehicle = null;
 
@@ -53,9 +55,12 @@ namespace SmartParkInnovate.Core.Services
                 throw new ArgumentException(string.Format(VehicleErrorMessages.InvalidVehicleErrorMessage));
             }
 
+            if (vehicle.ParkingSpotOccupations.Any(c => c.ExitDateTime == null))
+            {
+                throw new InvalidOperationException(string.Format(VehicleErrorMessages.VehicleAlreadyParkedErrorMessage));
+            }
+
             parkingSpot.IsOccupied = true;
-            parkingSpot.OccupationVehicleId = vehicle.Id;
-            parkingSpot.OccupationVehicle = vehicle;
 
             ParkingSpotOccupation occupation = new ParkingSpotOccupation()
             {
@@ -72,8 +77,12 @@ namespace SmartParkInnovate.Core.Services
 
         public async Task Exit(int id, string userId)
         {
-            ParkingSpot? parkingSpot = await this.repository.GetByIdAsync<ParkingSpot>(id);
-            Worker? worker = await this.repository.GetByIdAsync<Worker>(userId);
+            ParkingSpot? parkingSpot = await this.repository.All<ParkingSpot>()
+                .Include(c => c.ParkingSpotOccupations).FirstOrDefaultAsync(c => c.Id == id);
+
+            Worker? worker = await this.repository.All<Worker>()
+                .Include(c => c.Vehicles)
+                .FirstOrDefaultAsync(c => c.Id == userId);
 
             if (parkingSpot == null)
             {
@@ -90,29 +99,25 @@ namespace SmartParkInnovate.Core.Services
                 throw new ArgumentException(string.Format(WorkerErrorMessages.InvalidWorkerErrorMessage));
             }
 
-            if (!parkingSpot.IsOccupied && parkingSpot.OccupationVehicle == null)
+            if (!parkingSpot.IsOccupied)
             {
                 throw new InvalidOperationException(string.Format(ParkingSpotErrorMessages.ParkingSpotNotOccupiedErrorMessage));
             }
 
-            int vehicleId = parkingSpot.OccupationVehicle.Id;
-
-            if (worker.Vehicles.FirstOrDefault(c => c.Id == vehicleId) == null)
-            {
-                throw new ArgumentException(string.Format(VehicleErrorMessages.InvalidVehicleErrorMessage));
-            }
-
             ParkingSpotOccupation? occupation = parkingSpot.ParkingSpotOccupations
-                .FirstOrDefault(c => c.ParkingSpotId == parkingSpot.Id && c.Vehicle.Id == vehicleId && c.ExitDateTime == null);
+                .FirstOrDefault(c => c.ParkingSpotId == parkingSpot.Id && c.ExitDateTime == null);
 
             if (occupation == null)
             {
                 throw new ArgumentException(string.Format(ParkingSpotErrorMessages.ParkingSpotWasNotUsed));
             }
 
+            if (worker.Vehicles.FirstOrDefault(c => c.LicensePlate == occupation.Vehicle.LicensePlate) == null)
+            {
+                throw new InvalidOperationException(string.Format(VehicleErrorMessages.VehicleDoesNotBelongToWorker));
+            }
+
             parkingSpot.IsOccupied = false;
-            parkingSpot.OccupationVehicleId = null;
-            parkingSpot.OccupationVehicle = null;
 
             occupation.ExitDateTime = DateTime.Now;
 
@@ -159,84 +164,45 @@ namespace SmartParkInnovate.Core.Services
 
         public async Task<ParkingSpotDetailsViewModel> Details(int id)
         {
-            ParkingSpot? parkingSpot = await this.repository.GetByIdAsync<ParkingSpot>(id);
+            ParkingSpotDetailsViewModel? model = await this.repository.All<ParkingSpot>()
+                .Include(c => c.ParkingSpotOccupations)
+                .ThenInclude(c => c.Vehicle)
+                .ThenInclude(c => c.Worker)
+                .Select(c => new ParkingSpotDetailsViewModel()
+                {
+                    Id = id,
+                    IsEnabled = c.IsEnabled,
+                    IsOccupied = c.IsOccupied,
+                    OccupationsCount = c.ParkingSpotOccupations.Count,
+                    ParkingSpotOccupations = c.ParkingSpotOccupations.Select(p => new ParkingSpotOccupationViewModel()
+                    {
+                        VehicleId = p.VehicleId,
+                        OccupationVehicleLicensePlate = p.Vehicle.LicensePlate,
+                        OccupationVehicleWorkerUserName = p.Vehicle.Worker.UserName,
+                        EnterDateTime = p.EnterDateTime,
+                        ExitDateTime = p.ExitDateTime
+                    }).ToList()
 
-            if (parkingSpot == null)
+                })
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+
+            if (model == null)
             {
                 throw new ArgumentException(string.Format(ParkingSpotErrorMessages.InvalidParkingSpotErrorMessage));
             }
-
-            ParkingSpotDetailsViewModel? model = new ParkingSpotDetailsViewModel()
-            {
-                Id = parkingSpot.Id,
-                IsEnabled = parkingSpot.IsEnabled,
-                IsOccupied = parkingSpot.IsOccupied,
-                OccupationVehicleId = (parkingSpot.OccupationVehicleId == null) ? null : parkingSpot.OccupationVehicleId,
-                OccupationVehicle = parkingSpot.OccupationVehicle == null ? null : new ParkingSpotDetailsVehicleViewModel()
-                {
-                    Make = parkingSpot.OccupationVehicle.Make,
-                    Model = parkingSpot.OccupationVehicle.Model,
-                    LicensePlate = parkingSpot.OccupationVehicle.LicensePlate,
-                    WorkerId = parkingSpot.OccupationVehicle.Worker.Id,
-                    WorkerUserName = parkingSpot.OccupationVehicle.Worker.UserName
-                },
-                ParkingSpotOccupations = parkingSpot.ParkingSpotOccupations
-                .Select(c => new ParkingSpotOccupationViewModel()
-                {
-                    VehicleId = c.VehicleId,
-                    OccupationVehicleLicensePlate = c.Vehicle.LicensePlate,
-                    OccupationVehicleWorkerUserName = c.Vehicle.Worker.UserName
-                }).ToList()
-            };
 
             return model;
         }
 
         public async Task<List<ParkingSpotViewModel>> All()
         {
-            List<ParkingSpotViewModel> parkingSpots = await this.repository.All<ParkingSpot>()
+            var parkingSpots = await this.repository.All<ParkingSpot>()
                 .Select(c => new ParkingSpotViewModel()
                 {
                     Id = c.Id,
                     IsEnabled = c.IsEnabled,
                     IsOccupied = c.IsOccupied,
-                    OccupationVehicleId = (c.OccupationVehicleId == null) ? null : c.OccupationVehicleId,
-                    OccupationVehicleLicensePlate = (c.OccupationVehicle == null) ? null : c.OccupationVehicle.LicensePlate,
-                    OccupationVehicleWorkerUserName = (c.OccupationVehicle == null) ? null : c.OccupationVehicle.Worker.UserName,
-                }).ToListAsync();
-
-            return parkingSpots;
-        }
-
-        public async Task<List<ParkingSpotViewModel>> NotOccupied()
-        {
-            List<ParkingSpotViewModel> parkingSpots = await this.repository.All<ParkingSpot>()
-                .Where(c => c.IsOccupied == false)
-                .Select(c => new ParkingSpotViewModel()
-                {
-                    Id = c.Id,
-                    IsEnabled = c.IsEnabled,
-                    IsOccupied = c.IsOccupied,
-                    OccupationVehicleId = (c.OccupationVehicleId == null) ? null : c.OccupationVehicleId,
-                    OccupationVehicleLicensePlate = (c.OccupationVehicle == null) ? null : c.OccupationVehicle.LicensePlate,
-                    OccupationVehicleWorkerUserName = (c.OccupationVehicle == null) ? null : c.OccupationVehicle.Worker.UserName,
-                }).ToListAsync();
-
-            return parkingSpots;
-        }
-
-        public async Task<List<ParkingSpotViewModel>> Occupied()
-        {
-            List<ParkingSpotViewModel> parkingSpots = await this.repository.All<ParkingSpot>()
-                .Where(c => c.IsOccupied == true)
-                .Select(c => new ParkingSpotViewModel()
-                {
-                    Id = c.Id,
-                    IsEnabled = c.IsEnabled,
-                    IsOccupied = c.IsOccupied,
-                    OccupationVehicleId = (c.OccupationVehicleId == null) ? null : c.OccupationVehicleId,
-                    OccupationVehicleLicensePlate = (c.OccupationVehicle == null) ? null : c.OccupationVehicle.LicensePlate,
-                    OccupationVehicleWorkerUserName = (c.OccupationVehicle == null) ? null : c.OccupationVehicle.Worker.UserName,
                 }).ToListAsync();
 
             return parkingSpots;

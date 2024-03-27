@@ -94,6 +94,7 @@ namespace SmartParkInnovate.Core.Services
         public List<VehicleViewModel> MyVehicles(string userId)
         {
             List<VehicleViewModel> vehicles = this.repository.AllAsReadOnly<Vehicle>()
+                .Include(c => c.Worker)
                 .Where(c => c.WorkerId == userId)
                 .Select(c => new VehicleViewModel()
                 {
