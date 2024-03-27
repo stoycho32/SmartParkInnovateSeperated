@@ -57,14 +57,11 @@
                                     <form asp-controller="Parking" asp-action="ExitSpot" method="post">
                                         <input type="hidden" name="id" value="@Model.ParkingSpotDetailsViewModel.Id" />
                                         <button type="submit" class="btn btn-success p-3 fw-bold rounded-pill d-flex justify-content-center align-items-center"
-                                                style="width: 130px; height: 1px; background-color: #ED8396; border: none; box-shadow: none; line-height: normal; padding: 0;">Exit
+                                                style="width: 130px; height: 1px; background-color: #ED8396; border: none; box-shadow: none; line-height: normal; padding: 0;">
+                                            Exit
                                         </button>
                                     </form>
                                 </td>
-
-                                @* <td><a asp-controller="Parking" asp-action="ExitSpot" asp-route-id="@Model.ParkingSpotDetailsViewModel.Id"
-                    class="btn btn-success p-3 fw-bold rounded-pill d-flex justify-content-center align-items-center"
-                    style="width: 130px; height: 1px; background-color: #ED8396; border: none; box-shadow: none; line-height: normal; padding: 0;">Exit</a></td>*@
                             }
                             else
                             {
