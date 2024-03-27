@@ -21,7 +21,12 @@ namespace SmartParkInnovate.Core.Services
 
         public async Task Use(int id, string userId, UseSpotVehicleFormModel vehicleModel)
         {
-            ParkingSpot? parkingSpot = await this.repository.GetByIdAsync<ParkingSpot>(id);
+            ParkingSpot? parkingSpot = await this.repository.All<ParkingSpot>()
+                .Where(c => c.Id == id)
+                .Include(c => c.ParkingSpotOccupations)
+                .FirstOrDefaultAsync();
+
+
             Worker? worker = await this.repository.All<Worker>()
                 .Include(c => c.Vehicles)
                 .ThenInclude(c => c.ParkingSpotOccupations)
