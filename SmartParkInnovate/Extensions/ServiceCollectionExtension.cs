@@ -25,6 +25,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.AddScoped<IParkingService, ParkingService>();
             services.AddScoped<IVehicleService, VehicleService>();
+            services.AddScoped<IPostService, PostService>();
 
 
             services.AddDatabaseDeveloperPageExceptionFilter();
