@@ -20,6 +20,7 @@ namespace SmartParkInnovate.Core.Services
             List<PostViewModel> posts = await this.repository.All<Post>()
                 .Select(c => new PostViewModel()
                 {
+                    Id = c.Id,
                     WorkerUserName = c.Worker.UserName,
                     PostBody = c.PostBody,
                     PostDate = c.PostDate,
@@ -33,6 +34,7 @@ namespace SmartParkInnovate.Core.Services
 
         public async Task Add(string userId, PostFormModel model)
         {
+
             throw new NotImplementedException();
         }
 

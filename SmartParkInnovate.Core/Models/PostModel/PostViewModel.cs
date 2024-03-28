@@ -7,6 +7,9 @@ namespace SmartParkInnovate.Core.Models.PostModel
     public class PostViewModel
     {
         [Required]
+        public int Id { get; set; }
+
+        [Required]
         public string WorkerUserName { get; set; } = null!;
 
         [Required]
