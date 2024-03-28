@@ -69,19 +69,24 @@ namespace SmartParkInnovate.Core.Services
             VehicleDetailsViewModel? model = await this.repository.All<Vehicle>()
                 .Include(c => c.ParkingSpotOccupations)
                 .Include(c => c.Worker)
+                .Where(c => c.Id == id)
                 .Select(c => new VehicleDetailsViewModel()
                 {
                     Make = c.Make,
                     Model = c.Model,
                     LicensePlate = c.LicensePlate,
                     WorkerUserName = c.Worker.UserName,
+                    IsDeleted = c.IsDeleted,
+                    DeletedOn = c.DeletedOn,
                     Occupations = c.ParkingSpotOccupations.Select(c => new VehicleOccupationViewModel()
                     {
                         ParkingSpotId = c.ParkingSpot.Id,
                         EnterDateTime = c.EnterDateTime,
                         ExitDateTime = c.ExitDateTime,
-                    }).ToList()
-                }).FirstOrDefaultAsync(c => c.Id == id);
+                    })
+                    .OrderByDescending(c => c.EnterDateTime)
+                    .ToList()
+                }).FirstOrDefaultAsync();
 
             if (model == null)
             {

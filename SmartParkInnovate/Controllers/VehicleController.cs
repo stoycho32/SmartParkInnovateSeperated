@@ -47,6 +47,15 @@ namespace SmartParkInnovate.Controllers
             return View(vehicles);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            VehicleDetailsViewModel model = await this.vehicleService.Details(id);
+
+            return View(model);
+        }
+
+
         [HttpPost]
         public async Task<IActionResult> Remove(int id)
         {

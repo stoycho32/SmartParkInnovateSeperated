@@ -1,0 +1,59 @@
+﻿@model VehicleDetailsViewModel
+
+<body style="background-color: #4C98CF">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-3" style="color: #CCE5EA">Vehicle License Plate: @Model.LicensePlate</h1>
+            <br />
+            <p class="lead" style="color: #CCE5EA">Vehicle Owner: @Model.WorkerUserName</p>
+            @if (Model.IsDeleted == false)
+            {
+                <p class="lead" style="color: #CCE5EA">The Vehicle Is Not Deleted</p>
+            }
+            else
+            {
+                <p class="lead" style="color: #CB4040">The Vehicle Is Deleted. Deleted on: @Model.DeletedOn</p>
+            }
+        </div>
+    </div>
+
+    <br />
+
+    <h1 style="color: #CCE5EA">Vehicle History</h1>
+    @if (@Model.Occupations.Count() > 0)
+    {
+        <div>
+            <table class="table table-borderless" style="border: none; box-shadow: none; color: #CCE5EA">
+                <thead>
+                    <tr class="font-weight-bold">
+                        <th scope="col">Parking Spot ID</th>
+                        <th scope="col">Enter DateTime</th>
+                        <th scope="col">Exit DateTime</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var vehicle in @Model.Occupations)
+                    {
+                        <tr>
+                            <td style="font-size: 18px">@vehicle.ParkingSpotId</td>
+                            <td style="font-size: 18px">@vehicle.EnterDateTime</td>
+                            @if (vehicle.ExitDateTime == null)
+                            {
+                                <td style="font-size: 18px">The Vehicle Is Still Parked</td>
+                            }
+                            else
+                            {
+                                <td style="font-size: 18px">@vehicle.ExitDateTime</td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <br />
+        <p style="color: #CCE5EA">Vehicle History Is Empty</p>
+    }
+</body>
