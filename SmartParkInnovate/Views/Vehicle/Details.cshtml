@@ -5,15 +5,7 @@
         <div class="container">
             <h1 class="display-3" style="color: #CCE5EA">Vehicle License Plate: @Model.LicensePlate</h1>
             <br />
-            <p class="lead" style="color: #CCE5EA">Vehicle Owner: @Model.WorkerUserName</p>
-            @if (Model.IsDeleted == false)
-            {
-                <p class="lead" style="color: #CCE5EA">The Vehicle Is Not Deleted</p>
-            }
-            else
-            {
-                <p class="lead" style="color: #CB4040">The Vehicle Is Deleted. Deleted on: @Model.DeletedOn</p>
-            }
+            <h2 class="lead" style="color: #CCE5EA">Vehicle Owner: @Model.WorkerUserName</h2>
         </div>
     </div>
 
