@@ -1,12 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SmartParkInnovate.Core.Models.PostModel;
 
 namespace SmartParkInnovate.Core.Contracts
 {
-    internal interface IPostService
+    public interface IPostService
     {
+        public Task<List<PostViewModel>> All();
+
+        //public Task Add(string userId, PostFormModel model);
+
+        //public Task Edit(int postId, PostFormModel model);
+
+        //public Task Delete(int postId);
+
+        //public Task LikePost(int postId);
+
+        //public Task Comment(int postId);
+
+        //public Task Details(int postId);
     }
 }
