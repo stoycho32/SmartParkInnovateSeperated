@@ -29,7 +29,7 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
 
 
         [Required]
-        public DateTime PostDate { get; init; }
+        public DateTime PostDate { get; set; }
 
         [Required]
         public string WorkerId { get; set; }
