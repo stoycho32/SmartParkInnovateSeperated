@@ -14,6 +14,7 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
             this.Likes = new List<PostLike>();
             this.Comments = new List<Comment>();
             this.IsDeleted = false;
+            this.DeletedOn = null;
         }
 
 
@@ -44,8 +45,6 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
 
         [InverseProperty(nameof(Post))]
         public ICollection<Comment> Comments { get; set; }
-
-
 
         public bool IsDeleted { get; set; }
         public DateTime? DeletedOn { get; set; }
