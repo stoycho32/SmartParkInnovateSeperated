@@ -8,10 +8,25 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
         public Worker()
         {
             this.Vehicles = new List<Vehicle>();
+            this.Posts = new List<Post>();
+            this.Comments = new List<Comment>();
+            this.Likes = new List<PostLike>();
         }
 
 
         [InverseProperty(nameof(Worker))]
         public ICollection<Vehicle> Vehicles { get; set; }
+
+
+        [InverseProperty(nameof(Worker))]
+        public ICollection<Post> Posts { get; set; }
+
+
+        [InverseProperty(nameof(Worker))]
+        public ICollection<Comment> Comments { get; set; }
+
+
+        [InverseProperty(nameof(Worker))]
+        public ICollection<PostLike> Likes { get; set; }
     }
 }
