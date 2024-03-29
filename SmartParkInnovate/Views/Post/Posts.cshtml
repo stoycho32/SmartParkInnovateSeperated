@@ -2,8 +2,14 @@
 
 
 <body style="background-color: #4C98CF">
-    <h1 class="text-center" style="color: #CCE5EA">Posts</h1>
-
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-3" style="color: #CCE5EA">Posts</h1>
+            <a asp-controller="Post" asp-action="PublishPost"
+               class="btn btn-success p-3 fw-bold rounded-pill"
+               style="width: 130px; background-color: #3BBD6E; border: none; box-shadow: none">Publish Post</a>
+        </div>
+    </div>
     <br />
     @if (Model.Count() > 0)
     {

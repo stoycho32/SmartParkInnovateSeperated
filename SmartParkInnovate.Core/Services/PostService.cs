@@ -3,6 +3,7 @@ using SmartParkInnovate.Core.Contracts;
 using SmartParkInnovate.Core.Models.PostModel;
 using SmartParkInnovate.Infrastructure.Data.Models;
 using SmartParkInnovate.Infrastructure.Repository;
+using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages;
 
 namespace SmartParkInnovate.Core.Services
 {
@@ -34,8 +35,22 @@ namespace SmartParkInnovate.Core.Services
 
         public async Task Add(string userId, PostFormModel model)
         {
+            Worker? worker = await this.repository.GetByIdAsync<Worker>(userId);
 
-            throw new NotImplementedException();
+            if (worker == null)
+            {
+                throw new ArgumentException(string.Format(WorkerErrorMessages.InvalidWorkerErrorMessage));
+            }
+
+            Post post = new Post()
+            {
+                PostBody = model.PostBody,
+                WorkerId = worker.Id,
+                Worker = worker
+            };
+
+            await this.repository.AddAsync(post);
+            await this.repository.SaveChangesAsync();
         }
 
         public Task Details(int postId)
