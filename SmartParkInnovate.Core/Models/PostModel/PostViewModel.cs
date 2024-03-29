@@ -14,7 +14,7 @@ namespace SmartParkInnovate.Core.Models.PostModel
 
         [Required]
         [StringLength(PostDataConstants.PostBodyMaxValue,
-            MinimumLength = PostDataConstants.PostBodyMaxValue,
+            MinimumLength = PostDataConstants.PostBodyMinValue,
             ErrorMessage = PostErrorMessages.PostBodyErrorMessage)]
         public string PostBody { get; set; } = null!;
 
