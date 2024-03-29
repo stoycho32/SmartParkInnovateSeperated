@@ -1,4 +1,5 @@
 ﻿using SmartParkInnovate.Infrastructure.Contracts;
+using SmartParkInnovate.Infrastructure.Data.Attributes;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using static SmartParkInnovate.Infrastructure.Data.Constants.DataConstants;
@@ -23,6 +24,7 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
 
 
         [Required]
+        [PostFormat]
         [StringLength(PostDataConstants.PostBodyMaxValue,
             MinimumLength = PostDataConstants.PostBodyMinValue,
             ErrorMessage = PostErrorMessages.PostBodyErrorMessage)]
