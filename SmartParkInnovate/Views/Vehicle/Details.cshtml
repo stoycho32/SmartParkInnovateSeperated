@@ -28,15 +28,8 @@
                     {
                         <tr>
                             <td style="font-size: 18px">@vehicle.ParkingSpotId</td>
-                            <td style="font-size: 18px">@vehicle.EnterDateTime</td>
-                            @if (vehicle.ExitDateTime == null)
-                            {
-                                <td style="font-size: 18px">The Vehicle Is Still Parked</td>
-                            }
-                            else
-                            {
-                                <td style="font-size: 18px">@vehicle.ExitDateTime</td>
-                            }
+                            <td style="font-size: 18px">@vehicle.EnterDateTime.ToString("dd.MM.yyyy HH:mm:ss")</td>
+                            <td style="font-size: 18px">@(vehicle.ExitDateTime.HasValue ? vehicle.ExitDateTime.Value.ToString("dd.MM.yyyy HH:mm:ss") : "Not Exited Yet")</td>
                         </tr>
                     }
                 </tbody>
