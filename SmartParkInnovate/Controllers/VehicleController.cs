@@ -16,7 +16,7 @@ namespace SmartParkInnovate.Controllers
 
 
         [HttpGet]
-        public  IActionResult Add()
+        public  IActionResult AddVehicle()
         {
             VehicleFormModel formModel = new VehicleFormModel();
 
@@ -25,7 +25,7 @@ namespace SmartParkInnovate.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Add(VehicleFormModel formModel)
+        public async Task<IActionResult> AddVehicle(VehicleFormModel formModel)
         {
             string userId = User.Id();
 
