@@ -25,7 +25,7 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
 
 
         [Required]
-        public DateTime CommentDate { get; init; }
+        public DateTime CommentDate { get; set; }
 
 
         [Required]
