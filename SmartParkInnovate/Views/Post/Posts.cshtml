@@ -7,7 +7,9 @@
             <h1 class="display-3" style="color: #CCE5EA">Posts</h1>
             <a asp-controller="Post" asp-action="PublishPost"
                class="btn btn-success p-3 fw-bold rounded-pill"
-               style="width: 130px; background-color: #3BBD6E; border: none; box-shadow: none">Publish Post</a>
+               style="width: 130px; background-color: #3BBD6E; border: none; box-shadow: none">
+                Publish Post
+            </a>
         </div>
     </div>
     <br />
@@ -15,18 +17,29 @@
     {
         foreach (var post in Model.OrderByDescending(c => c.PostDate))
         {
-            <div class="card text-left">
-                <div class="card-header" style="color: #CCE5EA">
-                    @post.WorkerUserName
+            <div class="card text-left" style="background-color: #41CAC6">
+                <div class="card-header d-flex justify-content-between align-items-center" style="color: #CCE5EA; font-size: 20px">
+                    <span>@post.WorkerUserName</span>
+                    <a asp-controller="Post" asp-action="Details" class="btn btn-link btn-sm"
+                       style="color: #CCE5EA; font-size: 18px; text-decoration: none; border: none; box-shadow: none">Details</a>
                 </div>
                 <div class="card-body">
-                    <p class="card-text" style="color: #CCE5EA; text-align: justify; text-justify: inter-word; line-height: 1;">@post.PostBody</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <p class="card-text" style="color: #CCE5EA; font-size: 18px; text-align: justify; text-justify: inter-word; line-height: 1;">@post.PostBody</p>
                 </div>
-                <div class="card-footer text-muted" style="color: #CCE5EA">
-                    @post.PostDate
+                <div class="card-footer text-muted d-flex justify-content-between align-items-center" style="color: #CCE5EA">
+                    <div>
+                    <a asp-controller="Post" asp-action="LikePost" class="btn btn-link btn-sm"
+                       style="color: #CCE5EA; font-size: 18px; text-decoration: none; border: none; box-shadow: none">@post.LikesCount Like</a>
+                    <a asp-controller="Post" asp-action="CommentPost" class="btn btn-link btn-sm"
+                       style="color: #CCE5EA; font-size: 18px; text-decoration: none; border: none; box-shadow: none">@post.CommentsCount Comment</a>
+                    </div>
+                    <div style="color: #CCE5EA">
+                        @post.PostDate.ToString("dd.MM.yyyy HH:mm")
+                    </div>
                 </div>
             </div>
+            <br />
+
         }
     }
     else
