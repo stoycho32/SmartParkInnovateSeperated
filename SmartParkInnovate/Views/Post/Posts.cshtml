@@ -28,10 +28,8 @@
                 </div>
                 <div class="card-footer text-muted d-flex justify-content-between align-items-center" style="color: #CCE5EA">
                     <div>
-                    <a asp-controller="Post" asp-action="LikePost" class="btn btn-link btn-sm"
-                       style="color: #CCE5EA; font-size: 18px; text-decoration: none; border: none; box-shadow: none">@post.LikesCount Like</a>
-                    <a asp-controller="Post" asp-action="CommentPost" class="btn btn-link btn-sm"
-                       style="color: #CCE5EA; font-size: 18px; text-decoration: none; border: none; box-shadow: none">@post.CommentsCount Comment</a>
+                        <label style="color: #CCE5EA">@post.LikesCount Likes</label>
+                        <label style="color: #CCE5EA">@post.CommentsCount Comments</label>
                     </div>
                     <div style="color: #CCE5EA">
                         @post.PostDate.ToString("dd.MM.yyyy HH:mm")
