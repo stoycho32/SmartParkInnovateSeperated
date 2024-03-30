@@ -8,7 +8,7 @@ namespace SmartParkInnovate.Infrastructure.Data.SeedDB
     {
         public void Configure(EntityTypeBuilder<PostComment> builder)
         {
-            builder.HasKey(c => new {c.WorkerId, c.PostId});
+            builder.HasKey(c => new {c.WorkerId, c.PostId, c.CommentDate});
         }
     }
 }
