@@ -20,7 +20,7 @@
             <div class="card text-left" style="background-color: #41CAC6">
                 <div class="card-header d-flex justify-content-between align-items-center" style="color: #CCE5EA; font-size: 20px">
                     <span>@post.WorkerUserName</span>
-                    <a asp-controller="Post" asp-action="Details" class="btn btn-link btn-sm"
+                    <a asp-controller="Post" asp-action="Details" asp-route-id="@post.Id" class="btn btn-link btn-sm"
                        style="color: #CCE5EA; font-size: 18px; text-decoration: none; border: none; box-shadow: none">Details</a>
                 </div>
                 <div class="card-body">

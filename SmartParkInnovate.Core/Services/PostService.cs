@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartParkInnovate.Core.Contracts;
+using SmartParkInnovate.Core.Models.CommentModel;
+using SmartParkInnovate.Core.Models.LikeModel;
 using SmartParkInnovate.Core.Models.PostModel;
 using SmartParkInnovate.Infrastructure.Data.Models;
 using SmartParkInnovate.Infrastructure.Repository;
@@ -53,22 +55,60 @@ namespace SmartParkInnovate.Core.Services
             await this.repository.SaveChangesAsync();
         }
 
-        public Task Details(int postId)
+        public async Task<PostDetailModel> Details(string userId, int postId)
         {
-            throw new NotImplementedException();
+            PostDetailModel? postModel = await this.repository.AllAsReadOnly<Post>()
+                .Include(c => c.Worker)
+                .Include(c => c.Likes)
+                .Include(c => c.Comments)
+                .Where(c => c.Id == postId)
+                .Select(c => new PostDetailModel()
+                {
+                    CurrentUser = userId,
+                    PostDetailViewModel = new PostDetailViewModel()
+                    {
+                        Id = c.Id,
+                        WorkerId = c.WorkerId,
+                        WorkerUsername = c.Worker.UserName,
+                        PostBody = c.PostBody,
+                        PostDate = c.PostDate,
+                        PostComments = c.Comments.Select(c => new CommentViewModel()
+                        {
+                            WorkerUsername = c.Worker.UserName,
+                            CommentBody = c.CommentBody,
+                            CommentDate = c.CommentDate,
+                        }).ToList(),
+                        PostLikes = c.Likes.Select(c => new LikeViewModel()
+                        {
+                            WorkerUsername = c.Worker.UserName
+                        }).ToList()
+                    }
+                })
+                .FirstOrDefaultAsync();
+
+            if (postModel == null)
+            {
+                throw new ArgumentException(string.Format(PostErrorMessages.InvalidPostErrorMessage));
+            }
+
+            return postModel;
         }
+
         public Task LikePost(int postId)
         {
             throw new NotImplementedException();
         }
+
         public Task Comment(int postId)
         {
             throw new NotImplementedException();
         }
+
         public Task Delete(int postId)
         {
             throw new NotImplementedException();
         }
+
         public Task Edit(int postId, PostFormModel model)
         {
             throw new NotImplementedException();

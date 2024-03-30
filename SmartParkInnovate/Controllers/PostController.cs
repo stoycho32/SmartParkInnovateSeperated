@@ -44,5 +44,14 @@ namespace SmartParkInnovate.Controllers
 
             return RedirectToAction(nameof(Posts));
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            string userId = User.Id();
+            PostDetailModel model = await this.postService.Details(userId, id);
+            
+            return View(model);
+        }
     }
 }

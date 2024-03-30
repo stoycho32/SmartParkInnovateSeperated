@@ -27,6 +27,7 @@
         public static class PostErrorMessages
         {
             public const string PostBodyErrorMessage = "Post body cannot be empty.";
+            public const string InvalidPostErrorMessage = "The Chosen Post Is Not Valid";
         }
 
         public static class ParkingSpotErrorMessages

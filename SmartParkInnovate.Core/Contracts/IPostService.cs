@@ -8,6 +8,7 @@ namespace SmartParkInnovate.Core.Contracts
 
         public Task Add(string userId, PostFormModel model);
 
+        public Task<PostDetailModel> Details(string userId, int postId);
         //public Task Edit(int postId, PostFormModel model);
 
         //public Task Delete(int postId);
@@ -16,6 +17,5 @@ namespace SmartParkInnovate.Core.Contracts
 
         //public Task Comment(int postId);
 
-        //public Task Details(int postId);
     }
 }
