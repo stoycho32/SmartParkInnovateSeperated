@@ -94,9 +94,31 @@ namespace SmartParkInnovate.Core.Services
             return postModel;
         }
 
-        public Task LikePost(int postId)
+        public async Task LikePost(int postId, string userId)
         {
-            throw new NotImplementedException();
+            Post? post = await this.repository.GetByIdAsync<Post>(postId);
+            Worker? worker = await this.repository.GetByIdAsync<Worker>(userId);
+
+            if (post == null)
+            {
+                throw new ArgumentException(string.Format(PostErrorMessages.InvalidPostErrorMessage));
+            }
+
+            if (worker == null)
+            {
+                throw new ArgumentException(string.Format(WorkerErrorMessages.InvalidWorkerErrorMessage));
+            }
+
+
+            PostLike like = new PostLike()
+            {
+                WorkerId = worker.Id,
+                Worker = worker,
+                PostId = post.Id,
+                Post = post
+            };
+
+
         }
 
         public Task Comment(int postId)
