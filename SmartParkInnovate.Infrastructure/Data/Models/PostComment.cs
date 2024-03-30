@@ -5,17 +5,12 @@ using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages;
 
 namespace SmartParkInnovate.Infrastructure.Data.Models
 {
-    public class Comment
+    public class PostComment
     {
-        public Comment()
+        public PostComment()
         {
             this.CommentDate = DateTime.Now;
         }
-
-
-        [Key]
-        public int Id { get; set; }
-
 
         [Required]
         [StringLength(CommentDataConstants.CommentBodyMaxValue,

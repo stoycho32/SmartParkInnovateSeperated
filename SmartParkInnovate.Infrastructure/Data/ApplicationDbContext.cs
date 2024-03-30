@@ -17,7 +17,7 @@ namespace SmartParkInnovate.Data
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<ParkingSpot> ParkingSpots { get; set; }
         public DbSet<ParkingSpotOccupation> ParkingSpotOccupations { get; set; }
-        public DbSet<Comment> Comments { get; set; }
+        public DbSet<PostComment> Comments { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<PostLike> PostLikes { get; set; }
 
@@ -31,6 +31,8 @@ namespace SmartParkInnovate.Data
             builder.ApplyConfiguration(new ParkingSpotOccupationsConfiguration());
             builder.ApplyConfiguration(new ParkingSpotConfiguration());
             builder.ApplyConfiguration(new WorkerConfiguration());
+            builder.ApplyConfiguration(new PostLikeConfiguration());
+            builder.ApplyConfiguration(new PostCommentConfiguration());
 
             base.OnModelCreating(builder);
         }

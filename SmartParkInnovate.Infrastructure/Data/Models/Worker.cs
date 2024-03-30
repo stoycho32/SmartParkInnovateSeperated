@@ -9,7 +9,7 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
         {
             this.Vehicles = new List<Vehicle>();
             this.Posts = new List<Post>();
-            this.Comments = new List<Comment>();
+            this.Comments = new List<PostComment>();
             this.Likes = new List<PostLike>();
         }
 
@@ -23,7 +23,7 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
 
 
         [InverseProperty(nameof(Worker))]
-        public ICollection<Comment> Comments { get; set; }
+        public ICollection<PostComment> Comments { get; set; }
 
 
         [InverseProperty(nameof(Worker))]

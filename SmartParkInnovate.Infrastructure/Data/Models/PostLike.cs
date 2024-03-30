@@ -5,9 +5,6 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
 {
     public class PostLike
     {
-        [Key]
-        public int Id { get; set; }
-
         [Required]
         public string WorkerId { get; set; } = null!;
 
