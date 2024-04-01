@@ -72,6 +72,8 @@ namespace SmartParkInnovate.Core.Services
                         WorkerUsername = c.Worker.UserName,
                         PostBody = c.PostBody,
                         PostDate = c.PostDate,
+                        LikesCount = c.Likes.Count(),
+                        CommentsCount = c.Comments.Count(),
                         PostComments = c.Comments.Select(c => new CommentViewModel()
                         {
                             WorkerUsername = c.Worker.UserName,
@@ -96,7 +98,11 @@ namespace SmartParkInnovate.Core.Services
 
         public async Task LikePost(int postId, string userId)
         {
-            Post? post = await this.repository.GetByIdAsync<Post>(postId);
+            Post? post = await this.repository.All<Post>()
+                .Include(c => c.Likes)
+                .Where(c => c.Id == postId)
+                .FirstOrDefaultAsync();
+
             Worker? worker = await this.repository.GetByIdAsync<Worker>(userId);
 
             if (post == null)
@@ -109,24 +115,29 @@ namespace SmartParkInnovate.Core.Services
                 throw new ArgumentException(string.Format(WorkerErrorMessages.InvalidWorkerErrorMessage));
             }
 
+            PostLike? existingLike = post.Likes.FirstOrDefault(c => c.WorkerId == userId && c.PostId == post.Id);
 
-            PostLike like = new PostLike()
+            if (existingLike != null)
             {
-                WorkerId = worker.Id,
-                Worker = worker,
-                PostId = post.Id,
-                Post = post
-            };
+                post.Likes.Remove(existingLike);
+                await this.repository.SaveChangesAsync();
+            }
+            else
+            {
+                PostLike like = new PostLike()
+                {
+                    WorkerId = worker.Id,
+                    Worker = worker,
+                    PostId = post.Id,
+                    Post = post
+                };
 
-
+                post.Likes.Add(like);
+                await this.repository.SaveChangesAsync();
+            }
         }
 
         public Task Comment(int postId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task Delete(int postId)
         {
             throw new NotImplementedException();
         }

@@ -53,5 +53,15 @@ namespace SmartParkInnovate.Controllers
             
             return View(model);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> LikePost(int id)
+        {
+            string userId = User.Id();
+
+            await this.postService.LikePost(id, userId);
+
+            return RedirectToAction(nameof(Details), new {id});
+        }
     }
 }

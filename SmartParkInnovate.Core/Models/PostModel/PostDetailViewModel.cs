@@ -27,6 +27,11 @@ namespace SmartParkInnovate.Core.Models.PostModel
         [Required]
         public DateTime PostDate { get; set; }
 
+        [Required]
+        public int LikesCount { get; set; }
+
+        [Required]
+        public int CommentsCount { get; set; }
 
         [Required]
         public List<CommentViewModel> PostComments { get; set; } = new List<CommentViewModel>();
