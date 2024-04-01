@@ -21,6 +21,7 @@ namespace SmartParkInnovate.Core.Services
         public async Task<List<PostViewModel>> All()
         {
             List<PostViewModel> posts = await this.repository.All<Post>()
+                .AsSplitQuery()
                 .Select(c => new PostViewModel()
                 {
                     Id = c.Id,
@@ -58,9 +59,7 @@ namespace SmartParkInnovate.Core.Services
         public async Task<PostDetailModel> Details(string userId, int postId)
         {
             PostDetailModel? postModel = await this.repository.AllAsReadOnly<Post>()
-                .Include(c => c.Worker)
-                .Include(c => c.Likes)
-                .Include(c => c.Comments)
+                .AsSplitQuery()
                 .Where(c => c.Id == postId)
                 .Select(c => new PostDetailModel()
                 {
@@ -137,9 +136,33 @@ namespace SmartParkInnovate.Core.Services
             }
         }
 
-        public Task Comment(int postId)
+        public async Task Comment(int postId, string userId, CommentFormModel comment)
         {
-            throw new NotImplementedException();
+            Post? post = await this.repository.GetByIdAsync<Post>(postId);
+
+            Worker? worker = await this.repository.GetByIdAsync<Worker>(userId);
+
+            if (post == null)
+            {
+                throw new ArgumentException(string.Format(PostErrorMessages.InvalidPostErrorMessage));
+            }
+
+            if (worker == null)
+            {
+                throw new ArgumentException(string.Format(WorkerErrorMessages.InvalidWorkerErrorMessage));
+            }
+
+            PostComment postComment = new PostComment()
+            {
+                CommentBody = comment.CommentBody,
+                WorkerId = worker.Id,
+                Worker = worker,
+                PostId = post.Id,
+                Post = post
+            };
+
+            post.Comments.Add(postComment);
+            await this.repository.SaveChangesAsync();
         }
 
         public Task Edit(int postId, PostFormModel model)

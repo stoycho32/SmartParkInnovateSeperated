@@ -1,4 +1,5 @@
-﻿using SmartParkInnovate.Core.Models.PostModel;
+﻿using SmartParkInnovate.Core.Models.CommentModel;
+using SmartParkInnovate.Core.Models.PostModel;
 
 namespace SmartParkInnovate.Core.Contracts
 {
@@ -11,7 +12,7 @@ namespace SmartParkInnovate.Core.Contracts
         public Task<PostDetailModel> Details(string userId, int postId);
 
         public Task LikePost(int postId, string userId);
-        //public Task Comment(int postId);
+        public Task Comment(int postId, string userId, CommentFormModel comment);
 
         //public Task Edit(int postId, PostFormModel model);
     }

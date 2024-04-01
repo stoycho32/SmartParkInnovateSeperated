@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SmartParkInnovate.Core.Contracts;
+using SmartParkInnovate.Core.Models.CommentModel;
 using SmartParkInnovate.Core.Models.PostModel;
 using System.Security.Claims;
 
@@ -33,12 +34,12 @@ namespace SmartParkInnovate.Controllers
         [HttpPost]
         public async Task<IActionResult> PublishPost(PostFormModel model)
         {
-            string userId = User.Id();
-
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
+
+            string userId = User.Id();
 
             await this.postService.Add(userId, model);
 
@@ -50,7 +51,7 @@ namespace SmartParkInnovate.Controllers
         {
             string userId = User.Id();
             PostDetailModel model = await this.postService.Details(userId, id);
-            
+
             return View(model);
         }
 
@@ -61,7 +62,30 @@ namespace SmartParkInnovate.Controllers
 
             await this.postService.LikePost(id, userId);
 
-            return RedirectToAction(nameof(Details), new {id});
+            return RedirectToAction(nameof(Details), new { id });
+        }
+
+        [HttpGet]
+        public IActionResult CommentPost(int id)
+        {
+            CommentFormModel model = new CommentFormModel();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CommentPost(int id, CommentFormModel comment)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            string userId = User.Id();
+
+            await this.postService.Comment(id, userId, comment);
+
+            return RedirectToAction(nameof(Details), new { id });
         }
     }
 }

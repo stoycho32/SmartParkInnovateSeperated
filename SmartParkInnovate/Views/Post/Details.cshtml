@@ -26,10 +26,10 @@
                             </button>
                         </div>
                     </form>
-                    <button type="submit" class="btn btn-link btn-sm"
+                    <a asp-controller="Post" asp-action="CommentPost" asp-route-id="@Model.PostDetailViewModel.Id" class="btn btn-link btn-sm"
                             style="color: #CCE5EA; font-size: 18px; text-decoration: none; border: none; box-shadow: none">
                         @Model.PostDetailViewModel.CommentsCount Comments
-                    </button>
+                    </a>
                 </div>
             </div>
             <div style="color: #CCE5EA">
@@ -61,29 +61,18 @@
                 @foreach (var commentedUser in Model.PostDetailViewModel.PostComments)
                 {
                     <div class="card" style="background-color: #41CAC6">
-                        <div class="card-header">
+                        <div class="card-header" style="color: #CCE5EA">
                             @commentedUser.WorkerUsername
                         </div>
                         <div class="card-body">
                             <blockquote class="blockquote mb-0">
                                 <p style="color: #CCE5EA">@commentedUser.CommentBody</p>
-                                <footer class="blockquote-footer" style="color: #CCE5EA">@commentedUser.CommentDate</footer>
+                                <footer class="blockquote-footer" style="color: #CCE5EA">@commentedUser.CommentDate.ToString("dd.MM.yyyy HH:mm")</footer>
                             </blockquote>
                         </div>
                     </div>
                 }
                 <div>
-                    <br />
-                    <form asp-controller="Post" asp-action="CommentPost" method="post" class="d-flex flex-column align-items-start">
-                        <div class="mb-3 d-flex align-items-center">
-                            <input type="hidden" name="id" value="@Model.PostDetailViewModel.Id" />
-                            <textarea asp-for="@Model.PostFormModel.PostBody" class="form-control me-2" style="background-color: #CCE5EA; resize: none; flex-grow: 1;" cols="90" rows="3" aria-required="true" placeholder="Enter Post Text"></textarea>
-                            <span asp-validation-for="@Model.PostFormModel.PostBody" class="text-danger"></span>
-                            <div class="mb-3">
-                                <input class="btn btn-success p-3 fw-bold rounded-pill" style="min-width: 80px; background-color: #3BBD6E; border: none; box-shadow: none" type="submit" value="Publish Post" />
-                            </div>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>

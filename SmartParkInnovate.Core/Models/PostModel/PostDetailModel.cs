@@ -1,11 +1,15 @@
-﻿namespace SmartParkInnovate.Core.Models.PostModel
+﻿using SmartParkInnovate.Core.Models.CommentModel;
+using System.ComponentModel.DataAnnotations;
+
+namespace SmartParkInnovate.Core.Models.PostModel
 {
     public class PostDetailModel
     {
-        public string CurrentUser { get; set; }
+        [Required]
+        public string CurrentUser { get; set; } = null!;
 
         public PostDetailViewModel PostDetailViewModel { get; set; } = null!;
 
-        public PostFormModel PostFormModel { get; set; } = new PostFormModel();
+        public CommentFormModel CommentFormModel { get; set; } = new CommentFormModel();
     }
 }

@@ -51,7 +51,7 @@ namespace SmartParkInnovate.Core.Services
         public async Task<List<VehicleViewModel>> All()
         {
             List<VehicleViewModel> vehicles = await this.repository.All<Vehicle>()
-                .Include(c => c.Worker)
+                .AsSplitQuery()
                 .Select(c => new VehicleViewModel()
                 {
                     Id = c.Id,
@@ -67,8 +67,7 @@ namespace SmartParkInnovate.Core.Services
         public async Task<VehicleDetailsViewModel> Details(int id)
         {
             VehicleDetailsViewModel? model = await this.repository.All<Vehicle>()
-                .Include(c => c.ParkingSpotOccupations)
-                .Include(c => c.Worker)
+                .AsSplitQuery()
                 .Where(c => c.Id == id)
                 .Select(c => new VehicleDetailsViewModel()
                 {
@@ -99,7 +98,7 @@ namespace SmartParkInnovate.Core.Services
         public List<VehicleViewModel> MyVehicles(string userId)
         {
             List<VehicleViewModel> vehicles = this.repository.AllAsReadOnly<Vehicle>()
-                .Include(c => c.Worker)
+                .AsSplitQuery()
                 .Where(c => c.WorkerId == userId)
                 .Select(c => new VehicleViewModel()
                 {
