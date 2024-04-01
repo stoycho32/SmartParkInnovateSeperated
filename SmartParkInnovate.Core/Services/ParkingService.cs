@@ -22,8 +22,8 @@ namespace SmartParkInnovate.Core.Services
         public async Task Use(int id, string userId, UseSpotVehicleFormModel vehicleModel)
         {
             ParkingSpot? parkingSpot = await this.repository.All<ParkingSpot>()
-                .Where(c => c.Id == id)
                 .Include(c => c.ParkingSpotOccupations)
+                .Where(c => c.Id == id)
                 .FirstOrDefaultAsync();
 
 
@@ -171,6 +171,7 @@ namespace SmartParkInnovate.Core.Services
         public async Task<ParkingSpotDetailsModel> Details(int id, string userId)
         {
             ParkingSpotDetailsModel? model = await this.repository.All<ParkingSpot>()
+                .AsNoTracking()
                .AsSplitQuery()
                .Where(c => c.Id == id)
                .Select(c => new ParkingSpotDetailsModel()
@@ -189,9 +190,10 @@ namespace SmartParkInnovate.Core.Services
                            OccupationVehicleWorkerUserName = p.Vehicle.Worker.UserName,
                            EnterDateTime = p.EnterDateTime,
                            ExitDateTime = p.ExitDateTime
-                       }).ToList()
+                       }).OrderByDescending(c => c.EnterDateTime).ToList()
                    }
-               }).FirstOrDefaultAsync();
+               })
+               .FirstOrDefaultAsync();
 
 
             if (model == null)
@@ -205,6 +207,7 @@ namespace SmartParkInnovate.Core.Services
         public async Task<List<ParkingSpotViewModel>> All()
         {
             var parkingSpots = await this.repository.All<ParkingSpot>()
+                .AsNoTracking()
                 .Select(c => new ParkingSpotViewModel()
                 {
                     Id = c.Id,
