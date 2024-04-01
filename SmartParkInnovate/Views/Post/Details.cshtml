@@ -26,13 +26,10 @@
                             </button>
                         </div>
                     </form>
-                    <form asp-controller="Post" asp-action="CommentPost" method="post">
-                        <input type="hidden" name="id" value="@Model.PostDetailViewModel.Id" />
-                        <button type="submit" class="btn btn-link btn-sm"
-                                style="color: #CCE5EA; font-size: 18px; text-decoration: none; border: none; box-shadow: none">
-                            @Model.PostDetailViewModel.CommentsCount Comments
-                        </button>
-                    </form>
+                    <button type="submit" class="btn btn-link btn-sm"
+                            style="color: #CCE5EA; font-size: 18px; text-decoration: none; border: none; box-shadow: none">
+                        @Model.PostDetailViewModel.CommentsCount Comments
+                    </button>
                 </div>
             </div>
             <div style="color: #CCE5EA">
@@ -75,6 +72,19 @@
                         </div>
                     </div>
                 }
+                <div>
+                    <br />
+                    <form asp-controller="Post" asp-action="CommentPost" method="post" class="d-flex flex-column align-items-start">
+                        <div class="mb-3 d-flex align-items-center">
+                            <input type="hidden" name="id" value="@Model.PostDetailViewModel.Id" />
+                            <textarea asp-for="@Model.PostFormModel.PostBody" class="form-control me-2" style="background-color: #CCE5EA; resize: none; flex-grow: 1;" cols="90" rows="3" aria-required="true" placeholder="Enter Post Text"></textarea>
+                            <span asp-validation-for="@Model.PostFormModel.PostBody" class="text-danger"></span>
+                            <div class="mb-3">
+                                <input class="btn btn-success p-3 fw-bold rounded-pill" style="min-width: 80px; background-color: #3BBD6E; border: none; box-shadow: none" type="submit" value="Publish Post" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
