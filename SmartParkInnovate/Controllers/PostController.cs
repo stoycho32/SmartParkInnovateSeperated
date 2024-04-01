@@ -87,5 +87,27 @@ namespace SmartParkInnovate.Controllers
 
             return RedirectToAction(nameof(Details), new { id });
         }
+
+        [HttpGet]
+        public async Task<IActionResult> EditPost(int id)
+        {
+            PostFormModel model = await this.postService.GetPostById(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditPost(int id, PostFormModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            await this.postService.Edit(id, model);
+
+            return RedirectToAction(nameof(Details), new { id });
+        }
+
     }
 }

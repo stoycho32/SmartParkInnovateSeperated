@@ -1,0 +1,25 @@
+﻿@model PostFormModel
+
+<body style="background-color: #4C98CF">
+
+    <div class="row d-flex align-items-center justify-content-center">
+        <form asp-action="EditPost" method="post" style="width: 600px">
+            <h2 class="text-center" style="color: #CCE5EA">Edit Post</h2>
+            <br />
+            <div>
+                <div class="mb-3">
+                    <textarea asp-for="@Model.PostBody" class="form-control" style="background-color: #CCE5EA; resize: none" cols="60" rows="5" aria-required="true" placeholder="">@Model.PostBody</textarea>
+                    <span asp-validation-for="@Model.PostBody" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <input class="btn btn-success p-3 fw-bold rounded-pill" style="width: 580px; background-color: #3BBD6E; border: none; box-shadow: none" type="submit" value="Comment" />
+            </div>
+        </form>
+    </div>
+</body>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -165,9 +165,32 @@ namespace SmartParkInnovate.Core.Services
             await this.repository.SaveChangesAsync();
         }
 
-        public Task Edit(int postId, PostFormModel model)
+        public async Task Edit(int postId, PostFormModel model)
         {
-            throw new NotImplementedException();
+            Post? postToEdit = await this.repository.GetByIdAsync<Post>(postId);
+
+            if (postToEdit == null)
+            {
+                throw new ArgumentException(string.Format(PostErrorMessages.InvalidPostErrorMessage));
+            }
+
+            postToEdit.PostBody = model.PostBody;
+            await this.repository.SaveChangesAsync();
+        }
+
+        public async Task<PostFormModel> GetPostById(int id)
+        {
+            Post? post = await this.repository.GetByIdAsync<Post>(id);
+
+            if (post == null)
+            {
+                throw new ArgumentException(string.Format(PostErrorMessages.InvalidPostErrorMessage));
+            }
+
+            return new PostFormModel()
+            {
+                PostBody = post.PostBody
+            };
         }
     }
 }
