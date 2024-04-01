@@ -38,6 +38,7 @@
                         <th scope="col">Owner</th>
                         <th scope="col">Enter DateTime</th>
                         <th scope="col">Exit DateTime</th>
+                        <th scope="col">Options</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,7 +51,7 @@
                             <td style="font-size: 18px">@(vehicle.ExitDateTime.HasValue ? vehicle.ExitDateTime.Value.ToString("dd.MM.yyyy HH:mm:ss") : "N/A")</td>
                             @if (vehicle.OccupationVehicleWorkerId == Model.CurrentUserId && vehicle.ExitDateTime == null)
                             {
-                            <td>
+                            <td style="font-size: 18px">
                                 <form asp-controller="Parking" asp-action="ExitSpot" method="post">
                                     <input type="hidden" name="id" value="@Model.ParkingSpotDetailsViewModel.Id" />
                                     <button type="submit" class="btn btn-success p-3 fw-bold rounded-pill d-flex justify-content-center align-items-center"
