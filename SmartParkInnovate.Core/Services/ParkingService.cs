@@ -171,9 +171,7 @@ namespace SmartParkInnovate.Core.Services
         public async Task<ParkingSpotDetailsModel> Details(int id, string userId)
         {
             ParkingSpotDetailsModel? model = await this.repository.All<ParkingSpot>()
-               .Include(c => c.ParkingSpotOccupations)
-               .ThenInclude(c => c.Vehicle)
-               .ThenInclude(c => c.Worker)
+               .AsSplitQuery()
                .Where(c => c.Id == id)
                .Select(c => new ParkingSpotDetailsModel()
                {
