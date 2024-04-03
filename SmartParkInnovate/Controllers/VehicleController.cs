@@ -40,9 +40,11 @@ namespace SmartParkInnovate.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Vehicles()
+        public  IActionResult Vehicles()
         {
-            List<VehicleViewModel> vehicles = await this.vehicleService.All();
+            string userId = User.Id();
+
+            List<VehicleViewModel> vehicles =  this.vehicleService.MyVehicles(userId);
 
             return View(vehicles);
         }
