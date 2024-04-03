@@ -48,22 +48,6 @@ namespace SmartParkInnovate.Core.Services
             await this.repository.SaveChangesAsync();
         }
 
-        public async Task<List<VehicleViewModel>> All()
-        {
-            List<VehicleViewModel> vehicles = await this.repository.All<Vehicle>()
-                .AsSplitQuery()
-                .Select(c => new VehicleViewModel()
-                {
-                    Id = c.Id,
-                    Make = c.Make,
-                    Model = c.Model,
-                    LicensePlate = c.LicensePlate,
-                    WorkerUserName = c.Worker.UserName,
-                }).ToListAsync();
-
-            return vehicles;
-        }
-
         public async Task<VehicleDetailsViewModel> Details(int id)
         {
             VehicleDetailsViewModel? model = await this.repository.All<Vehicle>()
