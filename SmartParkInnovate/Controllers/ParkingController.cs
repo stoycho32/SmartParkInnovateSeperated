@@ -43,27 +43,16 @@ namespace SmartParkInnovate.Controllers
         [HttpPost]
         public async Task<IActionResult> UseSpot(int id, UseSpotVehicleFormModel model)
         {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest();
-                }
-
-                string userId = User.Id();
-
-                await this.parkingService.Use(id, userId, model);
-
-                return RedirectToAction(nameof(ParkingSpots));
-            }
-            catch (ArgumentException argException)
+            if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
-            catch (InvalidOperationException ioe)
-            {
-                return BadRequest();
-            }
+
+            string userId = User.Id();
+
+            await this.parkingService.Use(id, userId, model);
+
+            return RedirectToAction(nameof(ParkingSpots));
         }
 
         [HttpPost]
