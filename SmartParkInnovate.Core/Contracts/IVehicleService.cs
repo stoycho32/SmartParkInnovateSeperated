@@ -8,6 +8,8 @@ namespace SmartParkInnovate.Core.Contracts
 
         public Task<VehicleDetailsViewModel> Details(int id);
 
+        public Task<List<VehicleViewModel>> All();
+
         public List<VehicleViewModel> MyVehicles(string userId);
 
         public Task Remove(int id);
