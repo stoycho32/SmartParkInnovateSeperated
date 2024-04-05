@@ -170,8 +170,7 @@ namespace SmartParkInnovate.Core.Services
 
         public async Task<ParkingSpotDetailsModel> Details(int id, string userId)
         {
-            ParkingSpotDetailsModel? model = await this.repository.All<ParkingSpot>()
-                .AsNoTracking()
+            ParkingSpotDetailsModel? model = await this.repository.AllAsReadOnly<ParkingSpot>()
                .AsSplitQuery()
                .Where(c => c.Id == id)
                .Select(c => new ParkingSpotDetailsModel()
@@ -206,7 +205,7 @@ namespace SmartParkInnovate.Core.Services
 
         public async Task<List<ParkingSpotViewModel>> All()
         {
-            var parkingSpots = await this.repository.All<ParkingSpot>()
+            var parkingSpots = await this.repository.AllAsReadOnly<ParkingSpot>()
                 .AsNoTracking()
                 .Select(c => new ParkingSpotViewModel()
                 {

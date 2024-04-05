@@ -81,7 +81,7 @@ namespace SmartParkInnovate.Core.Services
 
         public async Task<List<VehicleViewModel>> All()
         {
-            List<VehicleViewModel> vehicles = await this.repository.All<Vehicle>()
+            List<VehicleViewModel> vehicles = await this.repository.AllAsReadOnly<Vehicle>()
                 .AsSplitQuery()
                 .Select(c => new VehicleViewModel()
                 {

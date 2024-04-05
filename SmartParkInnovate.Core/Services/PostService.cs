@@ -20,7 +20,7 @@ namespace SmartParkInnovate.Core.Services
 
         public async Task<List<PostViewModel>> All()
         {
-            List<PostViewModel> posts = await this.repository.All<Post>()
+            List<PostViewModel> posts = await this.repository.AllAsReadOnly<Post>()
                 .AsSplitQuery()
                 .Select(c => new PostViewModel()
                 {
