@@ -8,9 +8,13 @@ namespace SmartParkInnovate.Infrastructure.Data.SeedDB
         public ParkingSpot FirstParkingSpot { get; set; }
         public ParkingSpot SecondParkingSpot { get; set; }
         public ParkingSpot ThirdParkingSpot { get; set; }
-        public ParkingSpot ForthParkingSpot { get; set; }
+        public ParkingSpot FourthParkingSpot { get; set; }
         public ParkingSpot FifthParkingSpot { get; set; }
         public ParkingSpot SixthParkingSpot { get; set; }
+        public ParkingSpot SeventhParkingSpot { get; set; }
+        public ParkingSpot EighthParkingSpot { get; set; }
+        public ParkingSpot NinthParkingSpot { get; set; }
+        public ParkingSpot TenthParkingSpot { get; set; }
         public Worker Test1Worker { get; set; }
         public Worker Test2Worker { get; set; }
         public Worker Test3Worker { get; set; }
@@ -33,12 +37,12 @@ namespace SmartParkInnovate.Infrastructure.Data.SeedDB
                 Id = 2
             };
 
-            ThirdParkingSpot = new ParkingSpot() 
+            ThirdParkingSpot = new ParkingSpot()
             {
                 Id = 3
             };
 
-            ForthParkingSpot = new ParkingSpot()
+            FourthParkingSpot = new ParkingSpot()
             {
                 Id = 4
             };
@@ -53,6 +57,25 @@ namespace SmartParkInnovate.Infrastructure.Data.SeedDB
                 Id = 6
             };
 
+            SeventhParkingSpot = new ParkingSpot()
+            {
+                Id = 7
+            };
+
+            EighthParkingSpot = new ParkingSpot()
+            {
+                Id = 8
+            };
+
+            NinthParkingSpot = new ParkingSpot()
+            {
+                Id = 9
+            };
+
+            TenthParkingSpot = new ParkingSpot()
+            {
+                Id = 10
+            };
         }
 
         public void SeedUsers()

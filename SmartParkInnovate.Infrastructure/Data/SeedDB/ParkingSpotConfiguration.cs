@@ -14,7 +14,14 @@ namespace SmartParkInnovate.Infrastructure.Data.SeedDB
                 {
                     data.FirstParkingSpot,
                     data.SecondParkingSpot,
-                    data.ThirdParkingSpot
+                    data.ThirdParkingSpot,
+                    data.FourthParkingSpot,
+                    data.FifthParkingSpot,
+                    data.SixthParkingSpot,
+                    data.SeventhParkingSpot,
+                    data.EighthParkingSpot,
+                    data.NinthParkingSpot,
+                    data.TenthParkingSpot
                 });
         }
     }
