@@ -1,4 +1,6 @@
-﻿namespace SmartParkInnovate.Infrastructure.Data.Constants
+﻿using System.Text.RegularExpressions;
+
+namespace SmartParkInnovate.Infrastructure.Data.Constants
 {
     public static class ErrorMessages
     {
@@ -43,6 +45,11 @@
         public static class WorkerErrorMessages
         {
             public const string InvalidWorkerErrorMessage = "Invalid Credentials";
+            public const string InvalidPasswordErrorMessage = "The password must be at least 6 and at max 100 characters long.";
+            public const string PasswordAndConfirmedPasswordDoesNotMatchErrorMessage = "The password and confirmation password do not match.";
+            public const string FirstNameCharactersErrorMessage = "First name must be between 2 and 20 characters long";
+            public const string LastNameCharactersErrorMessage = "Last name must be between 2 and 30 characters long";
+
         }
 
         public static class GeneralErrorMessages

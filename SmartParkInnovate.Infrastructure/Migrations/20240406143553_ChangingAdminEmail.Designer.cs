@@ -12,8 +12,8 @@ using SmartParkInnovate.Data;
 namespace SmartParkInnovate.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240405211702_SeedingMoreParkingSpotsToTheDatabase")]
-    partial class SeedingMoreParkingSpotsToTheDatabase
+    [Migration("20240406143553_ChangingAdminEmail")]
+    partial class ChangingAdminEmail
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -239,6 +239,18 @@ namespace SmartParkInnovate.Infrastructure.Migrations
                             Id = 10,
                             IsEnabled = true,
                             IsOccupied = false
+                        },
+                        new
+                        {
+                            Id = 11,
+                            IsEnabled = true,
+                            IsOccupied = false
+                        },
+                        new
+                        {
+                            Id = 12,
+                            IsEnabled = true,
+                            IsOccupied = false
                         });
                 });
 
@@ -386,6 +398,16 @@ namespace SmartParkInnovate.Infrastructure.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -434,51 +456,57 @@ namespace SmartParkInnovate.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "dea12856-c198-4129-b3f3-b893d8395082",
+                            Id = "cab58169-f3b4-4d01-b353-cebe9a1ec27c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "94a6b98d-e4e0-43ec-affb-ebf1e6b5cda7",
+                            ConcurrencyStamp = "dc964cf1-7d1b-451c-ae9e-614959d8f3b7",
                             Email = "test1@mail.com",
                             EmailConfirmed = false,
+                            FirstName = "Dimitrichko",
+                            LastName = "Ivanov",
                             LockoutEnabled = false,
                             NormalizedEmail = "test1@mail.com",
                             NormalizedUserName = "test1@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAELl4HQWWMz6kZRuyZHqFROlA8HSq/BrPZ3Gha03iLqEH8Rqz9uVRqk+xfCyuzysgHQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEF5RsQ0hCYlzRZPoejO+aL+gMBcczR8Kq/JQQ0tabDD1UUE8F2OhbSBNHbS25PVTjg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7761e4b2-ef3e-468b-9ce0-f627eba52c75",
+                            SecurityStamp = "334b9188-04f5-4bce-93ae-344bd58e92d7",
                             TwoFactorEnabled = false,
                             UserName = "test1@mail.com"
                         },
                         new
                         {
-                            Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+                            Id = "8b1d3899-c244-45a9-98a9-aa1ee7d80819",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cfcd64ab-5bee-4318-be96-8aed5e692e15",
+                            ConcurrencyStamp = "f4f3c6cd-100b-41db-88dd-8e88de9e1326",
                             Email = "test2@mail.com",
                             EmailConfirmed = false,
+                            FirstName = "Dimitur",
+                            LastName = "Dimitrov",
                             LockoutEnabled = false,
                             NormalizedEmail = "test2@mail.com",
                             NormalizedUserName = "test2@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEI6lD8Z10qqIPltLiimhm1LDU6g1S0EuCH+bNTmJDz2K6U1NyD27qbfIw6L0k8RXkw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEC7kW6jQkfy3oePXl8p4z6jb5D1Ow9++kE3YfVtaOr4iyWRSLDTKTc6VEUaRUsGmYA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2970bb0b-240a-463d-99f1-ce52d5530038",
+                            SecurityStamp = "5d0b76a4-41bd-4be2-9ef4-f3e26dde743a",
                             TwoFactorEnabled = false,
                             UserName = "test2@mail.com"
                         },
                         new
                         {
-                            Id = "cc644110-5a86-4e9f-9664-fde76465c618",
+                            Id = "d3d412e3-bdfd-49fc-89e5-7c53a3075673",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "21aaaedc-8de1-4656-ab6f-3e5973a5bf66",
-                            Email = "test3@mail.com",
+                            ConcurrencyStamp = "f6a11c74-9d68-4156-b600-06d17264a50e",
+                            Email = "admin@mail.com",
                             EmailConfirmed = false,
+                            FirstName = "Stoycho",
+                            LastName = "Karadaliev",
                             LockoutEnabled = false,
-                            NormalizedEmail = "test3@mail.com",
-                            NormalizedUserName = "test3@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAECRcHcZ/DMGOihKXkvKMw2DL8KIrCp7bzvSI3lqP/KStmxdWM4imniItpIfH1yZDyQ==",
+                            NormalizedEmail = "admin@mail.com",
+                            NormalizedUserName = "admin@mail.com",
+                            PasswordHash = "AQAAAAEAACcQAAAAEM50oF/kLinT0S2QzHdK0JM8lRVeXzgjFW+L1WpJuQN5ujyYNwowvGad7nSEiQu79Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d9d370f8-18b5-4e12-a77f-71008345f930",
+                            SecurityStamp = "924b0d62-9d2f-4fcb-b1f7-3bbe709a2bee",
                             TwoFactorEnabled = false,
-                            UserName = "test3@mail.com"
+                            UserName = "admin@mail.com"
                         });
                 });
 

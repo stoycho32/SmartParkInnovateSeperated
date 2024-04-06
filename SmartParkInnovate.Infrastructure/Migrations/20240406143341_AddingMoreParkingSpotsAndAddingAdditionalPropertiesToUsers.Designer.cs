@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartParkInnovate.Data;
 
@@ -11,9 +12,10 @@ using SmartParkInnovate.Data;
 namespace SmartParkInnovate.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240406143341_AddingMoreParkingSpotsAndAddingAdditionalPropertiesToUsers")]
+    partial class AddingMoreParkingSpotsAndAddingAdditionalPropertiesToUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -456,7 +458,7 @@ namespace SmartParkInnovate.Infrastructure.Migrations
                         {
                             Id = "cab58169-f3b4-4d01-b353-cebe9a1ec27c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dc964cf1-7d1b-451c-ae9e-614959d8f3b7",
+                            ConcurrencyStamp = "32fcdfda-676f-4fba-b6df-e8e714404543",
                             Email = "test1@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Dimitrichko",
@@ -464,9 +466,9 @@ namespace SmartParkInnovate.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "test1@mail.com",
                             NormalizedUserName = "test1@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEF5RsQ0hCYlzRZPoejO+aL+gMBcczR8Kq/JQQ0tabDD1UUE8F2OhbSBNHbS25PVTjg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJR1wQugqxjBzE4noVN9dVVXYwnGz073KIUc52NF754vQJggI1ZZc8yJxi/dSkCwgA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "334b9188-04f5-4bce-93ae-344bd58e92d7",
+                            SecurityStamp = "6a56f76b-c2f9-4f7f-b45f-8aa7bcf2789c",
                             TwoFactorEnabled = false,
                             UserName = "test1@mail.com"
                         },
@@ -474,7 +476,7 @@ namespace SmartParkInnovate.Infrastructure.Migrations
                         {
                             Id = "8b1d3899-c244-45a9-98a9-aa1ee7d80819",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f4f3c6cd-100b-41db-88dd-8e88de9e1326",
+                            ConcurrencyStamp = "32a32bda-d22b-4308-bc37-3c82c5dcc8c2",
                             Email = "test2@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Dimitur",
@@ -482,9 +484,9 @@ namespace SmartParkInnovate.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "test2@mail.com",
                             NormalizedUserName = "test2@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEC7kW6jQkfy3oePXl8p4z6jb5D1Ow9++kE3YfVtaOr4iyWRSLDTKTc6VEUaRUsGmYA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMoZPXuIu5fJgWjtwRv6QBQbo+cVTbqw5AX15MJrKH85qNtTrpLlJo2fMhjTZZAa6g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5d0b76a4-41bd-4be2-9ef4-f3e26dde743a",
+                            SecurityStamp = "5afc146f-81a7-4808-aee4-c1f01af1fa11",
                             TwoFactorEnabled = false,
                             UserName = "test2@mail.com"
                         },
@@ -492,19 +494,19 @@ namespace SmartParkInnovate.Infrastructure.Migrations
                         {
                             Id = "d3d412e3-bdfd-49fc-89e5-7c53a3075673",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f6a11c74-9d68-4156-b600-06d17264a50e",
-                            Email = "admin@mail.com",
+                            ConcurrencyStamp = "ff814433-4aac-4ce5-bb36-d52963cb85ff",
+                            Email = "test3@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Stoycho",
                             LastName = "Karadaliev",
                             LockoutEnabled = false,
-                            NormalizedEmail = "admin@mail.com",
-                            NormalizedUserName = "admin@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEM50oF/kLinT0S2QzHdK0JM8lRVeXzgjFW+L1WpJuQN5ujyYNwowvGad7nSEiQu79Q==",
+                            NormalizedEmail = "test3@mail.com",
+                            NormalizedUserName = "test3@mail.com",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPfnoRBgv+h4jQXAhhKvKEUqWtaYBW1O0ggngc/smh/1IyOr0SlKj1qKhs+17f7MjQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "924b0d62-9d2f-4fcb-b1f7-3bbe709a2bee",
+                            SecurityStamp = "033b52e2-669d-4d25-a2bc-e7e286f2956f",
                             TwoFactorEnabled = false,
-                            UserName = "admin@mail.com"
+                            UserName = "test3@mail.com"
                         });
                 });
 

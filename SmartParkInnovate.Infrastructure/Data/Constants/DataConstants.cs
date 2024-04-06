@@ -29,5 +29,17 @@
             public const int PostBodyMaxValue = int.MaxValue;
             public const int PostBodyMinValue = 1;
         }
+
+        public static class WorkerDataConstants 
+        {
+            public const int MinPasswordLength = 6;
+            public const int MaxPasswordLength = 100;
+
+            public const int FirstNameMinLength = 2;
+            public const int FirstNameMaxLength = 20;
+
+            public const int LastNameMinLength = 2;
+            public const int LastNameMaxLength = 30;
+        }
     }
 }

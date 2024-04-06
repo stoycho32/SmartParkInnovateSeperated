@@ -4,7 +4,7 @@ using SmartParkInnovate.Infrastructure.Data.Models;
 
 namespace SmartParkInnovate.Infrastructure.Data.SeedDB
 {
-    internal class ParkingSpotConfiguration : IEntityTypeConfiguration<ParkingSpot>
+    public class ParkingSpotConfiguration : IEntityTypeConfiguration<ParkingSpot>
     {
         public void Configure(EntityTypeBuilder<ParkingSpot> builder)
         {
@@ -12,16 +12,18 @@ namespace SmartParkInnovate.Infrastructure.Data.SeedDB
 
             builder.HasData(new ParkingSpot[]
                 {
-                    data.FirstParkingSpot,
-                    data.SecondParkingSpot,
-                    data.ThirdParkingSpot,
-                    data.FourthParkingSpot,
-                    data.FifthParkingSpot,
-                    data.SixthParkingSpot,
-                    data.SeventhParkingSpot,
-                    data.EighthParkingSpot,
-                    data.NinthParkingSpot,
-                    data.TenthParkingSpot
+                   data.FirstParkingSpot,
+                   data.SecondParkingSpot,
+                   data.ThirdParkingSpot,
+                   data.FourthParkingSpot,
+                   data.FifthParkingSpot,
+                   data.SixthParkingSpot,
+                   data.SeventhParkingSpot,
+                   data.EighthParkingSpot,
+                   data.NinthParkingSpot,
+                   data.TenthParkingSpot,
+                   data.EleventhParkingSpot,
+                   data.TwelfthParkingSpot
                 });
         }
     }

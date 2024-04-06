@@ -39,10 +39,10 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
 
 
         [Required]
-        public string WorkerId { get; set; }
+        public string WorkerId { get; set; } = null!;
 
         [ForeignKey(nameof(WorkerId))]
-        public Worker Worker { get; set; }
+        public Worker Worker { get; set; } = null!;
 
 
         [InverseProperty(nameof(Vehicle))]

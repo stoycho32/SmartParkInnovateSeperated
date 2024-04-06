@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static SmartParkInnovate.Infrastructure.Data.Constants.DataConstants;
+using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages;
 
 namespace SmartParkInnovate.Infrastructure.Data.Models
 {
@@ -13,6 +16,13 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
             this.Likes = new List<PostLike>();
         }
 
+        [Required]
+        [StringLength(WorkerDataConstants.FirstNameMaxLength, ErrorMessage = WorkerErrorMessages.FirstNameCharactersErrorMessage, MinimumLength = WorkerDataConstants.FirstNameMinLength)]
+        public string FirstName { get; set; } = null!;
+
+        [Required]
+        [StringLength(WorkerDataConstants.LastNameMaxLength, ErrorMessage = WorkerErrorMessages.LastNameCharactersErrorMessage, MinimumLength = WorkerDataConstants.LastNameMinLength)]
+        public string LastName { get; set; } = null!;
 
         [InverseProperty(nameof(Worker))]
         public ICollection<Vehicle> Vehicles { get; set; }

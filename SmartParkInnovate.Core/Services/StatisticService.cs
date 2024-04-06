@@ -1,7 +1,4 @@
 ﻿using SmartParkInnovate.Core.Contracts;
-using SmartParkInnovate.Core.Models.ParkingSpot;
-using SmartParkInnovate.Core.Models.StatisticModel;
-using SmartParkInnovate.Infrastructure.Data.Models;
 using SmartParkInnovate.Infrastructure.Repository;
 
 namespace SmartParkInnovate.Core.Services

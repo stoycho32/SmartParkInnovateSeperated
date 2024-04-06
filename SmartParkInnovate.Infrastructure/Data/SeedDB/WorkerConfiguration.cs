@@ -14,7 +14,7 @@ namespace SmartParkInnovate.Infrastructure.Data.SeedDB
                 {
                      data.Test1Worker,
                     data.Test2Worker,
-                     data.Test3Worker
+                     data.AdminWorker
                 });
         }
     }

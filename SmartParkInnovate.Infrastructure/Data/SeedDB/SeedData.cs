@@ -15,9 +15,11 @@ namespace SmartParkInnovate.Infrastructure.Data.SeedDB
         public ParkingSpot EighthParkingSpot { get; set; }
         public ParkingSpot NinthParkingSpot { get; set; }
         public ParkingSpot TenthParkingSpot { get; set; }
+        public ParkingSpot EleventhParkingSpot { get; set; }
+        public ParkingSpot TwelfthParkingSpot { get; set; }
         public Worker Test1Worker { get; set; }
-        public Worker Test2Worker { get; set; }
-        public Worker Test3Worker { get; set; }
+        public Worker Test2Worker { get; set; } 
+        public Worker AdminWorker { get; set; }
 
         public SeedData()
         {
@@ -76,6 +78,16 @@ namespace SmartParkInnovate.Infrastructure.Data.SeedDB
             {
                 Id = 10
             };
+
+            EleventhParkingSpot = new ParkingSpot()
+            {
+                Id = 11
+            };
+
+            TwelfthParkingSpot = new ParkingSpot()
+            {
+                Id = 12
+            };
         }
 
         public void SeedUsers()
@@ -84,11 +96,13 @@ namespace SmartParkInnovate.Infrastructure.Data.SeedDB
 
             Test1Worker = new Worker()
             {
-                Id = "dea12856-c198-4129-b3f3-b893d8395082",
+                Id = "cab58169-f3b4-4d01-b353-cebe9a1ec27c",
                 UserName = "test1@mail.com",
                 NormalizedUserName = "test1@mail.com",
                 Email = "test1@mail.com",
-                NormalizedEmail = "test1@mail.com"
+                NormalizedEmail = "test1@mail.com",
+                FirstName = "Dimitrichko",
+                LastName = "Ivanov"
             };
 
             Test1Worker.PasswordHash =
@@ -96,27 +110,31 @@ namespace SmartParkInnovate.Infrastructure.Data.SeedDB
 
             Test2Worker = new Worker()
             {
-                Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+                Id = "8b1d3899-c244-45a9-98a9-aa1ee7d80819",
                 UserName = "test2@mail.com",
                 NormalizedUserName = "test2@mail.com",
                 Email = "test2@mail.com",
-                NormalizedEmail = "test2@mail.com"
+                NormalizedEmail = "test2@mail.com",
+                FirstName = "Dimitur",
+                LastName = "Dimitrov"
             };
 
             Test2Worker.PasswordHash =
                  hasher.HashPassword(Test2Worker, "Test2!");
 
-            Test3Worker = new Worker()
+            AdminWorker = new Worker()
             {
-                Id = "cc644110-5a86-4e9f-9664-fde76465c618",
-                UserName = "test3@mail.com",
-                NormalizedUserName = "test3@mail.com",
-                Email = "test3@mail.com",
-                NormalizedEmail = "test3@mail.com"
+                Id = "d3d412e3-bdfd-49fc-89e5-7c53a3075673",
+                UserName = "admin@mail.com",
+                NormalizedUserName = "admin@mail.com",
+                Email = "admin@mail.com",
+                NormalizedEmail = "admin@mail.com",
+                FirstName = "Stoycho",
+                LastName = "Karadaliev"
             };
 
-            Test3Worker.PasswordHash =
-                 hasher.HashPassword(Test3Worker, "Test3!");
+            AdminWorker.PasswordHash =
+                 hasher.HashPassword(AdminWorker, "Admin1!");
         }
     }
 }

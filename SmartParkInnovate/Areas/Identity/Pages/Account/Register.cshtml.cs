@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SmartParkInnovate.Infrastructure.Data.Models;
 using System.ComponentModel.DataAnnotations;
+using static SmartParkInnovate.Infrastructure.Data.Constants.DataConstants;
+using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages;
 
 namespace SmartParkInnovate.Areas.Identity.Pages.Account
 {
@@ -40,15 +42,23 @@ namespace SmartParkInnovate.Areas.Identity.Pages.Account
             public string Email { get; set; }
 
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(WorkerDataConstants.MaxPasswordLength, ErrorMessage = WorkerErrorMessages.InvalidPasswordErrorMessage, MinimumLength = WorkerDataConstants.MinPasswordLength)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Compare("Password", ErrorMessage = WorkerErrorMessages.PasswordAndConfirmedPasswordDoesNotMatchErrorMessage)]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [StringLength(WorkerDataConstants.FirstNameMaxLength, ErrorMessage = WorkerErrorMessages.FirstNameCharactersErrorMessage, MinimumLength = WorkerDataConstants.FirstNameMinLength)]
+            public string FirstName { get; set; }
+
+            [Required]
+            [StringLength(WorkerDataConstants.LastNameMaxLength, ErrorMessage = WorkerErrorMessages.LastNameCharactersErrorMessage, MinimumLength = WorkerDataConstants.LastNameMinLength)]
+            public string LastName { get; set; }
         }
 
 
@@ -64,6 +74,9 @@ namespace SmartParkInnovate.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 Worker user = CreateUser();
+
+                user.FirstName = Input.FirstName;
+                user.LastName = Input.LastName;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
 
