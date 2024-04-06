@@ -18,7 +18,7 @@ namespace SmartParkInnovate.Core.Models.ParkingSpotOccupationsViewModel
         public string OccupationVehicleWorkerUserName { get; set; } = null!;
 
         [Required]
-        public DateTime EnterDateTime { get; init; }
+        public DateTime EnterDateTime { get; set; }
 
         public DateTime? ExitDateTime { get; set; }
     }
