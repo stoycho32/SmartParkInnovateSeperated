@@ -23,6 +23,7 @@ namespace SmartParkInnovate.Core.Services
         {
             ParkingSpot? parkingSpot = await this.repository.All<ParkingSpot>()
                 .Include(c => c.ParkingSpotOccupations)
+                .AsSplitQuery()
                 .Where(c => c.Id == id)
                 .FirstOrDefaultAsync();
 
@@ -30,6 +31,7 @@ namespace SmartParkInnovate.Core.Services
             Worker? worker = await this.repository.All<Worker>()
                 .Include(c => c.Vehicles)
                 .ThenInclude(c => c.ParkingSpotOccupations)
+                .AsSplitQuery()
                 .FirstOrDefaultAsync(c => c.Id == userId);
 
             Vehicle? vehicle = null;

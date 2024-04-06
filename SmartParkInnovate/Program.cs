@@ -17,9 +17,7 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error/500");
-    app.UseStatusCodePagesWithReExecute("/Home/Error?statuscode={0}");
-    //app.UseDeveloperExceptionPage();
+    app.UseDeveloperExceptionPage();
     app.UseMigrationsEndPoint();
 }
 else
@@ -41,7 +39,7 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
     endpoints.MapRazorPages();
 });
 
