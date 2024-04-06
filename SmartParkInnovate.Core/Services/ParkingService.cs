@@ -86,9 +86,11 @@ namespace SmartParkInnovate.Core.Services
         public async Task Exit(int id, string userId)
         {
             ParkingSpot? parkingSpot = await this.repository.All<ParkingSpot>()
+                .AsSplitQuery()
                 .Include(c => c.ParkingSpotOccupations).FirstOrDefaultAsync(c => c.Id == id);
 
             Worker? worker = await this.repository.All<Worker>()
+                .AsSplitQuery()
                 .Include(c => c.Vehicles)
                 .FirstOrDefaultAsync(c => c.Id == userId);
 
