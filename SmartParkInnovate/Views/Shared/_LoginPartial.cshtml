@@ -10,7 +10,7 @@
     if (SignInManager.IsSignedIn(User))
     {
         Worker user = await UserManager.FindByIdAsync(User.Id());
-        userName = user.FirstName;
+        userName = User.FindFirstValue(SmartParkInnovate.Infrastructure.Extensions.CustomClaims.UserFirstNameClaim) ?? string.Empty;
     }
 }
 
@@ -37,10 +37,3 @@
         </li>
     }
 </ul>
-
-
-
-
-
-@* <a class="nav-link text-light" style="color: #CCE5EA" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name</a>
-           *@

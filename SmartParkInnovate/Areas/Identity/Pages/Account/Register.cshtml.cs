@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SmartParkInnovate.Infrastructure.Data.Models;
+using SmartParkInnovate.Infrastructure.Extensions;
 using System.ComponentModel.DataAnnotations;
 using static SmartParkInnovate.Infrastructure.Data.Constants.DataConstants;
 using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages;
@@ -84,6 +85,9 @@ namespace SmartParkInnovate.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+                    await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim(CustomClaims.UserFirstNameClaim,
+                        $"{user.FirstName}"));
+
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);
 
