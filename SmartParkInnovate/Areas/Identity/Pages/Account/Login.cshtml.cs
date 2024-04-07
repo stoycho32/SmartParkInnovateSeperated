@@ -80,8 +80,10 @@ namespace SmartParkInnovate.Areas.Identity.Pages.Account
                     {
                         return RedirectToAction("Dashboard", "Home", new { Area = "Admin"});
                     }
-
-                    return LocalRedirect(returnUrl);
+                    else
+                    {
+                        return RedirectToAction("ParkingSpots", "Parking");
+                    }
                 }
                 else
                 {
