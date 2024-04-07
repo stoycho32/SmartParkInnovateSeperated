@@ -70,23 +70,5 @@ namespace SmartParkInnovate.Controllers
 
             return RedirectToAction(nameof(ParkingSpots));
         }
-
-        [HttpGet]
-        [Authorize(Roles = "Administrator")]
-        public async Task<IActionResult> DisableSpot(int id)
-        {
-            await this.parkingService.Disable(id);
-
-            return RedirectToAction(nameof(ParkingSpots));
-        }
-
-        [HttpGet]
-        [Authorize(Roles = "Administrator")]
-        public async Task<IActionResult> EnableSpot(int id)
-        {
-            await this.parkingService.Enable(id);
-
-            return RedirectToAction(nameof(ParkingSpots));
-        }
     }
 }

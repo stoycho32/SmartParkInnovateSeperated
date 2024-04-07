@@ -32,6 +32,9 @@ namespace SmartParkInnovate.Core.Models.VehicleModel
         public string WorkerUserName { get; set; } = null!;
 
         [Required]
+        public string WorkerFullName { get; set; } = null!;
+
+        [Required]
         public bool IsDeleted { get; set; }
         public DateTime? DeletedOn { get; set; }
 

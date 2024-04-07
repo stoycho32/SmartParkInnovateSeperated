@@ -134,44 +134,6 @@ namespace SmartParkInnovate.Core.Services
             await this.repository.SaveChangesAsync();
         }
 
-        public async Task Enable(int id)
-        {
-            ParkingSpot? parkingSpot = await this.repository.GetByIdAsync<ParkingSpot>(id);
-
-            if (parkingSpot == null)
-            {
-                throw new ArgumentException(string.Format(ParkingSpotErrorMessages.InvalidParkingSpotErrorMessage));
-            }
-
-            if (parkingSpot.IsEnabled)
-            {
-                throw new InvalidOperationException(string.Format(ParkingSpotErrorMessages.ParkingSpotAlreadyEnabledErrorMessage));
-            }
-
-            parkingSpot.IsEnabled = true;
-
-            await this.repository.SaveChangesAsync();
-        }
-
-        public async Task Disable(int id)
-        {
-            ParkingSpot? parkingSpot = await this.repository.GetByIdAsync<ParkingSpot>(id);
-
-            if (parkingSpot == null)
-            {
-                throw new ArgumentException(string.Format(ParkingSpotErrorMessages.InvalidParkingSpotErrorMessage));
-            }
-
-            if (!parkingSpot.IsEnabled)
-            {
-                throw new InvalidOperationException(string.Format(ParkingSpotErrorMessages.ParkingSpotAlreadyEnabledErrorMessage));
-            }
-
-            parkingSpot.IsEnabled = false;
-
-            await this.repository.SaveChangesAsync();
-        }
-
         public async Task<ParkingSpotDetailsModel> Details(int id, string userId)
         {
             ParkingSpotDetailsModel? model = await this.repository.AllAsReadOnly<ParkingSpot>()
@@ -185,19 +147,15 @@ namespace SmartParkInnovate.Core.Services
                        Id = id,
                        IsEnabled = c.IsEnabled,
                        IsOccupied = c.IsOccupied,
-                       ParkingSpotOccupations = c.ParkingSpotOccupations.Select(p => new ParkingSpotOccupationViewModel()
+                       ParkingSpotOccupations = c.ParkingSpotOccupations
+                       .Where(c => c.Vehicle.WorkerId == userId)
+                       .Select(p => new ParkingSpotOccupationViewModel()
                        {
-                           VehicleId = p.VehicleId,
-                           OccupationVehicleLicensePlate = p.Vehicle.LicensePlate,
-                           OccupationVehicleWorkerId = p.Vehicle.WorkerId,
-                           OccupationVehicleWorkerUserName = p.Vehicle.Worker.UserName,
                            EnterDateTime = p.EnterDateTime,
                            ExitDateTime = p.ExitDateTime
                        }).OrderByDescending(c => c.EnterDateTime).ToList()
                    }
-               })
-               .FirstOrDefaultAsync();
-
+               }).FirstOrDefaultAsync();
 
             if (model == null)
             {

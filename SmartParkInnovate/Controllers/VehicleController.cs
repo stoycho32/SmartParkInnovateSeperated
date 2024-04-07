@@ -14,7 +14,6 @@ namespace SmartParkInnovate.Controllers
             this.vehicleService = vehicleService;
         }
 
-
         [HttpGet]
         public IActionResult AddVehicle()
         {
@@ -22,7 +21,6 @@ namespace SmartParkInnovate.Controllers
 
             return View(formModel);
         }
-
 
         [HttpPost]
         public async Task<IActionResult> AddVehicle(VehicleFormModel formModel)
@@ -44,7 +42,7 @@ namespace SmartParkInnovate.Controllers
         {
             string userId = User.Id();
 
-            List<VehicleViewModel> vehicles = await this.vehicleService.All();
+            List<VehicleViewModel> vehicles = await this.vehicleService.MyVehicles(userId);
 
             return View(vehicles);
         }
@@ -52,26 +50,11 @@ namespace SmartParkInnovate.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
-            VehicleDetailsViewModel model = await this.vehicleService.Details(id);
+            string userId = User.Id();
+
+            VehicleDetailsViewModel model = await this.vehicleService.Details(id, userId);
 
             return View(model);
-        }
-
-
-        [HttpPost]
-        public async Task<IActionResult> Remove(int id)
-        {
-            await this.vehicleService.Remove(id);
-
-            return RedirectToAction(nameof(Vehicles));
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Return(int id)
-        {
-            await this.vehicleService.Return(id);
-
-            return RedirectToAction(nameof(Vehicles));
         }
     }
 }

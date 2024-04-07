@@ -20,7 +20,7 @@
             }
             else
             {
-                <p class="lead" style="color: #FF8282">The Parking Spot Is Occupied At The Moment</p>
+                <p class="lead" style="color: #FF8282">You Occupied The Parking Spot</p>
             }
         </div>
     </div>
@@ -34,8 +34,6 @@
             <table class="table table-borderless" style="border: none; box-shadow: none; color: #CCE5EA">
                 <thead>
                     <tr class="font-weight-bold">
-                        <th scope="col">License Plate</th>
-                        <th scope="col">Owner</th>
                         <th scope="col">Enter DateTime</th>
                         <th scope="col">Exit DateTime</th>
                         <th scope="col">Action</th>
@@ -45,11 +43,9 @@
                     @foreach (var vehicle in @Model.ParkingSpotDetailsViewModel.ParkingSpotOccupations)
                     {
                         <tr>
-                            <td style="font-size: 18px">@vehicle.OccupationVehicleLicensePlate</td>
-                            <td style="font-size: 18px">@vehicle.OccupationVehicleWorkerUserName</td>
                             <td style="font-size: 18px">@vehicle.EnterDateTime.ToString("dd.MM.yyyy HH:mm:ss")</td>
                             <td style="font-size: 18px">@(vehicle.ExitDateTime.HasValue ? vehicle.ExitDateTime.Value.ToString("dd.MM.yyyy HH:mm:ss") : "N/A")</td>
-                            @if (vehicle.OccupationVehicleWorkerId == Model.CurrentUserId && vehicle.ExitDateTime == null)
+                            @if (vehicle.ExitDateTime == null)
                             {
                             <td style="font-size: 18px">
                                 <form asp-controller="Parking" asp-action="ExitSpot" method="post">

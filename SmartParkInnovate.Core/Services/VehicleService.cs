@@ -48,7 +48,7 @@ namespace SmartParkInnovate.Core.Services
             await this.repository.SaveChangesAsync();
         }
 
-        public async Task<VehicleDetailsViewModel> Details(int id)
+        public async Task<VehicleDetailsViewModel> Details(int id, string userId)
         {
             VehicleDetailsViewModel? model = await this.repository.AllAsReadOnly<Vehicle>()
                 .AsSplitQuery()
@@ -59,9 +59,12 @@ namespace SmartParkInnovate.Core.Services
                     Model = c.Model,
                     LicensePlate = c.LicensePlate,
                     WorkerUserName = c.Worker.UserName,
+                    WorkerFullName = $"{c.Worker.FirstName} {c.Worker.LastName}",
                     IsDeleted = c.IsDeleted,
                     DeletedOn = c.DeletedOn,
-                    Occupations = c.ParkingSpotOccupations.Select(c => new VehicleOccupationViewModel()
+                    Occupations = c.ParkingSpotOccupations
+                    .Where(c => c.Vehicle.WorkerId == userId)
+                    .Select(c => new VehicleOccupationViewModel()
                     {
                         ParkingSpotId = c.ParkingSpot.Id,
                         EnterDateTime = c.EnterDateTime,
@@ -79,27 +82,11 @@ namespace SmartParkInnovate.Core.Services
             return model;
         }
 
-        public async Task<List<VehicleViewModel>> All()
+        public async Task<List<VehicleViewModel>> MyVehicles(string userId)
         {
             List<VehicleViewModel> vehicles = await this.repository.AllAsReadOnly<Vehicle>()
                 .AsSplitQuery()
-                .Select(c => new VehicleViewModel()
-                {
-                    Id = c.Id,
-                    Make = c.Make,
-                    Model = c.Model,
-                    LicensePlate = c.LicensePlate,
-                    WorkerUserName = c.Worker.UserName,
-                }).ToListAsync();
-
-            return vehicles;
-        }
-
-        public List<VehicleViewModel> MyVehicles(string userId)
-        {
-            List<VehicleViewModel> vehicles = this.repository.AllAsReadOnly<Vehicle>()
-                .AsSplitQuery()
-                .Where(c => c.WorkerId == userId)
+                .Where(c => c.WorkerId == userId && c.IsDeleted == false)
                 .Select(c => new VehicleViewModel()
                 {
                     Id = c.Id,
@@ -108,49 +95,9 @@ namespace SmartParkInnovate.Core.Services
                     LicensePlate = c.LicensePlate,
                     WorkerUserName = c.Worker.UserName,
                 })
-                .ToList();
+                .ToListAsync();
 
             return vehicles;
-        }
-
-        public async Task Remove(int id)
-        {
-            Vehicle? vehicleToRemove = await this.repository.GetByIdAsync<Vehicle>(id);
-
-            if (vehicleToRemove == null)
-            {
-                throw new ArgumentException(string.Format(VehicleErrorMessages.InvalidVehicleErrorMessage));
-            }
-
-            if (vehicleToRemove.IsDeleted == true)
-            {
-                throw new InvalidOperationException(string.Format(VehicleErrorMessages.VehicleAlreadyDeletedErrorMessage));
-            }
-
-            vehicleToRemove.IsDeleted = true;
-            vehicleToRemove.DeletedOn = DateTime.Now;
-
-            await this.repository.SaveChangesAsync();
-        }
-
-        public async Task Return(int id)
-        {
-            Vehicle? vehicleToReturn = await this.repository.GetByIdAsync<Vehicle>(id);
-
-            if (vehicleToReturn == null)
-            {
-                throw new ArgumentException(string.Format(VehicleErrorMessages.InvalidVehicleErrorMessage));
-            }
-
-            if (vehicleToReturn.IsDeleted == false)
-            {
-                throw new InvalidOperationException(string.Format(VehicleErrorMessages.VehicleIsNotDeletedErrorMessage));
-            }
-
-            vehicleToReturn.IsDeleted = false;
-            vehicleToReturn.DeletedOn = null;
-
-            await this.repository.SaveChangesAsync();
         }
     }
 }
