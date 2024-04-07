@@ -9,7 +9,7 @@
             @foreach (var spot in @Model)
             {
                 <div class="col-lg-3 col-md-4 col-sm-6 mb-4" style="border: none; box-shadow: none">
-                    @if (!spot.IsOccupied)
+                    @if (!spot.IsOccupied && spot.IsEnabled)
                     {
                         <div class="card" style="background-color: #41CAC6; border-radius: 30px;">
                             <div class="card-body">
@@ -18,11 +18,15 @@
                                 <div class="d-flex justify-content-between">
                                     <a asp-controller="Parking" asp-action="UseSpot" asp-route-id="@spot.Id" class="btn btn-success p-3 fw-bold rounded-pill" style="width: 130px; background-color: #3BBD6E; border: none; box-shadow: none">Use</a>
                                     <a asp-controller="Parking" asp-action="Details" asp-route-id="@spot.Id" asp-route-information="@Guid.NewGuid()" class="btn btn-success p-3 fw-bold rounded-pill" style="width: 130px; background-color: #A9BD39; border: none; box-shadow: none">Details</a>
+                                    @if (User.IsInRole("Administrator"))
+                                    {
+                                        <a asp-controller="Parking" asp-action="DisableSpot" asp-route-id="@spot.Id" class="btn btn-success p-3 fw-bold rounded-pill" style="width: 130px; background-color: #ED4366; border: none; box-shadow: none">Disable</a>
+                                    }
                                 </div>
                             </div>
                         </div>
                     }
-                    else
+                    else if (spot.IsOccupied && spot.IsEnabled)
                     {
                         <div class="card" style="background-color: #ED4366; border-radius: 30px;">
                             <div class="card-body">
@@ -30,6 +34,26 @@
                                 <p class="card-text" style="color: #CCE5EA; font-size: 20px">Spot Is Occupied</p>
                                 <div class="d-flex justify-content-center">
                                     <a asp-controller="Parking" asp-action="Details" asp-route-id="@spot.Id" class="btn btn-success p-3 fw-bold rounded-pill" style="width: 130px; background-color: #A9BD39; border: none; box-shadow: none">Details</a>
+                                    @if (User.IsInRole("Administrator"))
+                                    {
+                                        <a asp-controller="Parking" asp-action="DisableSpot" asp-route-id="@spot.Id" class="btn btn-success p-3 fw-bold rounded-pill" style="width: 130px; background-color: #5B5C5C; border: none; box-shadow: none">Disable</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else if (!spot.IsEnabled)
+                    {
+                        <div class="card" style="background-color: #5B5C5C; border-radius: 30px;">
+                            <div class="card-body">
+                                <h5 class="card-title" style="color: #CCE5EA; font-size: 25px">Spot Number: @spot.Id</h5>
+                                <p class="card-text" style="color: #CCE5EA; font-size: 20px">Spot Is Disabled</p>
+                                <div class="d-flex justify-content-center">
+                                    <a asp-controller="Parking" asp-action="Details" asp-route-id="@spot.Id" class="btn btn-success p-3 fw-bold rounded-pill" style="width: 130px; background-color: #A9BD39; border: none; box-shadow: none">Details</a>
+                                    @if (User.IsInRole("Administrator"))
+                                    {
+                                        <a asp-controller="Parking" asp-action="EnableSpot" asp-route-id="@spot.Id" class="btn btn-success p-3 fw-bold rounded-pill" style="width: 130px; background-color: #3BBD6E; border: none; box-shadow: none">Enable</a>
+                                    }
                                 </div>
                             </div>
                         </div>

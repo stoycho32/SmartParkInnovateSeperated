@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SmartParkInnovate.Core.Contracts;
 using SmartParkInnovate.Core.Models.ParkingSpot;
 using SmartParkInnovate.Core.Models.ParkingSpotModel;
@@ -37,6 +38,11 @@ namespace SmartParkInnovate.Controllers
         {
             UseSpotVehicleFormModel model = new UseSpotVehicleFormModel();
 
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             return View(model);
         }
 
@@ -61,6 +67,24 @@ namespace SmartParkInnovate.Controllers
             string userId = User.Id();
 
             await this.parkingService.Exit(id, userId);
+
+            return RedirectToAction(nameof(ParkingSpots));
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> DisableSpot(int id)
+        {
+            await this.parkingService.Disable(id);
+
+            return RedirectToAction(nameof(ParkingSpots));
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> EnableSpot(int id)
+        {
+            await this.parkingService.Enable(id);
 
             return RedirectToAction(nameof(ParkingSpots));
         }
