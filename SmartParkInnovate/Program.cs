@@ -1,5 +1,5 @@
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SmartParkInnovate.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,5 +42,7 @@ app.UseEndpoints(endpoints =>
     pattern: "{controller=Home}/{action=Index}/{id?}");
     endpoints.MapRazorPages();
 });
+
+await app.CreateAdminRoleAsync();
 
 await app.RunAsync();
