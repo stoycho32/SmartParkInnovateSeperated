@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using SmartParkInnovate.Extensions;
-using System.Formats.Asn1;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,10 +37,6 @@ app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
-    //endpoints.MapControllerRoute(
-    //name: "default",
-    //pattern: "{controller=Home}/{action=Index}/{id?}");
-
     endpoints.MapControllerRoute(
           name: "areas",
           pattern: "{area:exists}/{controller=Home}/{action=Dashboard}/{id?}");
