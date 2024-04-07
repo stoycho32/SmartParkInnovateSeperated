@@ -7,5 +7,6 @@ namespace SmartParkInnovate.Areas.Admin.Controllers
     [Authorize(Roles = "Administrator")]
     public class AdminBaseController : Controller
     {
+
     }
 }
