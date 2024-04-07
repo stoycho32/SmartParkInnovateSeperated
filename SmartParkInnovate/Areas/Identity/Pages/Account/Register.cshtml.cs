@@ -13,10 +13,10 @@ namespace SmartParkInnovate.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<Worker> _signInManager;
-        private readonly UserManager<Worker> _userManager;
-        private readonly IUserStore<Worker> _userStore;
-        private readonly ILogger<RegisterModel> _logger;
+        private readonly SignInManager<Worker> signInManager;
+        private readonly UserManager<Worker> userManager;
+        private readonly IUserStore<Worker> userStore;
+        private readonly ILogger<RegisterModel> logger;
 
         public RegisterModel(
             UserManager<Worker> userManager,
@@ -24,10 +24,10 @@ namespace SmartParkInnovate.Areas.Identity.Pages.Account
             SignInManager<Worker> signInManager,
             ILogger<RegisterModel> logger)
         {
-            _userManager = userManager;
-            _userStore = userStore;
-            _signInManager = signInManager;
-            _logger = logger;
+            this.userManager = userManager;
+            this.userStore = userStore;
+            this.signInManager = signInManager;
+            this.logger = logger;
         }
 
         [BindProperty]
@@ -79,16 +79,16 @@ namespace SmartParkInnovate.Areas.Identity.Pages.Account
                 user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
 
-                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
+                await userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
 
-                IdentityResult result = await _userManager.CreateAsync(user, Input.Password);
+                IdentityResult result = await userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {
-                    await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim(CustomClaims.UserFirstNameClaim,
+                    await userManager.AddClaimAsync(user, new System.Security.Claims.Claim(CustomClaims.UserFirstNameClaim,
                         $"{user.FirstName}"));
 
-                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    await signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);
 
                 }
@@ -117,11 +117,11 @@ namespace SmartParkInnovate.Areas.Identity.Pages.Account
 
         private IUserEmailStore<Worker> GetEmailStore()
         {
-            if (!_userManager.SupportsUserEmail)
+            if (!userManager.SupportsUserEmail)
             {
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
-            return (IUserEmailStore<Worker>)_userStore;
+            return (IUserEmailStore<Worker>)userStore;
         }
     }
 }

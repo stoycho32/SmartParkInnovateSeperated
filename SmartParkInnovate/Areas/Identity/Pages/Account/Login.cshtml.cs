@@ -11,13 +11,17 @@ namespace SmartParkInnovate.Areas.Identity.Pages.Account
 {
     public class LoginModel : PageModel
     {
-        private readonly SignInManager<Worker> _signInManager;
-        private readonly ILogger<LoginModel> _logger;
+        private readonly SignInManager<Worker> signInManager;
+        private readonly UserManager<Worker> userManager;
+        private readonly ILogger<LoginModel> logger;
 
-        public LoginModel(SignInManager<Worker> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<Worker> signInManager,
+            UserManager<Worker> userManager,
+            ILogger<LoginModel> logger)
         {
-            _signInManager = signInManager;
-            _logger = logger;
+            this.signInManager = signInManager;
+            this.userManager = userManager;
+            this.logger = logger;
         }
      
         [BindProperty]
@@ -64,11 +68,11 @@ namespace SmartParkInnovate.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var result 
-                    = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                    = await signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
 
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
+                    logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }
                 else
