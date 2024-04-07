@@ -39,12 +39,8 @@ app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
     //endpoints.MapControllerRoute(
-    //name: "Parking Spot Details",
-    //pattern: "{controller=Parking}/{action=Details}/{id}/{information}");
-
-    endpoints.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    //name: "default",
+    //pattern: "{controller=Home}/{action=Index}/{id?}");
 
     endpoints.MapControllerRoute(
           name: "areas",

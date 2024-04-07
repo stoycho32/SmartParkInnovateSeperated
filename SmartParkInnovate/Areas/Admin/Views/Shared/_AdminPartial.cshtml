@@ -1,1 +1,37 @@
-﻿
+﻿@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims;
+
+@inject SignInManager<Worker> SignInManager
+@inject UserManager<Worker> UserManager
+
+@{
+    string userName = string.Empty;
+
+    if (SignInManager.IsSignedIn(User))
+    {
+        Worker user = await UserManager.FindByIdAsync(User.Id());
+        userName = User.FindFirstValue(SmartParkInnovate.Infrastructure.Extensions.CustomClaims.UserFirstNameClaim) ?? string.Empty;
+    }
+}
+
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <p class="nav-link text-light" style="color: #CCE5EA">Hello, Mr.Admin</p>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" style="color:#CCE5EA" asp-area="" asp-controller="Home" asp-action="Index">Back To System</a>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-light" style="color:#CCE5EA" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" style="color:#CCE5EA" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </li>
+    }
+</ul>

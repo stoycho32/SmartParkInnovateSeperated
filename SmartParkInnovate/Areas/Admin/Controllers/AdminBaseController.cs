@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static SmartParkInnovate.Infrastructure.Data.Constants.AdminConstants;
 
 namespace SmartParkInnovate.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    [Authorize(Roles = "Administrator")]
+    [Area(AdminAreaName)]
+    [Authorize(Roles = AdminRoleName)]
     public class AdminBaseController : Controller
     {
 
