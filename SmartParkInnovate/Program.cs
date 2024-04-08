@@ -42,7 +42,7 @@ app.UseEndpoints(endpoints =>
           pattern: "{area:exists}/{controller=Home}/{action=Dashboard}/{id?}");
 
     endpoints.MapControllerRoute(
-    name: "ParkingSpots",
+    name: "default",
     pattern: "{controller=Parking}/{action=ParkingSpots}/{id?}");
 
     endpoints.MapDefaultControllerRoute();
