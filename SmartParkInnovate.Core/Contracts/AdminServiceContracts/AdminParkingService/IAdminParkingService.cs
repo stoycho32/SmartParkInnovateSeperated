@@ -1,10 +1,12 @@
-﻿namespace SmartParkInnovate.Core.Contracts.AdminServiceContracts.AdminParkingService
+﻿using SmartParkInnovate.Core.Models.ParkingSpot;
+
+namespace SmartParkInnovate.Core.Contracts.AdminServiceContracts.AdminParkingService
 {
     public interface IAdminParkingService
     {
-        public Task ParkingSpots();
+        public Task<List<ParkingSpotViewModel>> ParkingSpots();
 
-        public Task GetParkingSpotDetails(int id);
+        public Task AllOccupations(int id);
 
         public Task KickUserFromParkingSpot(int id);
 
