@@ -89,7 +89,7 @@ namespace SmartParkInnovate.Areas.Identity.Pages.Account
                         $"{user.FirstName}"));
 
                     await signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("ParkingSpots", "Parking");
+                    return LocalRedirect(returnUrl);
                 }
                 foreach (var error in result.Errors)
                 {

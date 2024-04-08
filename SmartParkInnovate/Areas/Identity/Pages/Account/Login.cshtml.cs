@@ -7,6 +7,7 @@ using static SmartParkInnovate.Infrastructure.Data.Constants.RoleConstants;
 using static SmartParkInnovate.Infrastructure.Data.Constants.AdminConstants;
 using SmartParkInnovate.Infrastructure.Data.Models;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace SmartParkInnovate.Areas.Identity.Pages.Account
 {
@@ -82,7 +83,7 @@ namespace SmartParkInnovate.Areas.Identity.Pages.Account
                     }
                     else
                     {
-                        return RedirectToAction("ParkingSpots", "Parking");
+                        return LocalRedirect(returnUrl);
                     }
                 }
                 else
