@@ -30,6 +30,7 @@ namespace SmartParkInnovate.Infrastructure.Data.Constants
         {
             public const string PostBodyErrorMessage = "Post body cannot be empty.";
             public const string InvalidPostErrorMessage = "The Chosen Post Is Not Valid";
+            public const string PostIsDeletedErrorMessage = "Post Is Deleted";
         }
 
         public static class ParkingSpotErrorMessages

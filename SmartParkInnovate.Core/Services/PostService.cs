@@ -5,7 +5,7 @@ using SmartParkInnovate.Core.Models.LikeModel;
 using SmartParkInnovate.Core.Models.PostModel;
 using SmartParkInnovate.Infrastructure.Data.Models;
 using SmartParkInnovate.Infrastructure.Repository;
-using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages;
+using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages.PostErrorMessages;
 
 namespace SmartParkInnovate.Core.Services
 {
@@ -22,6 +22,7 @@ namespace SmartParkInnovate.Core.Services
         {
             List<PostViewModel> posts = await this.repository.AllAsReadOnly<Post>()
                 .AsSplitQuery()
+                .Where(c => c.IsDeleted == false)
                 .Select(c => new PostViewModel()
                 {
                     Id = c.Id,
@@ -184,7 +185,12 @@ namespace SmartParkInnovate.Core.Services
 
             if (post == null)
             {
-                throw new ArgumentException(string.Format(PostErrorMessages.InvalidPostErrorMessage));
+                throw new ArgumentException(string.Format(InvalidPostErrorMessage));
+            }
+
+            if (post.IsDeleted == true)
+            {
+                throw new ArgumentException(string.Format(PostIsDeletedErrorMessage));
             }
 
             return new PostFormModel()
