@@ -40,6 +40,7 @@ namespace SmartParkInnovate.Infrastructure.Data.Constants
             public const string ParkingSpotAlreadyInUseErrorMessage = "Parking Spot Is Already In Use";
             public const string ParkingSpotWasNotUsed = "The Parking Spot Was Not Used And It Cannot Be Exited";
             public const string ParkingSpotAlreadyEnabledErrorMessage = "Parking Spot Is Already Enabled";
+            public const string ParkingSpotAlreadyDisabledErrorMessage = "Parking Spot Is Already Disabled";
         }
 
         public static class WorkerErrorMessages

@@ -1,0 +1,85 @@
+﻿@using SmartParkInnovate.Core.Models.ParkingSpot;
+
+@model IEnumerable<ParkingSpotViewModel>
+
+<br />
+<body style="background-color: #4C98CF">
+    <div class="container">
+        <h3 style="color: #CCE5EA">Parking Spots</h3>
+        <br />
+        @if (Model.Count() > 0)
+        {
+            @foreach (var spot in @Model)
+            {
+                <div style="border: none; box-shadow: none">
+                    @if (!spot.IsOccupied && spot.IsEnabled)
+                    {
+                        <div class="container-fluid">
+                            <div class="row justify-content-end">
+                                <div class="col-12 col-lg-6">
+                                    <div class="card" style="background-color: #41CAC6; border-radius: 30px; width: 800px">
+                                        <div class="card-body">
+                                            <h5 class="card-title" style="color: #CCE5EA; font-size: 25px;">Spot: @spot.Id</h5>
+                                            <p class="card-text" style="color: #CCE5EA; font-size: 20px;">Spot Is Available</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 d-flex justify-content-end align-items-end">
+                                    <div>
+                                        <a asp-area="Admin" asp-controller="Parking" asp-action="DisableParkingSpot" asp-route-id="@spot.Id" class="btn btn-success p-3 fw-bold rounded-pill" style="width: 130px; background-color: #ED4366; border: none; box-shadow: none;">Disable</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else if (spot.IsOccupied && spot.IsEnabled)
+                    {
+                        <div class="container-fluid">
+                            <div class="row justify-content-end">
+                                <div class="col-12 col-lg-6">
+                                    <div class="card" style="background-color: #ED4366; border-radius: 30px; width: 800px">
+                                        <div class="card-body">
+                                            <h5 class="card-title" style="color: #CCE5EA; font-size: 25px;">Spot: @spot.Id</h5>
+                                            <p class="card-text" style="color: #CCE5EA; font-size: 20px;">Spot Is Occupied</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 d-flex justify-content-end align-items-end">
+                                    <div>
+                                        <a asp-area="Admin" asp-controller="Parking" asp-action="KickUserFromParkingSpot" asp-route-id="@spot.Id" class="btn btn-success p-3 fw-bold rounded-pill" style="width: 130px; background-color: #ED5EC8; border: none; box-shadow: none;">Kick User</a>
+                                        <a asp-area="Admin" asp-controller="Parking" asp-action="DisableParkingSpot" asp-route-id="@spot.Id" class="btn btn-success p-3 fw-bold rounded-pill" style="width: 130px; background-color: #ED4366; border: none; box-shadow: none;">Disable</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else if (!spot.IsEnabled)
+                    {
+                        <div class="container-fluid">
+                            <div class="row justify-content-end">
+                                <div class="col-12 col-lg-6">
+                                    <div class="card" style="background-color: #5B5C5C; border-radius: 30px; width: 800px">
+                                        <div class="card-body">
+                                            <h5 class="card-title" style="color: #CCE5EA; font-size: 25px;">Spot: @spot.Id</h5>
+                                            <p class="card-text" style="color: #CCE5EA; font-size: 20px;">Spot Is Disabled</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 d-flex justify-content-end align-items-end">
+                                    <div>
+                                        <a asp-area="Admin" asp-controller="Parking" asp-action="EnableParkingSpot" asp-route-id="@spot.Id" class="btn btn-success p-3 fw-bold rounded-pill" style="width: 130px; background-color: #3BBD6E; border: none; box-shadow: none;">Enable</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <br />
+            }
+        }
+        else
+        {
+            <p>There Are No Parking Spots Activated</p>
+        }
+    </div>
+</body>

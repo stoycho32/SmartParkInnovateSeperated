@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using SmartParkInnovate.Core.Contracts;
 using SmartParkInnovate.Core.Contracts.AdminServiceContracts.AdminParkingService;
 using SmartParkInnovate.Core.Services;
+using SmartParkInnovate.Core.Services.AdminService.AdminParkingService;
 using SmartParkInnovate.Data;
 using SmartParkInnovate.Infrastructure.Data.Models;
 using SmartParkInnovate.Infrastructure.Repository;
@@ -27,7 +28,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IParkingService, ParkingService>();
             services.AddScoped<IVehicleService, VehicleService>();
             services.AddScoped<IPostService, PostService>();
-            services.AddScoped<IAdminParkingService, IAdminParkingService>();
+            services.AddScoped<IAdminParkingService, AdminParkingService>();
 
 
             services.AddDatabaseDeveloperPageExceptionFilter();

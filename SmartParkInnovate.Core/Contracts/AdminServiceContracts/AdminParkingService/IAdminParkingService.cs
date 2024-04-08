@@ -6,6 +6,8 @@ namespace SmartParkInnovate.Core.Contracts.AdminServiceContracts.AdminParkingSer
     {
         public Task<List<ParkingSpotViewModel>> ParkingSpots();
 
+        public Task AddParkingSpot();
+
         public Task AllOccupations(int id);
 
         public Task KickUserFromParkingSpot(int id);

@@ -3,9 +3,11 @@ using SmartParkInnovate.Core.Contracts.AdminServiceContracts.AdminParkingService
 using SmartParkInnovate.Core.Models.ParkingSpot;
 using SmartParkInnovate.Infrastructure.Data.Models;
 using SmartParkInnovate.Infrastructure.Repository;
+using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages.ParkingSpotErrorMessages;
 
 namespace SmartParkInnovate.Core.Services.AdminService.AdminParkingService
 {
+    //TO CONTINUE IMPLEMENTING FUNCTIONALITIES FOR THE ADMIN
     public class AdminParkingService : IAdminParkingService
     {
         private readonly IRepository repository;
@@ -28,6 +30,14 @@ namespace SmartParkInnovate.Core.Services.AdminService.AdminParkingService
             return spots;
         }
 
+        public async Task AddParkingSpot()
+        {
+            ParkingSpot createdSpot = new ParkingSpot();
+
+            await this.repository.AddAsync(createdSpot);
+            await this.repository.SaveChangesAsync();
+        }
+
         public Task AllOccupations(int id)
         {
             throw new NotImplementedException();
@@ -43,14 +53,40 @@ namespace SmartParkInnovate.Core.Services.AdminService.AdminParkingService
             throw new NotImplementedException();
         }
 
-        public Task EnableParkingSpot(int id)
+        public async Task EnableParkingSpot(int id)
         {
-            throw new NotImplementedException();
+            ParkingSpot? spotToEnable = await this.repository.GetByIdAsync<ParkingSpot>(id);
+
+            if (spotToEnable == null)
+            {
+                throw new ArgumentException(string.Format(InvalidParkingSpotErrorMessage));
+            }
+
+            if (spotToEnable.IsEnabled)
+            {
+                throw new InvalidOperationException(string.Format(ParkingSpotAlreadyEnabledErrorMessage));
+            }
+
+            spotToEnable.IsEnabled = true;
+            await this.repository.SaveChangesAsync();
         }
 
-        public Task DisableParkingSpot(int id)
+        public async Task DisableParkingSpot(int id)
         {
-            throw new NotImplementedException();
+            ParkingSpot? spotToEnable = await this.repository.GetByIdAsync<ParkingSpot>(id);
+
+            if (spotToEnable == null)
+            {
+                throw new ArgumentException(string.Format(InvalidParkingSpotErrorMessage));
+            }
+
+            if (!spotToEnable.IsEnabled)
+            {
+                throw new InvalidOperationException(string.Format(ParkingSpotAlreadyDisabledErrorMessage));
+            }
+
+            spotToEnable.IsEnabled = false;
+            await this.repository.SaveChangesAsync();
         }
     }
 }
