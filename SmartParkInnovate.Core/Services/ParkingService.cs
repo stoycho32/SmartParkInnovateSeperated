@@ -6,7 +6,9 @@ using SmartParkInnovate.Core.Models.ParkingSpotOccupationsViewModel;
 using SmartParkInnovate.Core.Models.VehicleModel;
 using SmartParkInnovate.Infrastructure.Data.Models;
 using SmartParkInnovate.Infrastructure.Repository;
-using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages;
+using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages.ParkingSpotErrorMessages;
+using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages.WorkerErrorMessages;
+using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages.VehicleErrorMessages;
 
 namespace SmartParkInnovate.Core.Services
 {
@@ -38,34 +40,34 @@ namespace SmartParkInnovate.Core.Services
 
             if (parkingSpot == null)
             {
-                throw new ArgumentException(string.Format(ParkingSpotErrorMessages.InvalidParkingSpotErrorMessage));
+                throw new ArgumentException(string.Format(InvalidParkingSpotErrorMessage));
             }
 
             if (worker == null)
             {
-                throw new ArgumentException(WorkerErrorMessages.InvalidWorkerErrorMessage);
+                throw new ArgumentException(string.Format(InvalidWorkerErrorMessage));
             }
 
             if (!parkingSpot.IsEnabled)
             {
-                throw new InvalidOperationException(string.Format(ParkingSpotErrorMessages.ParkingSpotIsDisabledErrorMessage));
+                throw new InvalidOperationException(string.Format(ParkingSpotIsDisabledErrorMessage));
             }
 
             if (parkingSpot.IsOccupied)
             {
-                throw new InvalidOperationException(string.Format(ParkingSpotErrorMessages.ParkingSpotAlreadyInUseErrorMessage));
+                throw new InvalidOperationException(string.Format(ParkingSpotAlreadyInUseErrorMessage));
             }
 
             vehicle = worker.Vehicles.FirstOrDefault(c => c.LicensePlate == vehicleModel.LicensePlate);
 
             if (vehicle == null)
             {
-                throw new ArgumentException(string.Format(VehicleErrorMessages.InvalidVehicleErrorMessage));
+                throw new ArgumentException(string.Format(InvalidVehicleErrorMessage));
             }
 
             if (vehicle.ParkingSpotOccupations.Any(c => c.ExitDateTime == null))
             {
-                throw new InvalidOperationException(string.Format(VehicleErrorMessages.VehicleAlreadyParkedErrorMessage));
+                throw new InvalidOperationException(string.Format(VehicleAlreadyParkedErrorMessage));
             }
 
             parkingSpot.IsOccupied = true;
@@ -96,22 +98,22 @@ namespace SmartParkInnovate.Core.Services
 
             if (parkingSpot == null)
             {
-                throw new ArgumentException(string.Format(ParkingSpotErrorMessages.InvalidParkingSpotErrorMessage));
+                throw new ArgumentException(string.Format(InvalidParkingSpotErrorMessage));
             }
 
             if (worker == null)
             {
-                throw new ArgumentException(string.Format(WorkerErrorMessages.InvalidWorkerErrorMessage));
+                throw new ArgumentException(string.Format(InvalidWorkerErrorMessage));
             }
 
             if (!parkingSpot.IsEnabled)
             {
-                throw new InvalidOperationException(ParkingSpotErrorMessages.ParkingSpotIsDisabledErrorMessage);
+                throw new InvalidOperationException(ParkingSpotIsDisabledErrorMessage);
             }
 
             if (!parkingSpot.IsOccupied)
             {
-                throw new InvalidOperationException(string.Format(ParkingSpotErrorMessages.ParkingSpotNotOccupiedErrorMessage));
+                throw new InvalidOperationException(string.Format(ParkingSpotNotOccupiedErrorMessage));
             }
 
             ParkingSpotOccupation? occupation = parkingSpot.ParkingSpotOccupations
@@ -119,12 +121,12 @@ namespace SmartParkInnovate.Core.Services
 
             if (occupation == null)
             {
-                throw new ArgumentException(string.Format(ParkingSpotErrorMessages.ParkingSpotWasNotUsed));
+                throw new ArgumentException(string.Format(ParkingSpotWasNotUsed));
             }
 
             if (worker.Vehicles.FirstOrDefault(c => c.LicensePlate == occupation.Vehicle.LicensePlate) == null)
             {
-                throw new InvalidOperationException(string.Format(VehicleErrorMessages.VehicleDoesNotBelongToWorker));
+                throw new InvalidOperationException(string.Format(VehicleDoesNotBelongToWorker));
             }
 
             parkingSpot.IsOccupied = false;
@@ -159,7 +161,7 @@ namespace SmartParkInnovate.Core.Services
 
             if (model == null)
             {
-                throw new ArgumentException(string.Format(ParkingSpotErrorMessages.InvalidParkingSpotErrorMessage));
+                throw new ArgumentException(string.Format(InvalidParkingSpotErrorMessage));
             }
 
             return model;

@@ -4,8 +4,8 @@ using SmartParkInnovate.Core.Models.ParkingSpotOccupationModel;
 using SmartParkInnovate.Core.Models.VehicleModel;
 using SmartParkInnovate.Infrastructure.Data.Models;
 using SmartParkInnovate.Infrastructure.Repository;
-using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages;
-
+using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages.VehicleErrorMessages;
+using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages.WorkerErrorMessages;
 namespace SmartParkInnovate.Core.Services
 {
     public class VehicleService : IVehicleService
@@ -24,14 +24,14 @@ namespace SmartParkInnovate.Core.Services
 
             if (isVehicleAlreadyAdded)
             {
-                throw new InvalidOperationException(string.Format(VehicleErrorMessages.VehicleAlreadyExistsErrorMessage));
+                throw new InvalidOperationException(string.Format(VehicleAlreadyExistsErrorMessage));
             }
 
             Worker? worker = await this.repository.GetByIdAsync<Worker>(userId);
 
             if (worker == null)
             {
-                throw new ArgumentException(WorkerErrorMessages.InvalidWorkerErrorMessage);
+                throw new ArgumentException(InvalidWorkerErrorMessage);
             }
 
             Vehicle vehicle = new Vehicle()
@@ -76,7 +76,7 @@ namespace SmartParkInnovate.Core.Services
 
             if (model == null)
             {
-                throw new ArgumentException(string.Format(VehicleErrorMessages.InvalidVehicleErrorMessage));
+                throw new ArgumentException(string.Format(InvalidVehicleErrorMessage));
             }
 
             return model;
