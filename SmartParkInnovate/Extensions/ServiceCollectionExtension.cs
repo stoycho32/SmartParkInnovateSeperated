@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using SmartParkInnovate.Core.Contracts;
 using SmartParkInnovate.Core.Contracts.AdminServiceContracts.AdminParkingService;
 using SmartParkInnovate.Core.Services;
-using SmartParkInnovate.Core.Services.AdminService.AdminParkingService;
+using SmartParkInnovate.Core.Services.AdminService;
 using SmartParkInnovate.Data;
 using SmartParkInnovate.Infrastructure.Data.Models;
 using SmartParkInnovate.Infrastructure.Repository;

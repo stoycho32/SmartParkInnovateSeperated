@@ -5,7 +5,7 @@ using SmartParkInnovate.Infrastructure.Data.Models;
 using SmartParkInnovate.Infrastructure.Repository;
 using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages.ParkingSpotErrorMessages;
 
-namespace SmartParkInnovate.Core.Services.AdminService.AdminParkingService
+namespace SmartParkInnovate.Core.Services.AdminService
 {
     //TO CONTINUE IMPLEMENTING FUNCTIONALITIES FOR THE ADMIN
     public class AdminParkingService : IAdminParkingService
@@ -19,7 +19,7 @@ namespace SmartParkInnovate.Core.Services.AdminService.AdminParkingService
 
         public async Task<List<ParkingSpotViewModel>> ParkingSpots()
         {
-            List<ParkingSpotViewModel> spots = await this.repository.AllAsReadOnly<ParkingSpot>()
+            List<ParkingSpotViewModel> spots = await repository.AllAsReadOnly<ParkingSpot>()
                 .Select(c => new ParkingSpotViewModel()
                 {
                     Id = c.Id,
@@ -34,8 +34,8 @@ namespace SmartParkInnovate.Core.Services.AdminService.AdminParkingService
         {
             ParkingSpot createdSpot = new ParkingSpot();
 
-            await this.repository.AddAsync(createdSpot);
-            await this.repository.SaveChangesAsync();
+            await repository.AddAsync(createdSpot);
+            await repository.SaveChangesAsync();
         }
 
         public Task AllOccupations(int id)
@@ -55,7 +55,7 @@ namespace SmartParkInnovate.Core.Services.AdminService.AdminParkingService
 
         public async Task EnableParkingSpot(int id)
         {
-            ParkingSpot? spotToEnable = await this.repository.GetByIdAsync<ParkingSpot>(id);
+            ParkingSpot? spotToEnable = await repository.GetByIdAsync<ParkingSpot>(id);
 
             if (spotToEnable == null)
             {
@@ -68,12 +68,12 @@ namespace SmartParkInnovate.Core.Services.AdminService.AdminParkingService
             }
 
             spotToEnable.IsEnabled = true;
-            await this.repository.SaveChangesAsync();
+            await repository.SaveChangesAsync();
         }
 
         public async Task DisableParkingSpot(int id)
         {
-            ParkingSpot? spotToEnable = await this.repository.GetByIdAsync<ParkingSpot>(id);
+            ParkingSpot? spotToEnable = await repository.GetByIdAsync<ParkingSpot>(id);
 
             if (spotToEnable == null)
             {
@@ -86,7 +86,7 @@ namespace SmartParkInnovate.Core.Services.AdminService.AdminParkingService
             }
 
             spotToEnable.IsEnabled = false;
-            await this.repository.SaveChangesAsync();
+            await repository.SaveChangesAsync();
         }
     }
 }

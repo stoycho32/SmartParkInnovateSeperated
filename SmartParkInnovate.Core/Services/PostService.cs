@@ -6,6 +6,7 @@ using SmartParkInnovate.Core.Models.PostModel;
 using SmartParkInnovate.Infrastructure.Data.Models;
 using SmartParkInnovate.Infrastructure.Repository;
 using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages.PostErrorMessages;
+using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages.WorkerErrorMessages;
 
 namespace SmartParkInnovate.Core.Services
 {
@@ -43,7 +44,7 @@ namespace SmartParkInnovate.Core.Services
 
             if (worker == null)
             {
-                throw new ArgumentException(string.Format(WorkerErrorMessages.InvalidWorkerErrorMessage));
+                throw new ArgumentException(string.Format(InvalidWorkerErrorMessage));
             }
 
             Post post = new Post()
@@ -90,7 +91,7 @@ namespace SmartParkInnovate.Core.Services
 
             if (postModel == null)
             {
-                throw new ArgumentException(string.Format(PostErrorMessages.InvalidPostErrorMessage));
+                throw new ArgumentException(string.Format(InvalidPostErrorMessage));
             }
 
             return postModel;
@@ -107,12 +108,12 @@ namespace SmartParkInnovate.Core.Services
 
             if (post == null)
             {
-                throw new ArgumentException(string.Format(PostErrorMessages.InvalidPostErrorMessage));
+                throw new ArgumentException(string.Format(InvalidPostErrorMessage));
             }
 
             if (worker == null)
             {
-                throw new ArgumentException(string.Format(WorkerErrorMessages.InvalidWorkerErrorMessage));
+                throw new ArgumentException(string.Format(InvalidWorkerErrorMessage));
             }
 
             PostLike? existingLike = post.Likes.FirstOrDefault(c => c.WorkerId == userId && c.PostId == post.Id);
@@ -145,12 +146,12 @@ namespace SmartParkInnovate.Core.Services
 
             if (post == null)
             {
-                throw new ArgumentException(string.Format(PostErrorMessages.InvalidPostErrorMessage));
+                throw new ArgumentException(string.Format(InvalidPostErrorMessage));
             }
 
             if (worker == null)
             {
-                throw new ArgumentException(string.Format(WorkerErrorMessages.InvalidWorkerErrorMessage));
+                throw new ArgumentException(string.Format(InvalidWorkerErrorMessage));
             }
 
             PostComment postComment = new PostComment()
@@ -172,7 +173,7 @@ namespace SmartParkInnovate.Core.Services
 
             if (postToEdit == null)
             {
-                throw new ArgumentException(string.Format(PostErrorMessages.InvalidPostErrorMessage));
+                throw new ArgumentException(string.Format(InvalidPostErrorMessage));
             }
 
             postToEdit.PostBody = model.PostBody;
