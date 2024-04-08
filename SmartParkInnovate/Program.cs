@@ -38,12 +38,12 @@ app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
-    name: "Parking Spots",
-    pattern: "{controller=Parking}/{action=ParkingSpots}/{id?}");
-
-    endpoints.MapControllerRoute(
           name: "areas",
           pattern: "{area:exists}/{controller=Home}/{action=Dashboard}/{id?}");
+
+    endpoints.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Parking}/{action=ParkingSpots}/{id?}");
 
     endpoints.MapDefaultControllerRoute();
     endpoints.MapRazorPages();
