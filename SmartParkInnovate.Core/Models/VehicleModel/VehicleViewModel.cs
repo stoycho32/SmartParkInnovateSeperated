@@ -1,7 +1,7 @@
 ﻿using SmartParkInnovate.Infrastructure.Data.Attributes;
 using System.ComponentModel.DataAnnotations;
-using static SmartParkInnovate.Infrastructure.Data.Constants.DataConstants;
-using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages;
+using static SmartParkInnovate.Infrastructure.Data.Constants.DataConstants.VehicleDataConstants;
+using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages.VehicleErrorMessages;
 
 namespace SmartParkInnovate.Core.Models.VehicleModel
 {
@@ -10,15 +10,15 @@ namespace SmartParkInnovate.Core.Models.VehicleModel
         public int Id { get; set; }
 
         [Required]
-        [StringLength(VehicleDataConstants.VehicleMakeMaxLength,
-            MinimumLength = VehicleDataConstants.VehicleMakeMinLength)]
+        [StringLength(VehicleMakeMaxLength,
+            MinimumLength = VehicleMakeMinLength)]
         public string Make { get; set; } = null!;
 
 
         [Required]
-        [StringLength(VehicleDataConstants.VehicleModelMaxLength,
-            MinimumLength = VehicleDataConstants.VehicleModelMinLength,
-            ErrorMessage = VehicleErrorMessages.VehicleModelLengthErrorMessage)]
+        [StringLength(VehicleModelMaxLength,
+            MinimumLength = VehicleModelMinLength,
+            ErrorMessage = VehicleModelLengthErrorMessage)]
         public string Model { get; set; } = null!;
 
 
