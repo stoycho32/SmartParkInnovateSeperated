@@ -1,11 +1,12 @@
-﻿@model PostDetailModel
+﻿@using static SmartParkInnovate.Infrastructure.Data.Constants.AdminConstants;
+@model PostDetailModel
 
 
 <body style="background-color: #4C98CF">
     <div class="card text-left" style="background-color: #41CAC6">
         <div class="card-header d-flex justify-content-between align-items-center" style="color: #CCE5EA; font-size: 20px">
             <span>@Model.PostDetailViewModel.WorkerUsername</span>
-            @if (Model.CurrentUser == Model.PostDetailViewModel.WorkerId)
+            @if (Model.CurrentUser == Model.PostDetailViewModel.WorkerId || User.IsInRole(AdminRoleName))
             {
                 <a asp-controller="Post" asp-action="EditPost" asp-route-id="@Model.PostDetailViewModel.Id" class="btn btn-link btn-sm"
                    style="color: #CCE5EA; font-size: 18px; text-decoration: none; border: none; box-shadow: none">Edit</a>
