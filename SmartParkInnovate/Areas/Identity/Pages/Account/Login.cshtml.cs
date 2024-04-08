@@ -1,10 +1,10 @@
 ﻿#nullable disable
-
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using static SmartParkInnovate.Infrastructure.Data.Constants.RoleConstants;
+using static SmartParkInnovate.Infrastructure.Data.Constants.AdminConstants;
 using SmartParkInnovate.Infrastructure.Data.Models;
 using System.ComponentModel.DataAnnotations;
 
@@ -78,7 +78,7 @@ namespace SmartParkInnovate.Areas.Identity.Pages.Account
 
                     if (await this.userManager.IsInRoleAsync(user, AdminRole))
                     {
-                        return RedirectToAction("Dashboard", "Home", new { Area = "Admin"});
+                        return RedirectToAction("Dashboard", "Home", new { Area = AdminAreaName});
                     }
                     else
                     {
