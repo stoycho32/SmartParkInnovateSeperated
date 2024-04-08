@@ -34,9 +34,9 @@ namespace SmartParkInnovate.Core.Models.PostModel
         public int CommentsCount { get; set; }
 
         [Required]
-        public List<CommentViewModel> PostComments { get; set; } = new List<CommentViewModel>();
+        public IEnumerable<CommentViewModel> PostComments { get; set; } = new List<CommentViewModel>();
 
         [Required]
-        public List<LikeViewModel> PostLikes { get; set; } = new List<LikeViewModel>();
+        public IEnumerable<LikeViewModel> PostLikes { get; set; } = new List<LikeViewModel>();
     }
 }

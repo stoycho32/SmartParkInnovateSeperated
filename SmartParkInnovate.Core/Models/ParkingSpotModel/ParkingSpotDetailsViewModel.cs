@@ -14,6 +14,6 @@ namespace SmartParkInnovate.Core.Models.ParkingSpot
         [Required]
         public bool IsOccupied { get; set; }
 
-        public ICollection<ParkingSpotOccupationViewModel> ParkingSpotOccupations { get; set; } = new List<ParkingSpotOccupationViewModel>();
+        public IEnumerable<ParkingSpotOccupationViewModel> ParkingSpotOccupations { get; set; } = new List<ParkingSpotOccupationViewModel>();
     }
 }

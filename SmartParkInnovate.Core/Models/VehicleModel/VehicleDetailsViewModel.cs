@@ -38,6 +38,6 @@ namespace SmartParkInnovate.Core.Models.VehicleModel
         public bool IsDeleted { get; set; }
         public DateTime? DeletedOn { get; set; }
 
-        public ICollection<VehicleOccupationViewModel> Occupations { get; set; } = new List<VehicleOccupationViewModel>();
+        public IEnumerable<VehicleOccupationViewModel> Occupations { get; set; } = new List<VehicleOccupationViewModel>();
     }
 }
