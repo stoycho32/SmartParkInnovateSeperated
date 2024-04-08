@@ -9,7 +9,5 @@ namespace SmartParkInnovate.Core.Models.PostModel
         public string CurrentUser { get; set; } = null!;
 
         public PostDetailViewModel PostDetailViewModel { get; set; } = null!;
-
-        public CommentFormModel CommentFormModel { get; set; } = new CommentFormModel();
     }
 }
