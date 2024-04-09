@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartParkInnovate.Core.Contracts.AdminServiceContracts;
 using SmartParkInnovate.Core.Models.ParkingSpot;
+using SmartParkInnovate.Core.Models.ParkingSpotOccupationModel;
 using SmartParkInnovate.Infrastructure.Data.Models;
 using SmartParkInnovate.Infrastructure.Repository;
 using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages.ParkingSpotErrorMessages;
 
 namespace SmartParkInnovate.Core.Services.AdminService
 {
-    //TO CONTINUE IMPLEMENTING FUNCTIONALITIES FOR THE ADMIN
     public class AdminParkingService : IAdminParkingService
     {
         private readonly IRepository repository;
@@ -38,9 +38,27 @@ namespace SmartParkInnovate.Core.Services.AdminService
             await repository.SaveChangesAsync();
         }
 
-        public Task AllOccupations(int? id)
+        public async Task<IEnumerable<ParkingOccupationsViewModel>> AllOccupations(int? id)
         {
-            throw new NotImplementedException();
+            IEnumerable<ParkingOccupationsViewModel> parkingOccupations = parkingOccupations = await this.repository.All<ParkingSpotOccupation>()
+                .Select(c => new ParkingOccupationsViewModel()
+                {
+                    ParkingSpotId = c.ParkingSpotId,
+                    VehicleLicensePlate = c.Vehicle.LicensePlate,
+                    VehicleOwnerEmail = c.Vehicle.Worker.UserName,
+                    VehicleOwnerFullName = $"{c.Vehicle.Worker.FirstName} {c.Vehicle.Worker.LastName}",
+                    EnterDateTime = c.EnterDateTime,
+                    ExitDateTime = c.ExitDateTime
+                })
+                .OrderByDescending(c => c.EnterDateTime)
+                .ToListAsync();
+
+            if (id != null)
+            {
+                parkingOccupations = parkingOccupations.Where(c => c.ParkingSpotId == id).ToList();
+            }
+
+            return parkingOccupations;
         }
 
         public Task KickUserFromParkingSpot(int id)

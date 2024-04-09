@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ParkingOccupationsViewModel>
+
+
+<body style="background-color: #4C98CF">
+    <h1 style="color: #CCE5EA">Parking Occupations History</h1>
+    <br />
+    <table class="table table-borderless" style="border: none; box-shadow: none; color: #CCE5EA">
+        <thead>
+            <tr>
+                <th scope="col" style="color: #CCE5EA">Spot Id</th>
+                <th scope="col" style="color: #CCE5EA">License Plate</th>
+                <th scope="col" style="color: #CCE5EA">Vehicle Owner Email</th>
+                <th scope="col" style="color: #CCE5EA">Vehicle Owner FullName</th>
+                <th scope="col" style="color: #CCE5EA">Enter DateTime</th>
+                <th scope="col" style="color: #CCE5EA">Exit DateTime</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count() > 0)
+            {
+                @foreach (var occupation in Model)
+                {
+                    <tr>
+                        <td style="font-size: 18px; color: #CCE5EA">@occupation.ParkingSpotId</td>
+                        <td style="font-size: 18px; color: #CCE5EA">@occupation.VehicleLicensePlate</td>
+                        <td style="font-size: 18px; color: #CCE5EA">@occupation.VehicleOwnerEmail</td>
+                        <td style="font-size: 18px; color: #CCE5EA">@occupation.VehicleOwnerFullName</td>
+                        <td style="font-size: 18px; color: #CCE5EA">@occupation.EnterDateTime.ToString("dd.MM.yyyy HH:mm:ss")</td>
+                        <td style="font-size: 18px; color: #CCE5EA">@(occupation.ExitDateTime.HasValue ? occupation.ExitDateTime.Value.ToString("dd.MM.yyyy HH:mm:ss") : "N/A")</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <p>There Is No Activity In The Parking Spot</p>
+            }
+        </tbody>
+    </table>
+</body>

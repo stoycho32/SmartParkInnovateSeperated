@@ -1,4 +1,5 @@
 ﻿using SmartParkInnovate.Core.Models.ParkingSpot;
+using SmartParkInnovate.Core.Models.ParkingSpotOccupationModel;
 
 namespace SmartParkInnovate.Core.Contracts.AdminServiceContracts
 {
@@ -8,7 +9,7 @@ namespace SmartParkInnovate.Core.Contracts.AdminServiceContracts
 
         public Task AddParkingSpot();
 
-        public Task AllOccupations(int? id);
+        public Task<IEnumerable<ParkingOccupationsViewModel>> AllOccupations(int? id);
 
         public Task KickUserFromParkingSpot(int id);
 
