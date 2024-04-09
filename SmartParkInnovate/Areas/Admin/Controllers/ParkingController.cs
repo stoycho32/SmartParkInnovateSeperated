@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SmartParkInnovate.Core.Contracts.AdminServiceContracts.AdminParkingService;
+using SmartParkInnovate.Core.Contracts.AdminServiceContracts;
 using SmartParkInnovate.Core.Models.ParkingSpot;
 
 namespace SmartParkInnovate.Areas.Admin.Controllers

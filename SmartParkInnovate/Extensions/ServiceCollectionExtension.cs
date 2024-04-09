@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SmartParkInnovate.Core.Contracts;
-using SmartParkInnovate.Core.Contracts.AdminServiceContracts.AdminParkingService;
+using SmartParkInnovate.Core.Contracts.AdminServiceContracts;
 using SmartParkInnovate.Core.Services;
 using SmartParkInnovate.Core.Services.AdminService;
 using SmartParkInnovate.Data;

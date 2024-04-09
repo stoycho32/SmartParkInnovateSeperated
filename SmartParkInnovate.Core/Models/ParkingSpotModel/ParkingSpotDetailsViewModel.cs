@@ -1,4 +1,4 @@
-﻿using SmartParkInnovate.Core.Models.ParkingSpotOccupationsViewModel;
+﻿using SmartParkInnovate.Core.Models.ParkingSpotOccupationModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace SmartParkInnovate.Core.Models.ParkingSpot

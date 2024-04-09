@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SmartParkInnovate.Core.Contracts.AdminServiceContracts.AdminParkingService;
+using SmartParkInnovate.Core.Contracts.AdminServiceContracts;
 using SmartParkInnovate.Core.Models.ParkingSpot;
 using SmartParkInnovate.Infrastructure.Data.Models;
 using SmartParkInnovate.Infrastructure.Repository;
@@ -38,7 +38,7 @@ namespace SmartParkInnovate.Core.Services.AdminService
             await repository.SaveChangesAsync();
         }
 
-        public Task AllOccupations(int id)
+        public Task AllOccupations(int? id)
         {
             throw new NotImplementedException();
         }
