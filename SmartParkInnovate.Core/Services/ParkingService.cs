@@ -106,11 +106,6 @@ namespace SmartParkInnovate.Core.Services
                 throw new ArgumentException(string.Format(InvalidWorkerErrorMessage));
             }
 
-            if (!parkingSpot.IsEnabled)
-            {
-                throw new InvalidOperationException(ParkingSpotIsDisabledErrorMessage);
-            }
-
             if (!parkingSpot.IsOccupied)
             {
                 throw new InvalidOperationException(string.Format(ParkingSpotNotOccupiedErrorMessage));
