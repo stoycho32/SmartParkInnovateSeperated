@@ -52,7 +52,7 @@ namespace SmartParkInnovate.Core.Services
         {
             VehicleDetailsViewModel? model = await this.repository.AllAsReadOnly<Vehicle>()
                 .AsSplitQuery()
-                .Where(c => c.Id == id)
+                .Where(c => c.Id == id && c.IsDeleted == false)
                 .Select(c => new VehicleDetailsViewModel()
                 {
                     Make = c.Make,
