@@ -23,6 +23,14 @@ namespace SmartParkInnovate.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> KickUserFromSpot(int id)
+        {
+            await this.adminParkingService.KickUserFromParkingSpot(id);
+
+            return RedirectToAction(nameof(ParkingSpots));
+        }
+
+        [HttpGet]
         public async Task<IActionResult> AddParkingSpot()
         {
             await this.adminParkingService.AddParkingSpot();

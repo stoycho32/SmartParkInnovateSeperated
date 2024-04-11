@@ -70,9 +70,30 @@ namespace SmartParkInnovate.Core.Services.AdminService
             return parkingOccupations;
         }
 
-        public Task KickUserFromParkingSpot(int id)
+        public async Task KickUserFromParkingSpot(int id)
         {
-            throw new NotImplementedException();
+            ParkingSpot? parkingSpot = await this.repository.All<ParkingSpot>()
+                .Include(c => c.ParkingSpotOccupations)
+                .Where(c => c.Id == id)
+                .FirstOrDefaultAsync();
+
+            ParkingSpotOccupation? occupation
+                = parkingSpot.ParkingSpotOccupations.FirstOrDefault(c => c.ExitDateTime == null);
+
+            if (parkingSpot == null)
+            {
+                throw new ArgumentException(string.Format(InvalidParkingSpotErrorMessage));
+            }
+
+            if (occupation == null)
+            {
+                throw new InvalidOperationException(ParkingSpotNotOccupiedErrorMessage);
+            }
+
+            occupation.ExitDateTime = DateTime.Now;
+            parkingSpot.IsOccupied = false;
+
+            await this.repository.SaveChangesAsync();
         }
 
         public async Task EnableParkingSpot(int id)
