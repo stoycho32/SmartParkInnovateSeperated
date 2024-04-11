@@ -5,6 +5,8 @@
     <div class="container">
         <h3 style="color: #CCE5EA">Parking Spots</h3>
         <br />
+        <a asp-area="Admin" asp-controller="Parking" asp-action="AddParkingSpot" class="btn btn-success p-3 fw-bold rounded-pill" style="background-color: #3BBD6E; width: 200px; height: 40px; border: none; box-shadow: none; display: flex; justify-content: center; align-items: center;">Add Parking Spot</a>
+        <br />
         @if (Model.Count() > 0)
         {
             @foreach (var spot in @Model)
