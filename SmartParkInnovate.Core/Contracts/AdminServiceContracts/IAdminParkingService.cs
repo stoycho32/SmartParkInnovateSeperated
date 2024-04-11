@@ -8,11 +8,9 @@ namespace SmartParkInnovate.Core.Contracts.AdminServiceContracts
 
         public Task AddParkingSpot();
 
-        public Task<IEnumerable<ParkingOccupationsAdminViewModel>> AllOccupations(int? id);
+        public Task<IEnumerable<ParkingOccupationsAdminViewModel>> AllOccupations(int? id, string? licensePlate, string? userEmail);
 
         public Task KickUserFromParkingSpot(int id);
-
-        public Task DeleteParkingSpotOccupation(int id);
 
         public Task EnableParkingSpot(int id);
 

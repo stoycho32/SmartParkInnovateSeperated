@@ -37,9 +37,8 @@ namespace SmartParkInnovate.Core.Services.AdminService
             await repository.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<ParkingOccupationsAdminViewModel>> AllOccupations(int? id)
+        public async Task<IEnumerable<ParkingOccupationsAdminViewModel>> AllOccupations(int? id, string? licensePlate, string? userEmail)
         {
-            //To Implement Additional filtering tomorrow
             IEnumerable<ParkingOccupationsAdminViewModel> parkingOccupations = parkingOccupations = await this.repository.All<ParkingSpotOccupation>()
                 .Select(c => new ParkingOccupationsAdminViewModel()
                 {
@@ -58,15 +57,20 @@ namespace SmartParkInnovate.Core.Services.AdminService
                 parkingOccupations = parkingOccupations.Where(c => c.ParkingSpotId == id).ToList();
             }
 
+            if (licensePlate != null)
+            {
+                parkingOccupations = parkingOccupations.Where(c => c.VehicleLicensePlate.Contains(licensePlate));
+            }
+
+            if (userEmail != null)
+            {
+                parkingOccupations = parkingOccupations.Where(c => c.VehicleOwnerEmail.Contains(userEmail));
+            }
+
             return parkingOccupations;
         }
 
         public Task KickUserFromParkingSpot(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task DeleteParkingSpotOccupation(int id)
         {
             throw new NotImplementedException();
         }

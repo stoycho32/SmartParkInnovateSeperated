@@ -23,9 +23,9 @@ namespace SmartParkInnovate.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ParkingOccupations(int? id)
+        public async Task<IActionResult> ParkingOccupations(int? id, string? licensePlate, string? userEmail)
         {
-            IEnumerable<ParkingOccupationsAdminViewModel> occupations = await this.adminParkingService.AllOccupations(id);
+            IEnumerable<ParkingOccupationsAdminViewModel> occupations = await this.adminParkingService.AllOccupations(id, licensePlate, userEmail);
 
             return View(occupations);
         }
