@@ -62,7 +62,7 @@ namespace SmartParkInnovate.Core.Services
         {
             PostDetailModel? postModel = await this.repository.AllAsReadOnly<Post>()
                 .AsSplitQuery()
-                .Where(c => c.Id == postId)
+                .Where(c => c.Id == postId && c.IsDeleted == false)
                 .Select(c => new PostDetailModel()
                 {
                     CurrentUser = userId,
