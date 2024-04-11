@@ -116,6 +116,11 @@ namespace SmartParkInnovate.Core.Services
                 throw new ArgumentException(string.Format(InvalidWorkerErrorMessage));
             }
 
+            if (postToEdit.IsDeleted)
+            {
+                throw new ArgumentException(string.Format(PostIsDeletedErrorMessage));
+            }
+
             PostLike? existingLike = post.Likes.FirstOrDefault(c => c.WorkerId == userId && c.PostId == post.Id);
 
             if (existingLike != null)
@@ -154,6 +159,11 @@ namespace SmartParkInnovate.Core.Services
                 throw new ArgumentException(string.Format(InvalidWorkerErrorMessage));
             }
 
+            if (postToEdit.IsDeleted)
+            {
+                throw new ArgumentException(string.Format(PostIsDeletedErrorMessage));
+            }
+
             PostComment postComment = new PostComment()
             {
                 CommentBody = comment.CommentBody,
@@ -176,6 +186,11 @@ namespace SmartParkInnovate.Core.Services
                 throw new ArgumentException(string.Format(InvalidPostErrorMessage));
             }
 
+            if (postToEdit.IsDeleted)
+            {
+                throw new ArgumentException(string.Format(PostIsDeletedErrorMessage));
+            }
+
             postToEdit.PostBody = model.PostBody;
             await this.repository.SaveChangesAsync();
         }
@@ -189,7 +204,7 @@ namespace SmartParkInnovate.Core.Services
                 throw new ArgumentException(string.Format(InvalidPostErrorMessage));
             }
 
-            if (post.IsDeleted == true)
+            if (post.IsDeleted)
             {
                 throw new ArgumentException(string.Format(PostIsDeletedErrorMessage));
             }
