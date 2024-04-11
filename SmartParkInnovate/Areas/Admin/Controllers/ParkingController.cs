@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SmartParkInnovate.Core.Contracts.AdminServiceContracts;
-using SmartParkInnovate.Core.Models.ParkingSpot;
-using SmartParkInnovate.Core.Models.ParkingSpotOccupationModel;
+using SmartParkInnovate.Core.Models.AdminModels.AdminParkingModels;
 
 namespace SmartParkInnovate.Areas.Admin.Controllers
 {
@@ -18,7 +17,7 @@ namespace SmartParkInnovate.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> ParkingSpots()
         {
-            List<ParkingSpotViewModel> parkingSpots = await this.adminParkingService.ParkingSpots();
+            List<ParkingSpotAdminViewModel> parkingSpots = await this.adminParkingService.ParkingSpots();
 
             return View(parkingSpots);
         }
@@ -26,7 +25,7 @@ namespace SmartParkInnovate.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> ParkingOccupations(int? id)
         {
-            IEnumerable<ParkingOccupationsViewModel> occupations = await this.adminParkingService.AllOccupations(id);
+            IEnumerable<ParkingOccupationsAdminViewModel> occupations = await this.adminParkingService.AllOccupations(id);
 
             return View(occupations);
         }

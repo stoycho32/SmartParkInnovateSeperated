@@ -1,9 +1,9 @@
 ﻿using SmartParkInnovate.Infrastructure.Data.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace SmartParkInnovate.Core.Models.ParkingSpotOccupationModel
+namespace SmartParkInnovate.Core.Models.AdminModels.AdminParkingModels
 {
-    public class ParkingOccupationsViewModel
+    public class ParkingOccupationsAdminViewModel
     {
         [Required]
         public int ParkingSpotId { get; set; }

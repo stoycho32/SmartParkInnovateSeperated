@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartParkInnovate.Core.Contracts.AdminServiceContracts;
-using SmartParkInnovate.Core.Models.ParkingSpot;
-using SmartParkInnovate.Core.Models.ParkingSpotOccupationModel;
+using SmartParkInnovate.Core.Models.AdminModels.AdminParkingModels;
 using SmartParkInnovate.Infrastructure.Data.Models;
 using SmartParkInnovate.Infrastructure.Repository;
 using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages.ParkingSpotErrorMessages;
@@ -17,10 +16,10 @@ namespace SmartParkInnovate.Core.Services.AdminService
             this.repository = repository;
         }
 
-        public async Task<List<ParkingSpotViewModel>> ParkingSpots()
+        public async Task<List<ParkingSpotAdminViewModel>> ParkingSpots()
         {
-            List<ParkingSpotViewModel> spots = await repository.AllAsReadOnly<ParkingSpot>()
-                .Select(c => new ParkingSpotViewModel()
+            List<ParkingSpotAdminViewModel> spots = await repository.AllAsReadOnly<ParkingSpot>()
+                .Select(c => new ParkingSpotAdminViewModel()
                 {
                     Id = c.Id,
                     IsOccupied = c.IsOccupied,
@@ -38,10 +37,11 @@ namespace SmartParkInnovate.Core.Services.AdminService
             await repository.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<ParkingOccupationsViewModel>> AllOccupations(int? id)
+        public async Task<IEnumerable<ParkingOccupationsAdminViewModel>> AllOccupations(int? id)
         {
-            IEnumerable<ParkingOccupationsViewModel> parkingOccupations = parkingOccupations = await this.repository.All<ParkingSpotOccupation>()
-                .Select(c => new ParkingOccupationsViewModel()
+            //To Implement Additional filtering tomorrow
+            IEnumerable<ParkingOccupationsAdminViewModel> parkingOccupations = parkingOccupations = await this.repository.All<ParkingSpotOccupation>()
+                .Select(c => new ParkingOccupationsAdminViewModel()
                 {
                     ParkingSpotId = c.ParkingSpotId,
                     VehicleLicensePlate = c.Vehicle.LicensePlate,

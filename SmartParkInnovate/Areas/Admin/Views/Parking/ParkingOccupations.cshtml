@@ -1,8 +1,14 @@
-﻿@model IEnumerable<ParkingOccupationsViewModel>
-
+﻿@model IEnumerable<ParkingOccupationsAdminViewModel>
 
 <body style="background-color: #4C98CF">
     <h1 style="color: #CCE5EA">Parking Occupations History</h1>
+    <br />
+    <form asp-action="ParkingOccupations" method="GET" style="display: flex; flex-direction: row;">
+        <input type="number" id="id" name="id" class="form-control" style="background-color: #CCE5EA; width: 200px; height: 40px; margin-right: 10px" placeholder="Parking Spot Id">
+        <input type="text" id="licensePlate" name="licensePlate" class="form-control" style="background-color: #CCE5EA; width: 200px; height: 40px; margin-right: 10px" placeholder="License Plate">
+        <input type="text" id="userEmail" name="userEmail" class="form-control" style="background-color: #CCE5EA; width: 200px; height: 40px; margin-right: 10px" placeholder="User Email">
+        <button class="btn btn-success p-3 fw-bold rounded-pill" style="background-color: #3BBD6E; width: 100px; height: 40px; border: none; box-shadow: none; display: flex; justify-content: center; align-items: center;" type="submit">Filter</button>
+    </form>
     <br />
     <table class="table table-borderless" style="border: none; box-shadow: none; color: #CCE5EA">
         <thead>
@@ -32,7 +38,7 @@
             }
             else
             {
-                <p>There Is No Activity In The Parking Spot</p>
+                <p style="color: #CCE5EA">There Is No Activity In The Parking Spot</p>
             }
         </tbody>
     </table>
