@@ -97,6 +97,7 @@ namespace SmartParkInnovate.Core.Services
             return postModel;
         }
 
+
         public async Task LikePost(int postId, string userId)
         {
             Post? post = await this.repository.All<Post>()
@@ -116,7 +117,7 @@ namespace SmartParkInnovate.Core.Services
                 throw new ArgumentException(string.Format(InvalidWorkerErrorMessage));
             }
 
-            if (postToEdit.IsDeleted)
+            if (post.IsDeleted)
             {
                 throw new ArgumentException(string.Format(PostIsDeletedErrorMessage));
             }
@@ -143,6 +144,7 @@ namespace SmartParkInnovate.Core.Services
             }
         }
 
+
         public async Task Comment(int postId, string userId, CommentFormModel comment)
         {
             Post? post = await this.repository.GetByIdAsync<Post>(postId);
@@ -159,7 +161,7 @@ namespace SmartParkInnovate.Core.Services
                 throw new ArgumentException(string.Format(InvalidWorkerErrorMessage));
             }
 
-            if (postToEdit.IsDeleted)
+            if (post.IsDeleted)
             {
                 throw new ArgumentException(string.Format(PostIsDeletedErrorMessage));
             }
