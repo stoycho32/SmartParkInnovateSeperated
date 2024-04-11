@@ -60,7 +60,7 @@ namespace SmartParkInnovate.Core.Services
 
             vehicle = worker.Vehicles.FirstOrDefault(c => c.LicensePlate == vehicleModel.LicensePlate);
 
-            if (vehicle == null)
+            if (vehicle == null || vehicle.IsDeleted == true)
             {
                 throw new ArgumentException(string.Format(InvalidVehicleErrorMessage));
             }
