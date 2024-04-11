@@ -25,8 +25,5 @@ namespace SmartParkInnovate.Core.Models.VehicleModel
         [Required]
         [LicensePlateFormat]
         public string LicensePlate { get; set; } = null!;
-
-        [Required]
-        public string WorkerUserName { get; set; } = null!;
     }
 }

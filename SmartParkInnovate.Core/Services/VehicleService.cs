@@ -92,8 +92,7 @@ namespace SmartParkInnovate.Core.Services
                     Id = c.Id,
                     Make = c.Make,
                     Model = c.Model,
-                    LicensePlate = c.LicensePlate,
-                    WorkerUserName = c.Worker.UserName,
+                    LicensePlate = c.LicensePlate
                 })
                 .ToListAsync();
 
