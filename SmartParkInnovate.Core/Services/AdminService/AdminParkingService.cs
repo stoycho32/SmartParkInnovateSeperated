@@ -59,12 +59,12 @@ namespace SmartParkInnovate.Core.Services.AdminService
 
             if (licensePlate != null)
             {
-                parkingOccupations = parkingOccupations.Where(c => c.VehicleLicensePlate.Contains(licensePlate));
+                parkingOccupations = parkingOccupations.Where(c => c.VehicleLicensePlate.Contains(licensePlate)).ToList();
             }
 
             if (userEmail != null)
             {
-                parkingOccupations = parkingOccupations.Where(c => c.VehicleOwnerEmail.Contains(userEmail));
+                parkingOccupations = parkingOccupations.Where(c => c.VehicleOwnerEmail.Contains(userEmail)).ToList();
             }
 
             return parkingOccupations;
