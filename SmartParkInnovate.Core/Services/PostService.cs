@@ -75,7 +75,7 @@ namespace SmartParkInnovate.Core.Services
                         PostDate = c.PostDate,
                         LikesCount = c.Likes.Count(),
                         CommentsCount = c.Comments.Count(),
-                        PostComments = c.Comments.Select(c => new CommentViewModel()
+                        PostComments = c.Comments.Where(c => c.IsDeleted == false).Select(c => new CommentViewModel()
                         {
                             WorkerUsername = c.Worker.UserName,
                             CommentBody = c.CommentBody,
