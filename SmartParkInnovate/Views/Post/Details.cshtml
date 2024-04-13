@@ -3,7 +3,7 @@
 
 
 <body style="background-color: #4C98CF">
-    <div class="card text-left" style="background-color: #41CAC6; border-radius: 30px;">
+    <div class="card text-left" style="background-color: #41CAC6; border-radius: 25px;">
         <div class="card-header d-flex justify-content-between align-items-center" style="color: #CCE5EA; font-size: 20px">
             <span>@Model.PostDetailViewModel.WorkerUsername</span>
             @if (Model.CurrentUser == Model.PostDetailViewModel.WorkerId)
@@ -50,13 +50,13 @@
         </div>
     </div>
     <br />
-    <div class="card text-left" style="background-color: #41CAC6">
+    <div class="card text-left" style="background-color: #41CAC6; border-radius: 25px;">
         <div class="card-header" style="color: #CCE5EA">
             Comments
         </div>
         @foreach (var commentedUser in Model.PostDetailViewModel.PostComments)
         {
-            <div class="card" style="background-color: #41CAC6; border-radius: 30px;">
+            <div class="card" style="background-color: #41CAC6; border-radius: 25px;">
                 <div class="card-body">
                     <blockquote class="blockquote mb-0">
                         <p style="color: #CCE5EA">@commentedUser.CommentBody</p>
