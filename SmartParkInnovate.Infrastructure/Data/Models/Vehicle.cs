@@ -22,7 +22,7 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
 
         [Required]
         [StringLength(VehicleMakeMaxLength,
-            MinimumLength = VehicleMakeMinLength)]
+            MinimumLength = VehicleMakeMinLength, ErrorMessage = VehicleMakeLengthErrorMessage)]
         public string Make { get; set; } = null!;
 
 
