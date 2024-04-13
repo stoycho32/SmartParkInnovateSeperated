@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartParkInnovate.Core.Contracts.AdminServiceContracts;
+using SmartParkInnovate.Core.Models.AdminModels.AdminCommentModel;
 using SmartParkInnovate.Core.Models.AdminModels.AdminPostModels;
 using SmartParkInnovate.Infrastructure.Data.Models;
 using SmartParkInnovate.Infrastructure.Repository;
@@ -72,12 +73,29 @@ namespace SmartParkInnovate.Core.Services.AdminService
            await this.repository.SaveChangesAsync();
         }
 
-        public Task DeleteComment(int id)
+        public async Task<IEnumerable<AdminCommentViewModel>> Comments()
+        {
+            IEnumerable<AdminCommentViewModel> comments = await this.repository.AllAsReadOnly<PostComment>()
+                .Select(c => new AdminCommentViewModel()
+                {
+                    WorkerUsername = c.Worker.UserName,
+                    CommentBody = c.CommentBody,
+                    CommentDate = c.CommentDate,
+                    IsDeleted = c.IsDeleted,
+                    WorkerId = c.WorkerId,
+                    PostId = c.PostId
+                })
+                .ToListAsync();
+
+            return comments;
+        }
+
+        public Task DeleteComment(string workerId, int postId, DateTime commentDate)
         {
             throw new NotImplementedException();
         }
 
-        public Task ReturnComment(int id)
+        public Task ReturnComment(string workerId, int postId, DateTime commentDate)
         {
             throw new NotImplementedException();
         }

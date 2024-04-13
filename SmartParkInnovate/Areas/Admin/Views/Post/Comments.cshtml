@@ -1,16 +1,16 @@
-﻿@model IEnumerable<AdminPostViewModel>
+﻿@model IEnumerable<AdminCommentViewModel>
 
 
 <body style="background-color: #4C98CF">
     @if (Model.Count() > 0)
     {
-        @foreach (var post in Model)
+        @foreach (var comment in Model)
         {
             <div class="card" style="border-radius: 30px; background-color: #41CAC6;">
                 <div class="card-header d-flex justify-content-between align-items-center" style="color: #CCE5EA">
                     <div>
-                        @post.PostDate
-                        @if (post.IsDeleted == true)
+                        @comment.CommentDate
+                        @if (comment.IsDeleted == true)
                         {
                             <span>(Deleted)</span>
                         }
@@ -21,21 +21,17 @@
                                 ☰
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="PostOptions" style="border-radius: 15px; background-color: #41CAC6; border: 2px solid #4C98CF; box-shadow: none;">
-                                <li>
-                                    <a asp-area="Admin" asp-controller="Post" asp-action="Comments" class="btn btn-link btn-sm"
-                                       style="color: #CCE5EA; font-size: 18px; text-decoration: none; border: none; box-shadow: none">Edit Comments</a>
-                                </li>
-                                @if (post.IsDeleted == false)
+                                @if (comment.IsDeleted == false)
                                 {
                                     <li>
-                                        <a asp-area="Admin" asp-controller="Post" asp-action="DeletePost" asp-route-id="@post.Id" class="btn btn-link btn-sm"
-                                           style="color: #CCE5EA; font-size: 18px; text-decoration: none; border: none; box-shadow: none">Delete Post</a>
+                                        <a asp-area="Admin" asp-controller="Post" asp-action="DeleteComment" asp-route-workerId="@comment.WorkerId" asp-route-postId="@comment.PostId" asp-route-commentDate="@comment.CommentDate" class="btn btn-link btn-sm"
+                                           style="color: #CCE5EA; font-size: 18px; text-decoration: none; border: none; box-shadow: none">Delete Comment</a>
                                     </li>
                                 }
                                 else
                                 {
                                     <li>
-                                        <a asp-area="Admin" asp-controller="Post" asp-action="ReturnPost" asp-route-id="@post.Id" class="btn btn-link btn-sm"
+                                        <a asp-area="Admin" asp-controller="Post" asp-action="ReturnComment" asp-route-workerId="@comment.WorkerId" asp-route-postId="@comment.PostId" asp-route-commentDate="@comment.CommentDate" class="btn btn-link btn-sm"
                                            style="color: #CCE5EA; font-size: 18px; text-decoration: none; border: none; box-shadow: none">Return Comment</a>
                                     </li>
                                 }
@@ -44,14 +40,14 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title" style="color: #CCE5EA">@post.WorkerUserName</h5>
-                    <p class="card-text" style="color: #CCE5EA">@post.PostBody</p>
+                    <h5 class="card-title" style="color: #CCE5EA">@comment.WorkerUsername</h5>
+                    <p class="card-text" style="color: #CCE5EA">@comment.CommentBody</p>
                 </div>
             </div>
         }
     }
     else
     {
-        <p style="color: #CCE5EA">There Are No Posts Available</p>
+        <p style="color: #CCE5EA">There Are No Comments Available</p>
     }
 </body>

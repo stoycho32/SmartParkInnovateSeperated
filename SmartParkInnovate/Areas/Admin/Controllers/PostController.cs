@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SmartParkInnovate.Core.Contracts.AdminServiceContracts;
+using SmartParkInnovate.Core.Models.AdminModels.AdminCommentModel;
 using SmartParkInnovate.Core.Models.AdminModels.AdminPostModels;
 
 namespace SmartParkInnovate.Areas.Admin.Controllers
@@ -35,6 +36,14 @@ namespace SmartParkInnovate.Areas.Admin.Controllers
             await this.adminPostService.ReturnPost(id);
 
             return RedirectToAction(nameof(Posts));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Comments()
+        {
+            IEnumerable<AdminCommentViewModel> comments = await this.adminPostService.Comments();
+
+            return View(comments);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using SmartParkInnovate.Core.Models.AdminModels.AdminPostModels;
+﻿using SmartParkInnovate.Core.Models.AdminModels.AdminCommentModel;
+using SmartParkInnovate.Core.Models.AdminModels.AdminPostModels;
 
 namespace SmartParkInnovate.Core.Contracts.AdminServiceContracts
 {
@@ -10,8 +11,10 @@ namespace SmartParkInnovate.Core.Contracts.AdminServiceContracts
 
         public Task ReturnPost(int id);
 
-        public Task DeleteComment(int id);
+        public Task<IEnumerable<AdminCommentViewModel>> Comments();
 
-        public Task ReturnComment(int id);
+        public Task DeleteComment(string workerId, int postId, DateTime commentDate);
+
+        public Task ReturnComment(string workerId, int postId, DateTime commentDate);
     }
 }
