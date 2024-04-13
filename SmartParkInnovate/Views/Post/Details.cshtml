@@ -23,11 +23,11 @@
                         <div class="d-flex">
                             <button type="submit" class="btn btn-link btn-sm"
                                     style="color: #CCE5EA; font-size: 18px; text-decoration: none; border: none; box-shadow: none">
-                                @Model.PostDetailViewModel.LikesCount
+                                👍🏻
                             </button>
                             <div class="dropdown">
                                 <button class="btn btn-link btn-sm dropdown-toggle-split" style="color: #CCE5EA; font-size: 18px; text-decoration: none; border: none; box-shadow: none;" type="button" id="likesDropDowmMenu" data-bs-toggle="dropdown">
-                                    Likes
+                                    @Model.PostDetailViewModel.LikesCount Likes
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="likesDropDowmMenu">
                                     @foreach (var like in Model.PostDetailViewModel.PostLikes)
