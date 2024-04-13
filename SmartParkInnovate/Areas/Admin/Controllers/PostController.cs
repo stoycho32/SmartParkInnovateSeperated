@@ -20,5 +20,21 @@ namespace SmartParkInnovate.Areas.Admin.Controllers
 
             return View(posts);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> DeletePost(int id)
+        {
+            await this.adminPostService.DeletePost(id);
+
+            return RedirectToAction(nameof(Posts));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ReturnPost(int id)
+        {
+            await this.adminPostService.ReturnPost(id);
+
+            return RedirectToAction(nameof(Posts));
+        }
     }
 }

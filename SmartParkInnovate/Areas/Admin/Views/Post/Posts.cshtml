@@ -8,13 +8,19 @@
         {
             <div class="card" style="border-radius: 30px; background-color: #41CAC6;">
                 <div class="card-header d-flex justify-content-between align-items-center" style="color: #CCE5EA">
-                    <div>@post.PostDate</div>
+                    <div>
+                        @post.PostDate
+                        @if (post.IsDeleted == true)
+                        {
+                            <span>(Deleted)</span>
+                        }
+                    </div>
                     <div class="d-flex">
                         <div class="dropdown">
                             <button class="btn btn-link btn-sm dropdown-toggle-split" style="color: #CCE5EA; font-size: 25px; text-decoration: none; border: none; box-shadow: none;" type="button" id="likesDropDowmMenu" data-bs-toggle="dropdown">
                                 ☰
                             </button>
-                            <ul class="dropdown-menu" aria-labelledby="PostOptions" style="border-radius: 15px; background-color: #41CAC6; border: none; box-shadow: none;">
+                            <ul class="dropdown-menu" aria-labelledby="PostOptions" style="border-radius: 15px; background-color: #41CAC6; border: 2px solid #4C98CF; box-shadow: none;">
                                 <li>
                                     <a asp-area="Admin" asp-controller="Post" asp-action="EditPost" asp-route-id="@post.Id" class="btn btn-link btn-sm"
                                        style="color: #CCE5EA; font-size: 18px; text-decoration: none; border: none; box-shadow: none">Edit Post</a>

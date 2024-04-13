@@ -5,5 +5,13 @@ namespace SmartParkInnovate.Core.Contracts.AdminServiceContracts
     public interface IAdminPostService
     {
         public Task<IEnumerable<AdminPostViewModel>> Posts();
+
+        public Task DeletePost(int id);
+
+        public Task ReturnPost(int id);
+
+        public Task DeleteComment(int id);
+
+        public Task ReturnComment(int id);
     }
 }
