@@ -14,6 +14,13 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            services.AddScoped<IParkingService, ParkingService>();
+            services.AddScoped<IVehicleService, VehicleService>();
+            services.AddScoped<IPostService, PostService>();
+            services.AddScoped<IAdminParkingService, AdminParkingService>();
+            services.AddScoped<IAdminVehicleService, AdminVehicleService>();
+            services.AddScoped<IAdminPostService, AdminPostService>();
+
             return services;
         }
 
@@ -24,13 +31,6 @@ namespace Microsoft.Extensions.DependencyInjection
                 options.UseSqlServer(connectionString));
 
             services.AddScoped<IRepository, Repository>();
-
-            services.AddScoped<IParkingService, ParkingService>();
-            services.AddScoped<IVehicleService, VehicleService>();
-            services.AddScoped<IPostService, PostService>();
-            services.AddScoped<IAdminParkingService, AdminParkingService>();
-            services.AddScoped<IAdminVehicleService, AdminVehicleService>();
-
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
