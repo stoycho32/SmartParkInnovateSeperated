@@ -87,6 +87,7 @@ namespace SmartParkInnovate.Core.Services
                         }).ToList()
                     }
                 })
+                .OrderByDescending(c => c.PostDetailViewModel.PostDate)
                 .FirstOrDefaultAsync();
 
             if (postModel == null)
@@ -96,7 +97,6 @@ namespace SmartParkInnovate.Core.Services
 
             return postModel;
         }
-
 
         public async Task LikePost(int postId, string userId)
         {
@@ -143,7 +143,6 @@ namespace SmartParkInnovate.Core.Services
                 await this.repository.SaveChangesAsync();
             }
         }
-
 
         public async Task Comment(int postId, string userId, CommentFormModel comment)
         {
