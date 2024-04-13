@@ -37,12 +37,20 @@
                         {
                             <td style="font-size: 18px; color: #CCE5EA">
                                 <a asp-area="Admin" asp-controller="Vehicle" asp-action="ReturnVehicle" asp-route-id="@vehicle.Id" class="btn btn-success p-3 fw-bold rounded-pill" style="width: 130px; background-color: #3BBD6E; width: 100px; height: 40px; border: none; box-shadow: none; display: flex; justify-content: center; align-items: center;">Return</a>
+                                <a asp-area="Admin" asp-controller="Vehicle" asp-action="VehicleDetails" asp-route-id="@vehicle.Id" class="btn btn-success p-3 fw-bold rounded-pill" style="width: 130px; background-color: #3BBD6E; width: 100px; height: 40px; border: none; box-shadow: none; display: flex; justify-content: center; align-items: center;">Details</a>
+                            </td>
+                            <td style="font-size: 18px; color: #CCE5EA">
+                                <a asp-area="Admin" asp-controller="Vehicle" asp-action="VehicleDetails" asp-route-id="@vehicle.Id" class="btn btn-success p-3 fw-bold rounded-pill" style="width: 130px; background-color: #3BBD6E; width: 100px; height: 40px; border: none; box-shadow: none; display: flex; justify-content: center; align-items: center;">Details</a>
                             </td>
                         }
                         else
                         {
                             <td style="font-size: 18px; color: #CCE5EA">
                                 <a asp-area="Admin" asp-controller="Vehicle" asp-action="DeleteVehicle" asp-route-id="@vehicle.Id" class="btn btn-success p-3 fw-bold rounded-pill" style="width: 130px; background-color: #ED4366; width: 100px; height: 40px; border: none; box-shadow: none; display: flex; justify-content: center; align-items: center;">Delete</a>
+                                <a asp-area="Admin" asp-controller="Vehicle" asp-action="VehicleDetails" asp-route-id="@vehicle.Id" class="btn btn-success p-3 fw-bold rounded-pill" style="width: 130px; background-color: #3BBD6E; width: 100px; height: 40px; border: none; box-shadow: none; display: flex; justify-content: center; align-items: center;">Details</a>
+                            </td>
+                            <td style="font-size: 18px; color: #CCE5EA">
+                                <a asp-area="Admin" asp-controller="Vehicle" asp-action="VehicleDetails" asp-route-id="@vehicle.Id" class="btn btn-success p-3 fw-bold rounded-pill" style="width: 130px; background-color: #3BBD6E; width: 100px; height: 40px; border: none; box-shadow: none; display: flex; justify-content: center; align-items: center;">Details</a>
                             </td>
                         }
                     </tr>
