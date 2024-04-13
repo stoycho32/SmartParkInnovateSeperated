@@ -78,14 +78,45 @@ namespace SmartParkInnovate.Core.Services.AdminService
             return vehicle;
         }
 
-        public Task RemoveVehicle()
+        public async Task ReturnVehicle(int id)
         {
-            throw new NotImplementedException();
+            Vehicle? vehicleToReturn = await this.repository.GetByIdAsync<Vehicle>(id);
+
+            if (vehicleToReturn == null)
+            {
+                throw new ArgumentException(string.Format(InvalidVehicleErrorMessage));
+            }
+
+            if (vehicleToReturn.IsDeleted == false)
+            {
+                throw new InvalidOperationException(string.Format(VehicleIsNotDeletedErrorMessage));
+            }
+
+            vehicleToReturn.IsDeleted = false;
+            vehicleToReturn.DeletedOn = null;
+
+            await this.repository.SaveChangesAsync();
         }
 
-        public Task ReturnVehicle()
+        public async Task RemoveVehicle(int id)
         {
-            throw new NotImplementedException();
+            Vehicle? vehicleToRemove = await this.repository.GetByIdAsync<Vehicle>(id);
+
+            if (vehicleToRemove == null)
+            {
+                throw new ArgumentException(string.Format(InvalidVehicleErrorMessage));
+            }
+
+            if (vehicleToRemove.IsDeleted == true)
+            {
+                throw new InvalidOperationException(string.Format(VehicleAlreadyDeletedErrorMessage));
+            }
+
+            vehicleToRemove.IsDeleted = true;
+            vehicleToRemove.DeletedOn = DateTime.Now;
+
+            await this.repository.SaveChangesAsync();
         }
+
     }
 }

@@ -8,8 +8,8 @@ namespace SmartParkInnovate.Core.Contracts.AdminServiceContracts
 
         public Task<AdminVehicleDetailsModel> Details(int id);
 
-        public Task RemoveVehicle();
+        public Task RemoveVehicle(int id);
 
-        public Task ReturnVehicle();
+        public Task ReturnVehicle(int id);
     }
 }
