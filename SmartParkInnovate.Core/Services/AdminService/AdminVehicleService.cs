@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartParkInnovate.Core.Contracts.AdminServiceContracts;
 using SmartParkInnovate.Core.Models.AdminModels.AdminVehicleModels;
+using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages.VehicleErrorMessages;
 using SmartParkInnovate.Infrastructure.Data.Models;
 using SmartParkInnovate.Infrastructure.Repository;
 
@@ -52,9 +53,29 @@ namespace SmartParkInnovate.Core.Services.AdminService
             return vehicles;
         }
 
-        public Task Details()
+        public async Task<AdminVehicleDetailsModel> Details(int id)
         {
-            throw new NotImplementedException();
+            AdminVehicleDetailsModel? vehicle = await this.repository.AllAsReadOnly<Vehicle>()
+                .Where(c => c.Id == id)
+                .Select(c => new AdminVehicleDetailsModel()
+                {
+                    Make = c.Make,
+                    Model = c.Model,
+                    LicensePlate = c.LicensePlate,
+                    OwnerEmail = c.Worker.UserName,
+                    OwnerFullName = $"{c.Worker.FirstName} {c.Worker.LastName}",
+                    OccupationsCount = c.ParkingSpotOccupations.Count(),
+                    IsDeleted = c.IsDeleted,
+                    DeletedOn = c.DeletedOn
+
+                }).FirstOrDefaultAsync();
+
+            if (vehicle == null)
+            {
+                throw new ArgumentException(string.Format(InvalidVehicleErrorMessage));
+            }
+
+            return vehicle;
         }
 
         public Task RemoveVehicle()

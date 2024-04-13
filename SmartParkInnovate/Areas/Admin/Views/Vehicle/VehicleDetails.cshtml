@@ -1,0 +1,18 @@
+﻿@model AdminVehicleDetailsModel
+
+
+<body style="background-color: #4C98CF">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4" style="color: #CCE5EA">Details</h1>
+            <h3 style="color: #CCE5EA">License Plate: @Model.LicensePlate</h3>
+            <p class="lead" style="color: #CCE5EA">Vehicle Make: @Model.Make</p>
+            <p class="lead" style="color: #CCE5EA">Vehicle Model: @Model.Model</p>
+            <p class="lead" style="color: #CCE5EA">Owner Email: @Model.OwnerEmail</p>
+            <p class="lead" style="color: #CCE5EA">Owner Full Name: @Model.OwnerFullName</p>
+            <p class="lead" style="color: #CCE5EA">Total Occupations: @Model.OccupationsCount</p>
+            <p class="lead" style="color: #CCE5EA">@(Model.IsDeleted == false ? "Vehicle Is Not Deleted" : "Vehicle Is Deleted")</p>
+            <p class="lead" style="color: #CCE5EA">Deletion Date: @(Model.DeletedOn.HasValue ? Model.DeletedOn.Value.ToString("dd.MM.yyyy HH:mm:ss") : "N/A")</p>
+        </div>
+    </div>
+</body>

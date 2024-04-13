@@ -6,7 +6,7 @@ namespace SmartParkInnovate.Core.Contracts.AdminServiceContracts
     {
         public Task<IEnumerable<AdminVehicleViewModel>> AllVehicles(string? licensePlate, string? ownerEmail, string? make, string? model);
 
-        public Task Details();
+        public Task<AdminVehicleDetailsModel> Details(int id);
 
         public Task RemoveVehicle();
 

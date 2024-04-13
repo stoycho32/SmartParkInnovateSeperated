@@ -20,5 +20,13 @@ namespace SmartParkInnovate.Areas.Admin.Controllers
 
             return View(vehicles);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> VehicleDetails(int id)
+        {
+            AdminVehicleDetailsModel model = await this.adminVehicleService.Details(id);
+
+            return View(model);
+        }
     }
 }
