@@ -29,5 +29,8 @@ namespace SmartParkInnovate.Core.Models.AdminModels.AdminVehicleModels
         [Required]
         [EmailAddress]
         public string OwnerEmail { get; set; } = null!;
+
+        [Required]
+        public bool IsDeleted { get; set; }
     }
 }

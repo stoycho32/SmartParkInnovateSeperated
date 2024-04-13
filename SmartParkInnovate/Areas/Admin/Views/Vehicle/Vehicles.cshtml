@@ -1,0 +1,57 @@
+﻿@model IEnumerable<AdminVehicleViewModel>
+
+<body style="background-color: #4C98CF">
+    <h1 style="color: #CCE5EA">Vehicles</h1>
+    <br />
+    <form asp-action="Vehicles" method="GET" style="display: flex; flex-direction: row;">
+        <input type="text" id="licensePlate" name="licensePlate" class="form-control" style="background-color: #CCE5EA; width: 200px; height: 40px; margin-right: 10px" placeholder="License Plate">
+        <input type="text" id="ownerEmail" name="ownerEmail" class="form-control" style="background-color: #CCE5EA; width: 200px; height: 40px; margin-right: 10px" placeholder="Owner Email">
+        <input type="text" id="make" name="make" class="form-control" style="background-color: #CCE5EA; width: 200px; height: 40px; margin-right: 10px" placeholder="Make">
+        <input type="text" id="model" name="model" class="form-control" style="background-color: #CCE5EA; width: 200px; height: 40px; margin-right: 10px" placeholder="Model">
+        <button class="btn btn-success p-3 fw-bold rounded-pill" style="background-color: #3BBD6E; width: 100px; height: 40px; border: none; box-shadow: none; display: flex; justify-content: center; align-items: center;" type="submit">Filter</button>
+    </form>
+    <br />
+    <table class="table table-borderless" style="border: none; box-shadow: none; color: #CCE5EA">
+        <thead>
+            <tr>
+                <th scope="col" style="color: #CCE5EA">Make</th>
+                <th scope="col" style="color: #CCE5EA">Model</th>
+                <th scope="col" style="color: #CCE5EA">License Plate</th>
+                <th scope="col" style="color: #CCE5EA">Owner Email</th>
+                <th scope="col" style="color: #CCE5EA">Is Deleted</th>
+                <th scope="col" style="color: #CCE5EA">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count() > 0)
+            {
+                @foreach (var vehicle in Model)
+                {
+                    <tr>
+                        <td style="font-size: 18px; color: #CCE5EA">@vehicle.Make</td>
+                        <td style="font-size: 18px; color: #CCE5EA">@vehicle.Model</td>
+                        <td style="font-size: 18px; color: #CCE5EA">@vehicle.LicensePlate</td>
+                        <td style="font-size: 18px; color: #CCE5EA">@vehicle.OwnerEmail</td>
+                        <td style="font-size: 18px; color: #CCE5EA">@(vehicle.IsDeleted == false ? "" : "X")</td>
+                        @if (vehicle.IsDeleted == true)
+                        {
+                            <td style="font-size: 18px; color: #CCE5EA">
+                                <a asp-area="Admin" asp-controller="Vehicle" asp-action="ReturnVehicle" asp-route-id="@vehicle.Id" class="btn btn-success p-3 fw-bold rounded-pill" style="width: 130px; background-color: #3BBD6E; width: 100px; height: 40px; border: none; box-shadow: none; display: flex; justify-content: center; align-items: center;">Return</a>
+                            </td>
+                        }
+                        else
+                        {
+                            <td style="font-size: 18px; color: #CCE5EA">
+                                <a asp-area="Admin" asp-controller="Vehicle" asp-action="DeleteVehicle" asp-route-id="@vehicle.Id" class="btn btn-success p-3 fw-bold rounded-pill" style="width: 130px; background-color: #ED4366; width: 100px; height: 40px; border: none; box-shadow: none; display: flex; justify-content: center; align-items: center;">Delete</a>
+                            </td>
+                        }
+                    </tr>
+                }
+            }
+            else
+            {
+                <p style="color: #CCE5EA">There Are No Vehicles</p>
+            }
+        </tbody>
+    </table>
+</body>

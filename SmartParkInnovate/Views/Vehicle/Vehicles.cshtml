@@ -15,7 +15,6 @@
                             <th scope="col">Vehicle Make</th>
                             <th scope="col">Vehicle Model</th>
                             <th scope="col">License Plate</th>
-                            <th scope="col">Owner</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -28,7 +27,6 @@
                                     <td>@vehicle.Make</td>
                                     <td>@vehicle.Model</td>
                                     <td>@vehicle.LicensePlate</td>
-                                    <td>@vehicle.WorkerUserName</td>
                                     <td>
                                         <a asp-controller="Vehicle" asp-action="Details" asp-route-id="@vehicle.Id" class="btn btn-success p-3 fw-bold rounded-pill d-flex justify-content-center align-items-center"
                                            style="width: 130px; height: 1px; background-color: #3BBD6E; border: none; box-shadow: none; line-height: normal; padding: 0;">Details</a>
