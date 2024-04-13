@@ -44,6 +44,11 @@ namespace SmartParkInnovate.Core.Services.AdminService
                 vehicles = vehicles.Where(c => c.Make.Contains(make)).ToList();
             }
 
+            if (model != null)
+            {
+                vehicles = vehicles.Where(c => c.Model.Contains(model)).ToList();
+            }
+
             return vehicles;
         }
 
