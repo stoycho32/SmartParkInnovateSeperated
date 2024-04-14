@@ -31,7 +31,7 @@ namespace SmartParkInnovate.Core.Services
                     PostBody = c.PostBody,
                     PostDate = c.PostDate,
                     LikesCount = c.Likes.Count(),
-                    CommentsCount = c.Comments.Count()
+                    CommentsCount = c.Comments.Where(c => c.IsDeleted == false).Count()
                 })
                 .ToListAsync();
 
