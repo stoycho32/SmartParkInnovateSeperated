@@ -162,7 +162,7 @@ namespace SmartParkInnovate.Core.Services
             return model;
         }
 
-        public async Task<IEnumerable<ParkingSpotViewModel>> All()
+        public async Task<IEnumerable<ParkingSpotViewModel>> ParkingSpots()
         {
             var parkingSpots = await this.repository.AllAsReadOnly<ParkingSpot>()
                 .AsNoTracking()

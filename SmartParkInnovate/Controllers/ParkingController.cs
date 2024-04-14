@@ -20,7 +20,7 @@ namespace SmartParkInnovate.Controllers
         [HttpGet]
         public async Task<IActionResult> ParkingSpots()
         {
-            IEnumerable<ParkingSpotViewModel> parkingSpots = await this.parkingService.All();
+            IEnumerable<ParkingSpotViewModel> parkingSpots = await this.parkingService.ParkingSpots();
             return View(parkingSpots);
         }
 
