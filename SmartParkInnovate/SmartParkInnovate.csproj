@@ -27,6 +27,11 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Comment\" />
+    <Folder Include="Instructions\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\InstructionPhotos\HowToUseSpot.png" />
   </ItemGroup>
 
 </Project>

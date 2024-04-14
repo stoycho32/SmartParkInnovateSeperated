@@ -175,5 +175,20 @@ namespace SmartParkInnovate.Core.Services
 
             return parkingSpots;
         }
+
+        public GeneralParkingInformationModel GeneralParkingSpotInformation()
+        {
+            int freeSpots =  repository.AllAsReadOnly<ParkingSpot>().Where(c => c.IsOccupied == false).Count();
+            int occupiedSpots = repository.AllAsReadOnly<ParkingSpot>().Where(c => c.IsOccupied == true).Count();
+            int totalSpots = repository.AllAsReadOnly<ParkingSpot>().Count();
+
+            GeneralParkingInformationModel generalInformationModel = new GeneralParkingInformationModel();
+
+            generalInformationModel.FreeParkingSpotsCount = freeSpots;
+            generalInformationModel.OccupiedParkingSpotsCount =  occupiedSpots;
+            generalInformationModel.TotalParkingSpotsCount = totalSpots;
+
+            return generalInformationModel;
+        }
     }
 }

@@ -1,10 +1,13 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
-
+﻿@model GeneralParkingInformationModel
 
 <body style="background-color: #4C98CF">
- <div class="text-center">
+    <div class="text-center">
         <h1 class="display-4" style="color: #CCE5EA">Welcome To SmartPark</h1>
- </div>
+    </div>
+    <br />
+    <div>
+        <h2 style="color: #CCE5EA">Free Parking Spots  <span class="badge badge-secondary" style="background-color: #3BBD6E; color: #CCE5EA">@Model.FreeParkingSpotsCount</span></h2>
+        <h2 style="color: #CCE5EA">Occupied Parking Spots  <span class="badge badge-secondary" style="background-color: #3BBD6E; color: #CCE5EA">@Model.OccupiedParkingSpotsCount</span></h2>
+        <h2 style="color: #CCE5EA">Total Parking Spots <span class="badge badge-secondary" style="background-color: #3BBD6E; color: #CCE5EA">@Model.TotalParkingSpotsCount</span></h2>
+    </div>
 </body>

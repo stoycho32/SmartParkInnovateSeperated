@@ -13,5 +13,7 @@ namespace SmartParkInnovate.Core.Contracts
         public Task<ParkingSpotDetailsModel> Details(int id, string userId);
 
         public Task<IEnumerable<ParkingSpotViewModel>> ParkingSpots();
+
+        public GeneralParkingInformationModel GeneralParkingSpotInformation();
     }
 }
