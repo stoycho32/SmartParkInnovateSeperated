@@ -4,6 +4,7 @@ using SmartParkInnovate.Core.Models.AdminModels.AdminCommentModel;
 using SmartParkInnovate.Core.Models.AdminModels.AdminPostModels;
 using SmartParkInnovate.Infrastructure.Data.Models;
 using SmartParkInnovate.Infrastructure.Repository;
+using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages.CommentErrorMessages;
 using static SmartParkInnovate.Infrastructure.Data.Constants.ErrorMessages.PostErrorMessages;
 
 namespace SmartParkInnovate.Core.Services.AdminService
@@ -78,6 +79,7 @@ namespace SmartParkInnovate.Core.Services.AdminService
             IEnumerable<AdminCommentViewModel> comments = await this.repository.AllAsReadOnly<PostComment>()
                 .Select(c => new AdminCommentViewModel()
                 {
+                    CommentGuid = c.CommentGuid,
                     WorkerUsername = c.Worker.UserName,
                     CommentBody = c.CommentBody,
                     CommentDate = c.CommentDate,
@@ -90,14 +92,48 @@ namespace SmartParkInnovate.Core.Services.AdminService
             return comments;
         }
 
-        public Task DeleteComment(string workerId, int postId, DateTime commentDate)
+        public async Task ReturnComment(string workerId, int postId, Guid commentGuid)
         {
-            throw new NotImplementedException();
+            PostComment? commentToReturn = await this.repository.All<PostComment>()
+                .Where(c => c.WorkerId == workerId && c.PostId == postId && c.CommentGuid == commentGuid)
+                .FirstOrDefaultAsync();
+
+            if (commentToReturn == null)
+            {
+                throw new ArgumentException(string.Format(InvalidCommentErrorMessage));
+            }
+
+            if (commentToReturn.IsDeleted == false && commentToReturn.DeletedOn == null)
+            {
+                throw new InvalidOperationException(string.Format(CommentIsNotDeletedErrorMessage));
+            }
+
+            commentToReturn.IsDeleted = false;
+            commentToReturn.DeletedOn = null;
+
+            await this.repository.SaveChangesAsync();
         }
 
-        public Task ReturnComment(string workerId, int postId, DateTime commentDate)
+        public async Task DeleteComment(string workerId, int postId, Guid commentGuid)
         {
-            throw new NotImplementedException();
+            PostComment? commentToDelete = await this.repository.All<PostComment>()
+                .Where(c => c.WorkerId == workerId && c.PostId == postId && c.CommentGuid == commentGuid)
+                .FirstOrDefaultAsync();
+
+            if (commentToDelete == null)
+            {
+                throw new ArgumentException(string.Format(InvalidCommentErrorMessage));
+            }
+
+            if (commentToDelete.IsDeleted == true && commentToDelete.DeletedOn != null)
+            {
+                throw new InvalidOperationException(string.Format(CommentIsDeletedErrorMessage));
+            }
+
+            commentToDelete.IsDeleted = true;
+            commentToDelete.DeletedOn = DateTime.Now;
+
+            await this.repository.SaveChangesAsync();
         }
     }
 }

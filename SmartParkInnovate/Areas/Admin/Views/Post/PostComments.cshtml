@@ -26,14 +26,14 @@
                                 @if (comment.IsDeleted == false)
                                 {
                                     <li>
-                                        <a asp-area="Admin" asp-controller="Post" asp-action="DeleteComment" asp-route-workerId="@comment.WorkerId" asp-route-postId="@comment.PostId" asp-route-commentDate="@comment.CommentDate" class="btn btn-link btn-sm"
+                                        <a asp-area="Admin" asp-controller="Post" asp-action="DeleteComment" asp-route-workerId="@comment.WorkerId" asp-route-postId="@comment.PostId" asp-route-commentGuid="@comment.CommentGuid" class="btn btn-link btn-sm"
                                            style="color: #CCE5EA; font-size: 18px; text-decoration: none; border: none; box-shadow: none">Delete Comment</a>
                                     </li>
                                 }
                                 else
                                 {
                                     <li>
-                                        <a asp-area="Admin" asp-controller="Post" asp-action="ReturnComment" asp-route-workerId="@comment.WorkerId" asp-route-postId="@comment.PostId" asp-route-commentDate="@comment.CommentDate" class="btn btn-link btn-sm"
+                                        <a asp-area="Admin" asp-controller="Post" asp-action="ReturnComment" asp-route-workerId="@comment.WorkerId" asp-route-postId="@comment.PostId" asp-route-commentGuid="@comment.CommentGuid" class="btn btn-link btn-sm"
                                            style="color: #CCE5EA; font-size: 18px; text-decoration: none; border: none; box-shadow: none">Return Comment</a>
                                     </li>
                                 }
@@ -46,6 +46,7 @@
                     <p class="card-text" style="color: #CCE5EA">@comment.CommentBody</p>
                 </div>
             </div>
+            <br />
         }
     }
     else

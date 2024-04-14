@@ -7,6 +7,9 @@ namespace SmartParkInnovate.Core.Models.AdminModels.AdminCommentModel
     public class AdminCommentViewModel
     {
         [Required]
+        public Guid CommentGuid { get; set; }
+
+        [Required]
         public string WorkerUsername { get; set; } = null!;
 
         [Required]

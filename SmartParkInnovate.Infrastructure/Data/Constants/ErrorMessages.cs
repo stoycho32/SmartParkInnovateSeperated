@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-
-namespace SmartParkInnovate.Infrastructure.Data.Constants
+﻿namespace SmartParkInnovate.Infrastructure.Data.Constants
 {
     public static class ErrorMessages
     {
@@ -24,6 +22,9 @@ namespace SmartParkInnovate.Infrastructure.Data.Constants
         public static class CommentErrorMessages
         {
             public const string CommentBodyErrorMessage = "Comment cannot be empty.";
+            public const string InvalidCommentErrorMessage = "Invalid Comment";
+            public const string CommentIsDeletedErrorMessage = "Comment Is Deleted";
+            public const string CommentIsNotDeletedErrorMessage = "Comment Is Not Deleted";
         }
 
         public static class PostErrorMessages

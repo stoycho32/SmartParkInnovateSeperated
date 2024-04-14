@@ -45,5 +45,21 @@ namespace SmartParkInnovate.Areas.Admin.Controllers
 
             return View(comments);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteComment(string workerId, int postId, Guid commentGuid)
+        {
+            await this.adminPostService.DeleteComment(workerId, postId, commentGuid);
+
+            return RedirectToAction(nameof(PostComments));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ReturnComment(string workerId, int postId, Guid commentGuid)
+        {
+            await this.adminPostService.ReturnComment(workerId, postId, commentGuid);
+
+            return RedirectToAction(nameof(PostComments));
+        }
     }
 }

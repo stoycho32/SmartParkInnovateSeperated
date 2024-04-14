@@ -13,8 +13,8 @@ namespace SmartParkInnovate.Core.Contracts.AdminServiceContracts
 
         public Task<IEnumerable<AdminCommentViewModel>> Comments();
 
-        public Task DeleteComment(string workerId, int postId, DateTime commentDate);
+        public Task DeleteComment(string workerId, int postId, Guid commentGuid);
 
-        public Task ReturnComment(string workerId, int postId, DateTime commentDate);
+        public Task ReturnComment(string workerId, int postId, Guid commentGuid);
     }
 }
