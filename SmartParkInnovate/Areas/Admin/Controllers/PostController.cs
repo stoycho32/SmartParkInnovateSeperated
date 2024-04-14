@@ -39,7 +39,7 @@ namespace SmartParkInnovate.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Comments()
+        public async Task<IActionResult> PostComments()
         {
             IEnumerable<AdminCommentViewModel> comments = await this.adminPostService.Comments();
 
