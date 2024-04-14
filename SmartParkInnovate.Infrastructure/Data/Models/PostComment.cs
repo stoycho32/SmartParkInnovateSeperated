@@ -11,7 +11,11 @@ namespace SmartParkInnovate.Infrastructure.Data.Models
         public PostComment()
         {
             this.CommentDate = DateTime.Now;
+            this.CommentGuid = Guid.NewGuid();
         }
+
+        [Required]
+        public Guid CommentGuid { get; set; }
 
         [Required]
         [StringLength(CommentBodyMaxValue,
