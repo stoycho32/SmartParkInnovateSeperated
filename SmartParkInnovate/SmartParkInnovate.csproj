@@ -30,8 +30,4 @@
     <Folder Include="Instructions\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="wwwroot\InstructionPhotos\HowToUseSpot.png" />
-  </ItemGroup>
-
 </Project>

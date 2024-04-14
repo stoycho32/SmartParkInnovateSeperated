@@ -6,8 +6,14 @@
     </div>
     <br />
     <div>
+        <h2 style="color: #CCE5EA">Current Date  <span class="badge badge-secondary" style="background-color: #3BBD6E; color: #CCE5EA">@DateTime.Now.ToString("dd.MM.yyyy HH:mm")</span></h2>
+        <br />
         <h2 style="color: #CCE5EA">Free Parking Spots  <span class="badge badge-secondary" style="background-color: #3BBD6E; color: #CCE5EA">@Model.FreeParkingSpotsCount</span></h2>
         <h2 style="color: #CCE5EA">Occupied Parking Spots  <span class="badge badge-secondary" style="background-color: #3BBD6E; color: #CCE5EA">@Model.OccupiedParkingSpotsCount</span></h2>
         <h2 style="color: #CCE5EA">Total Parking Spots <span class="badge badge-secondary" style="background-color: #3BBD6E; color: #CCE5EA">@Model.TotalParkingSpotsCount</span></h2>
+    </div>
+    <br />
+    <div class="text-center">
+        <a asp-controller="Parking" asp-action="ParkingSpots" class="btn btn-success p-3 fw-bold rounded-pill" style="width: 130px; background-color: #3BBD6E; border: none; box-shadow: none">Get Started</a>
     </div>
 </body>
