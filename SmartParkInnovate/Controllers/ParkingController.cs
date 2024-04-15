@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SmartParkInnovate.Core.Contracts;
 using SmartParkInnovate.Core.Models.ParkingSpot;
 using SmartParkInnovate.Core.Models.ParkingSpotModel;
@@ -31,6 +30,7 @@ namespace SmartParkInnovate.Controllers
             {
                 string userId = User.Id();
                 ParkingSpotDetailsModel parkingSpot = await this.parkingService.Details(id, userId);
+
                 return View(parkingSpot);
             }
             catch (ArgumentException argException)
@@ -64,26 +64,42 @@ namespace SmartParkInnovate.Controllers
                 return BadRequest();
             }
 
-            string userId = User.Id();
+            try
+            {
+                string userId = User.Id();
+                await this.parkingService.Use(id, userId, model);
 
-            await this.parkingService.Use(id, userId, model);
-
-            return RedirectToAction(nameof(ParkingSpots));
+                return RedirectToAction(nameof(ParkingSpots));
+            }
+            catch (ArgumentException argException)
+            {
+                return this.HandleErrorMessage(argException.Message);
+            }
+            catch (InvalidOperationException ioe)
+            {
+                return this.HandleErrorMessage(ioe.Message);
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> ExitSpot(int id)
         {
-            string userId = User.Id();
+            try
+            {
+                string userId = User.Id();
+                await this.parkingService.Exit(id, userId);
 
-            await this.parkingService.Exit(id, userId);
+                return RedirectToAction(nameof(ParkingSpots));
+            }
+            catch (ArgumentException argException) 
+            {
+                return this.HandleErrorMessage(argException.Message);
+            }
+            catch (InvalidOperationException ioe)
+            {
+                return this.HandleErrorMessage(ioe.Message);
 
-            return RedirectToAction(nameof(ParkingSpots));
-        }
-
-        private IActionResult HandleErrorMessage(string message)
-        {
-            return View("CustomError", message);
+            }
         }
     }
 }
