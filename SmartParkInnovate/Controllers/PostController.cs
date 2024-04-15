@@ -39,11 +39,21 @@ namespace SmartParkInnovate.Controllers
                 return BadRequest();
             }
 
-            string userId = User.Id();
+            try
+            {
+                string userId = User.Id();
+                await this.postService.Add(userId, model);
 
-            await this.postService.Add(userId, model);
-
-            return RedirectToAction(nameof(Posts));
+                return RedirectToAction(nameof(Posts));
+            }
+            catch (ArgumentException argException)
+            {
+                return this.HandleErrorMessage(argException.Message);
+            }
+            catch (InvalidOperationException ioe)
+            {
+                return this.HandleErrorMessage(ioe.Message);
+            }
         }
 
         [HttpGet]
@@ -58,11 +68,21 @@ namespace SmartParkInnovate.Controllers
         [HttpPost]
         public async Task<IActionResult> LikePost(int id)
         {
-            string userId = User.Id();
+            try
+            {
+                string userId = User.Id();
+                await this.postService.LikePost(id, userId);
 
-            await this.postService.LikePost(id, userId);
-
-            return RedirectToAction(nameof(Details), new { id });
+                return RedirectToAction(nameof(Details), new { id });
+            }
+            catch (ArgumentException argException)
+            {
+                return this.HandleErrorMessage(argException.Message);
+            }
+            catch (InvalidOperationException ioe)
+            {
+                return this.HandleErrorMessage(ioe.Message);
+            }
         }
 
         [HttpGet]
@@ -81,11 +101,21 @@ namespace SmartParkInnovate.Controllers
                 return BadRequest();
             }
 
-            string userId = User.Id();
+            try
+            {
+                string userId = User.Id();
+                await this.postService.Comment(id, userId, comment);
 
-            await this.postService.Comment(id, userId, comment);
-
-            return RedirectToAction(nameof(Details), new { id });
+                return RedirectToAction(nameof(Details), new { id });
+            }
+            catch (ArgumentException argException)
+            {
+                return this.HandleErrorMessage(argException.Message);
+            }
+            catch (InvalidOperationException ioe)
+            {
+                return this.HandleErrorMessage(ioe.Message);
+            }
         }
 
         [HttpGet]
@@ -104,9 +134,21 @@ namespace SmartParkInnovate.Controllers
                 return BadRequest();
             }
 
-            await this.postService.Edit(id, model);
+            try
+            {
+                string currentUser = User.Id();
+                await this.postService.Edit(id, currentUser, model);
 
-            return RedirectToAction(nameof(Details), new { id });
+                return RedirectToAction(nameof(Details), new { id });
+            }
+            catch (ArgumentException argException)
+            {
+                return this.HandleErrorMessage(argException.Message);
+            }
+            catch (InvalidOperationException ioe)
+            {
+                return this.HandleErrorMessage(ioe.Message);
+            }
         }
 
     }

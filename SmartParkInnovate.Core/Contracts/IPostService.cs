@@ -15,7 +15,7 @@ namespace SmartParkInnovate.Core.Contracts
 
         public Task Comment(int postId, string userId, CommentFormModel comment);
 
-        public Task Edit(int postId, PostFormModel model);
+        public Task Edit(int postId, string userId, PostFormModel model);
 
         public Task<PostFormModel> GetPostById(int id);
     }

@@ -74,7 +74,7 @@ namespace SmartParkInnovate.Core.Services
                         PostBody = c.PostBody,
                         PostDate = c.PostDate,
                         LikesCount = c.Likes.Count(),
-                        CommentsCount = c.Comments.Count(),
+                        CommentsCount = c.Comments.Where(c => c.IsDeleted == false).Count(),
                         PostComments = c.Comments.Where(c => c.IsDeleted == false).Select(c => new CommentViewModel()
                         {
                             WorkerUsername = c.Worker.UserName,
@@ -178,18 +178,24 @@ namespace SmartParkInnovate.Core.Services
             await this.repository.SaveChangesAsync();
         }
 
-        public async Task Edit(int postId, PostFormModel model)
+        public async Task Edit(int postId, string currentUser, PostFormModel model)
         {
-            Post? postToEdit = await this.repository.GetByIdAsync<Post>(postId);
+            Post? postToEdit = await this.repository.All<Post>()
+                .FirstOrDefaultAsync(c => c.Id == postId);
 
             if (postToEdit == null)
             {
                 throw new ArgumentException(string.Format(InvalidPostErrorMessage));
             }
 
+            if (postToEdit.WorkerId != currentUser)
+            {
+                throw new InvalidOperationException(string.Format(YouAreNotAllowedToEditPostErrorMessage));
+            }
+
             if (postToEdit.IsDeleted)
             {
-                throw new ArgumentException(string.Format(PostIsDeletedErrorMessage));
+                throw new InvalidOperationException(string.Format(PostIsDeletedErrorMessage));
             }
 
             postToEdit.PostBody = model.PostBody;
