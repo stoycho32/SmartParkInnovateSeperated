@@ -17,7 +17,7 @@ namespace SmartParkInnovate.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> ParkingSpots()
         {
-            List<ParkingSpotAdminViewModel> parkingSpots = await this.adminParkingService.ParkingSpots();
+            IEnumerable<ParkingSpotAdminViewModel> parkingSpots = await this.adminParkingService.ParkingSpots();
 
             return View(parkingSpots);
         }

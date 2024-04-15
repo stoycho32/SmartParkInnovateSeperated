@@ -18,7 +18,7 @@ namespace SmartParkInnovate.Controllers
         [HttpGet]
         public async Task<IActionResult> Posts()
         {
-            List<PostViewModel> posts = await this.postService.All();
+            IEnumerable<PostViewModel> posts = await this.postService.All();
 
             return View(posts);
         }

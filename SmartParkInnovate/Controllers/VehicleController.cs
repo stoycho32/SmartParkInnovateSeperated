@@ -42,7 +42,7 @@ namespace SmartParkInnovate.Controllers
         {
             string userId = User.Id();
 
-            List<VehicleViewModel> vehicles = await this.vehicleService.MyVehicles(userId);
+            IEnumerable<VehicleViewModel> vehicles = await this.vehicleService.MyVehicles(userId);
 
             return View(vehicles);
         }
