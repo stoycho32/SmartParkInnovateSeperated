@@ -32,17 +32,37 @@ namespace SmartParkInnovate.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> ReturnVehicle(int id)
         {
-            await this.adminVehicleService.ReturnVehicle(id);
-
-            return RedirectToAction(nameof(Vehicles));
+            try
+            {
+                await this.adminVehicleService.ReturnVehicle(id);
+                return RedirectToAction(nameof(Vehicles));
+            }
+            catch (ArgumentException argException)
+            {
+                return this.HandleErrorMessage(argException.Message);
+            }
+            catch (InvalidOperationException ioe)
+            {
+                return this.HandleErrorMessage(ioe.Message);
+            }
         }
 
         [HttpGet]
         public async Task<IActionResult> DeleteVehicle(int id)
         {
-            await this.adminVehicleService.RemoveVehicle(id);
-
-            return RedirectToAction(nameof(Vehicles));
+            try
+            {
+                await this.adminVehicleService.RemoveVehicle(id);
+                return RedirectToAction(nameof(Vehicles));
+            }
+            catch (ArgumentException argException)
+            {
+                return this.HandleErrorMessage(argException.Message);
+            }
+            catch (InvalidOperationException ioe)
+            {
+                return this.HandleErrorMessage(ioe.Message);
+            }
         }
     }
 }

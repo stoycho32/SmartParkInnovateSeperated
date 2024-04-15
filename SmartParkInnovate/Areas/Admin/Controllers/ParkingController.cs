@@ -13,7 +13,6 @@ namespace SmartParkInnovate.Areas.Admin.Controllers
             this.adminParkingService = adminParkingService;
         }
 
-
         [HttpGet]
         public async Task<IActionResult> ParkingSpots()
         {
@@ -25,9 +24,19 @@ namespace SmartParkInnovate.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> KickUserFromSpot(int id)
         {
-            await this.adminParkingService.KickUserFromParkingSpot(id);
-
-            return RedirectToAction(nameof(ParkingSpots));
+            try
+            {
+                await this.adminParkingService.KickUserFromParkingSpot(id);
+                return RedirectToAction(nameof(ParkingSpots));
+            }
+            catch (ArgumentException argException)
+            {
+                return this.HandleErrorMessage(argException.Message);
+            }
+            catch (InvalidOperationException ioe)
+            {
+                return this.HandleErrorMessage(ioe.Message);
+            }
         }
 
         [HttpGet]
@@ -48,15 +57,37 @@ namespace SmartParkInnovate.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> EnableParkingSpot(int id)
         {
-            await this.adminParkingService.EnableParkingSpot(id);
-            return RedirectToAction(nameof(ParkingSpots));
+            try
+            {
+                await this.adminParkingService.EnableParkingSpot(id);
+                return RedirectToAction(nameof(ParkingSpots));
+            }
+            catch (ArgumentException argException)
+            {
+                return this.HandleErrorMessage(argException.Message);
+            }
+            catch (InvalidOperationException ioe)
+            {
+                return this.HandleErrorMessage(ioe.Message);
+            }
         }
 
         [HttpGet]
         public async Task<IActionResult> DisableParkingSpot(int id)
         {
-            await this.adminParkingService.DisableParkingSpot(id);
-            return RedirectToAction(nameof(ParkingSpots));
+            try
+            {
+                await this.adminParkingService.DisableParkingSpot(id);
+                return RedirectToAction(nameof(ParkingSpots));
+            }
+            catch (ArgumentException argException)
+            {
+                return this.HandleErrorMessage(argException.Message);
+            }
+            catch (InvalidOperationException ioe)
+            {
+                return this.HandleErrorMessage(ioe.Message);
+            }
         }
     }
 }

@@ -8,6 +8,9 @@ namespace SmartParkInnovate.Areas.Admin.Controllers
     [Authorize(Roles = AdminRoleName)]
     public class AdminBaseController : Controller
     {
-
+        protected IActionResult HandleErrorMessage(string message)
+        {
+            return View("AdminCustomError", message);
+        }
     }
 }

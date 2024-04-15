@@ -25,17 +25,38 @@ namespace SmartParkInnovate.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> DeletePost(int id)
         {
-            await this.adminPostService.DeletePost(id);
-
-            return RedirectToAction(nameof(Posts));
+            try
+            {
+                await this.adminPostService.DeletePost(id);
+                return RedirectToAction(nameof(Posts));
+            }
+            catch (ArgumentException argException)
+            {
+                return this.HandleErrorMessage(argException.Message);
+            }
+            catch (InvalidOperationException ioe)
+            {
+                return this.HandleErrorMessage(ioe.Message);
+            }
         }
 
         [HttpGet]
         public async Task<IActionResult> ReturnPost(int id)
         {
-            await this.adminPostService.ReturnPost(id);
+            try
+            {
+                await this.adminPostService.ReturnPost(id);
+                return RedirectToAction(nameof(Posts));
+            }
+            catch (ArgumentException argException)
+            {
+                return this.HandleErrorMessage(argException.Message);
+            }
+            catch (InvalidOperationException ioe)
+            {
+                return this.HandleErrorMessage(ioe.Message);
+            }
 
-            return RedirectToAction(nameof(Posts));
         }
 
         [HttpGet]
@@ -49,17 +70,37 @@ namespace SmartParkInnovate.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> DeleteComment(string workerId, int postId, Guid commentGuid)
         {
-            await this.adminPostService.DeleteComment(workerId, postId, commentGuid);
-
-            return RedirectToAction(nameof(PostComments));
+            try
+            {
+                await this.adminPostService.DeleteComment(workerId, postId, commentGuid);
+                return RedirectToAction(nameof(PostComments));
+            }
+            catch (ArgumentException argException)
+            {
+                return this.HandleErrorMessage(argException.Message);
+            }
+            catch (InvalidOperationException ioe)
+            {
+                return this.HandleErrorMessage(ioe.Message);
+            }
         }
 
         [HttpGet]
         public async Task<IActionResult> ReturnComment(string workerId, int postId, Guid commentGuid)
         {
-            await this.adminPostService.ReturnComment(workerId, postId, commentGuid);
-
-            return RedirectToAction(nameof(PostComments));
+            try
+            {
+                await this.adminPostService.ReturnComment(workerId, postId, commentGuid);
+                return RedirectToAction(nameof(PostComments));
+            }
+            catch (ArgumentException argException)
+            {
+                return this.HandleErrorMessage(argException.Message);
+            }
+            catch (InvalidOperationException ioe)
+            {
+                return this.HandleErrorMessage(ioe.Message);
+            }
         }
     }
 }
