@@ -33,6 +33,7 @@
             public const string InvalidPostErrorMessage = "The Chosen Post Is Not Valid";
             public const string PostIsDeletedErrorMessage = "Post Is Deleted";
             public const string PostIsNotDeletedErrorMessage = "Post Is Not Deleted";
+            public const string YouAreNotAllowedToEditPostErrorMessage = "You Are Not Allowed To Edit The Post";
         }
 
         public static class ParkingSpotErrorMessages
