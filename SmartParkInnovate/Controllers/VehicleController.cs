@@ -32,9 +32,19 @@ namespace SmartParkInnovate.Controllers
                 return BadRequest();
             }
 
-            await this.vehicleService.Add(userId, formModel);
-
-            return RedirectToAction(nameof(Vehicles));
+            try
+            {
+                await this.vehicleService.Add(userId, formModel);
+                return RedirectToAction(nameof(Vehicles));
+            }
+            catch (ArgumentException argException)
+            {
+                return this.HandleErrorMessage(argException.Message);
+            }
+            catch (InvalidOperationException ioe)
+            {
+                return this.HandleErrorMessage(ioe.Message);
+            }
         }
 
         [HttpGet]
@@ -52,9 +62,15 @@ namespace SmartParkInnovate.Controllers
         {
             string userId = User.Id();
 
-            VehicleDetailsViewModel model = await this.vehicleService.Details(id, userId);
-
-            return View(model);
+            try
+            {
+                VehicleDetailsViewModel model = await this.vehicleService.Details(id, userId);
+                return View(model);
+            }
+            catch (ArgumentException argException)
+            {
+                return this.HandleErrorMessage(argException.Message);
+            }
         }
     }
 }
