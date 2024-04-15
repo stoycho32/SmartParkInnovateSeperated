@@ -4,7 +4,7 @@ namespace SmartParkInnovate.Core.Contracts.AdminServiceContracts
 {
     public interface IAdminParkingService
     {
-        public Task<List<ParkingSpotAdminViewModel>> ParkingSpots();
+        public Task<IEnumerable<ParkingSpotAdminViewModel>> ParkingSpots();
 
         public Task AddParkingSpot();
 

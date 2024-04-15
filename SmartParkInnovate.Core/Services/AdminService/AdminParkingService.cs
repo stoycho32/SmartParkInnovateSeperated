@@ -16,7 +16,7 @@ namespace SmartParkInnovate.Core.Services.AdminService
             this.repository = repository;
         }
 
-        public async Task<List<ParkingSpotAdminViewModel>> ParkingSpots()
+        public async Task<IEnumerable<ParkingSpotAdminViewModel>> ParkingSpots()
         {
             List<ParkingSpotAdminViewModel> spots = await repository.AllAsReadOnly<ParkingSpot>()
                 .Select(c => new ParkingSpotAdminViewModel()
