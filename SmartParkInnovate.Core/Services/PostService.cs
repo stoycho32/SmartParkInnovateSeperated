@@ -19,7 +19,7 @@ namespace SmartParkInnovate.Core.Services
             this.repository = repository;
         }
 
-        public async Task<List<PostViewModel>> All()
+        public async Task<IEnumerable<PostViewModel>> All()
         {
             List<PostViewModel> posts = await this.repository.AllAsReadOnly<Post>()
                 .AsSplitQuery()

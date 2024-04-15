@@ -5,7 +5,7 @@ namespace SmartParkInnovate.Core.Contracts
 {
     public interface IPostService
     {
-        public Task<List<PostViewModel>> All();
+        public Task<IEnumerable<PostViewModel>> All();
 
         public Task Add(string userId, PostFormModel model);
 

@@ -8,6 +8,6 @@ namespace SmartParkInnovate.Core.Contracts
 
         public Task<VehicleDetailsViewModel> Details(int id, string userId);
 
-        public Task<List<VehicleViewModel>> MyVehicles(string userId);
+        public Task<IEnumerable<VehicleViewModel>> MyVehicles(string userId);
     }
 }

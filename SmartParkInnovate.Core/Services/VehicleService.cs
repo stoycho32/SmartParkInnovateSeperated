@@ -82,9 +82,9 @@ namespace SmartParkInnovate.Core.Services
             return model;
         }
 
-        public async Task<List<VehicleViewModel>> MyVehicles(string userId)
+        public async Task<IEnumerable<VehicleViewModel>> MyVehicles(string userId)
         {
-            List<VehicleViewModel> vehicles = await this.repository.AllAsReadOnly<Vehicle>()
+            IEnumerable<VehicleViewModel> vehicles = await this.repository.AllAsReadOnly<Vehicle>()
                 .AsSplitQuery()
                 .Where(c => c.WorkerId == userId && c.IsDeleted == false)
                 .Select(c => new VehicleViewModel()
