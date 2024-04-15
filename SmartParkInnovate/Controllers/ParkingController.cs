@@ -27,10 +27,20 @@ namespace SmartParkInnovate.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
-            string userId = User.Id();
-            ParkingSpotDetailsModel parkingSpot = await this.parkingService.Details(id, userId);
-
-            return View(parkingSpot);
+            try
+            {
+                string userId = User.Id();
+                ParkingSpotDetailsModel parkingSpot = await this.parkingService.Details(id, userId);
+                return View(parkingSpot);
+            }
+            catch (ArgumentException argException)
+            {
+                return this.HandleErrorMessage(argException.Message);
+            }
+            catch(InvalidOperationException ioe)
+            {
+                return this.HandleErrorMessage(ioe.Message);
+            }
         }
 
         [HttpGet]
@@ -69,6 +79,11 @@ namespace SmartParkInnovate.Controllers
             await this.parkingService.Exit(id, userId);
 
             return RedirectToAction(nameof(ParkingSpots));
+        }
+
+        private IActionResult HandleErrorMessage(string message)
+        {
+            return View("CustomError", message);
         }
     }
 }
