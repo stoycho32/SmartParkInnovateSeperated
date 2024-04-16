@@ -32,7 +32,7 @@ namespace SmartParkInnovate.Core.Models.AdminModels.AdminVehicleModels
         public string OwnerFullName { get; set; } = null!;
 
         [Required]
-        public int OccupationsCount { get; set; } = 0;
+        public int OccupationsCount { get; set; }
 
         [Required]
         public bool IsDeleted { get; set; }
