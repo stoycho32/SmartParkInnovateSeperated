@@ -27,7 +27,7 @@
                             </button>
                             <div class="dropdown">
                                 <button class="btn btn-link btn-sm dropdown-toggle-split" style="color: #CCE5EA; font-size: 18px; text-decoration: none; border: none; box-shadow: none;" type="button" id="likesDropDowmMenu" data-bs-toggle="dropdown">
-                                    @Model.PostDetailViewModel.LikesCount Likes
+                                    @Model.PostDetailViewModel.LikesCount
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="likesDropDowmMenu">
                                     @foreach (var like in Model.PostDetailViewModel.PostLikes)
@@ -40,7 +40,7 @@
                     </form>
                     <a asp-controller="Post" asp-action="CommentPost" asp-route-id="@Model.PostDetailViewModel.Id" class="btn btn-link btn-sm"
                        style="color: #CCE5EA; font-size: 18px; text-decoration: none; border: none; box-shadow: none">
-                        @Model.PostDetailViewModel.CommentsCount Comments
+                        💬 @Model.PostDetailViewModel.CommentsCount
                     </a>
                 </div>
             </div>
