@@ -16,9 +16,29 @@ namespace SmartParkInnovate.Core.Services.AdminService
             this.repository = repository;
         }
 
-        public async Task<string> GetAdminReport()
+        public  GeneralAdminInformationModel GetAdminReport()
         {
-            return "";
+            DateTime todayDate = DateTime.Today;
+            DateTime yesterdayDate = todayDate.AddDays(-1);
+
+            GeneralAdminInformationModel adminInfoModel = new GeneralAdminInformationModel();
+
+            adminInfoModel.FreeParkingSpots =  this.repository.AllAsReadOnly<ParkingSpot>().Where(c => c.IsOccupied == false).Count();
+
+            adminInfoModel.OccupiedParkingSpots = this.repository.AllAsReadOnly<ParkingSpot>().Where(c => c.IsOccupied == true).Count();
+
+            adminInfoModel.TotalParkingSpots = this.repository.AllAsReadOnly<ParkingSpot>().Count();
+
+            adminInfoModel.SpotsOccupiedForToday = this.repository.AllAsReadOnly<ParkingSpotOccupation>().Where(c => c.EnterDateTime.Year == todayDate.Year 
+            && c.EnterDateTime.Month == todayDate.Month 
+            && c.EnterDateTime.Day == todayDate.Day).Count();
+
+            adminInfoModel.SpotsOccupiedForYesterday = this.repository.AllAsReadOnly<ParkingSpotOccupation>().Where(c => c.EnterDateTime.Year == yesterdayDate.Year
+            && c.EnterDateTime.Month == yesterdayDate.Month
+            && c.EnterDateTime.Day == yesterdayDate.Day).Count();
+
+
+            return adminInfoModel;
         }
 
         public async Task<IEnumerable<ParkingSpotAdminViewModel>> ParkingSpots()

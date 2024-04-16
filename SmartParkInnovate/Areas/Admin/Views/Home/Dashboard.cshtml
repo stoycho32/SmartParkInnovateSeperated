@@ -1,3 +1,17 @@
-﻿<body style="background-color: #4C99CF">
-    <h1 style="color: #CCE5EA">This is the admin area!</h1>
+﻿@model GeneralAdminInformationModel
+
+<body style="background-color: #4C99CF">
+    <div class="text-center">
+    <h1 class="text-center"style="color: #CCE5EA">Welcome Mr. Admin!</h1>
+    </div>
+    <br />
+    <div>
+        <h2 style="color: #CCE5EA">Current Date  <span class="badge badge-secondary" style="background-color: #3BBD6E; color: #CCE5EA">@DateTime.Now.ToString("dd.MM.yyyy")</span></h2>
+        <br />
+        <h2 style="color: #CCE5EA">Free Parking Spots  <span class="badge badge-secondary" style="background-color: #3BBD6E; color: #CCE5EA">@Model.FreeParkingSpots</span></h2>
+        <h2 style="color: #CCE5EA">Occupied Parking Spots  <span class="badge badge-secondary" style="background-color: #3BBD6E; color: #CCE5EA">@Model.OccupiedParkingSpots</span></h2>
+        <h2 style="color: #CCE5EA">Total Parking Spots <span class="badge badge-secondary" style="background-color: #3BBD6E; color: #CCE5EA">@Model.TotalParkingSpots</span></h2>
+        <h2 style="color: #CCE5EA">Total Occupations For Today <span class="badge badge-secondary" style="background-color: #3BBD6E; color: #CCE5EA">@Model.SpotsOccupiedForToday</span></h2>
+        <h2 style="color: #CCE5EA">Total Occupations For Yesterday <span class="badge badge-secondary" style="background-color: #3BBD6E; color: #CCE5EA">@Model.SpotsOccupiedForYesterday</span></h2>
+    </div>
 </body>

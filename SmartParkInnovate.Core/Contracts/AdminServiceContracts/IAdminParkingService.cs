@@ -4,7 +4,7 @@ namespace SmartParkInnovate.Core.Contracts.AdminServiceContracts
 {
     public interface IAdminParkingService
     {
-        public Task<string> GetAdminReport();
+        public GeneralAdminInformationModel GetAdminReport();
 
         public Task<IEnumerable<ParkingSpotAdminViewModel>> ParkingSpots();
 
