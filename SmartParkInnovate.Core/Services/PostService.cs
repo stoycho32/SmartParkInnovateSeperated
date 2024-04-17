@@ -19,6 +19,12 @@ namespace SmartParkInnovate.Core.Services
             this.repository = repository;
         }
 
+
+
+        /// <summary>
+        /// With this functionality, we can get all the posts that are not deleted
+        /// </summary>
+        /// <returns>Collection of non-deleted posts</returns>
         public async Task<IEnumerable<PostViewModel>> All()
         {
             List<PostViewModel> posts = await this.repository.AllAsReadOnly<Post>()
@@ -38,6 +44,14 @@ namespace SmartParkInnovate.Core.Services
             return posts;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public async Task Add(string userId, PostFormModel model)
         {
             Worker? worker = await this.repository.GetByIdAsync<Worker>(userId);
