@@ -32,7 +32,7 @@
                         <td style="font-size: 18px; color: #CCE5EA">@vehicle.Model</td>
                         <td style="font-size: 18px; color: #CCE5EA">@vehicle.LicensePlate</td>
                         <td style="font-size: 18px; color: #CCE5EA">@vehicle.OwnerEmail</td>
-                        <td style="font-size: 18px; color: #CCE5EA">@(vehicle.IsDeleted == false ? "" : "X")</td>
+                        <td style="font-size: 18px; color: #ED4366">@(vehicle.IsDeleted == false ? "" : "✔")</td>
                         @if (vehicle.IsDeleted == true)
                         {
                             <td style="font-size: 18px; color: #CCE5EA">
