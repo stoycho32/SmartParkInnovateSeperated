@@ -23,6 +23,9 @@ namespace SmartParkInnovate.Core.Services
         /// <summary>
         /// This is a use parking spot function which allows the user to use a specific parking spot.
         /// </summary>
+        /// <param name="id">The Id of the parking spot</param>
+        /// <param name="userId">the id of the user</param>
+        /// <param name="vehicleModel">the form model of the vehicle (LicensePlate only)</param>
         /// <exception cref="ArgumentException">It gets exception if an invalid object is passed for the operation</exception>
         /// <exception cref="InvalidOperationException">It gets exception if a user makes an attempt to use already occupied parking spot</exception>
         public async Task Use(int id, string userId, UseSpotVehicleFormModel vehicleModel)
@@ -93,6 +96,8 @@ namespace SmartParkInnovate.Core.Services
         /// <summary>
         /// This is exit parking spot functionality which allows the user to leave the specified parking spot
         /// </summary>
+        /// <param name="id">the id of the parking spot</param>
+        /// <param name="userId">the id of the user</param>
         /// <exception cref="ArgumentException">It gets exception if an invalid object is passed for the operation</exception>
         /// <exception cref="InvalidOperationException">It gets exception if the user tries to leave unoccupied parking spot</exception>
         public async Task Exit(int id, string userId)
@@ -144,6 +149,7 @@ namespace SmartParkInnovate.Core.Services
         /// <summary>
         /// Provides details for the selected parking spot
         /// </summary>
+        /// <param name="id">the id of the parking spot</param>
         /// <param name="userId">The user id is used in order to add the current user to the view model so we can check if he can leave the spot (if decided)</param>
         /// <returns>Parking Spot Details object</returns>
         /// <exception cref="ArgumentException">It gets exception if the parking spot is invalid (Non existing)</exception>
