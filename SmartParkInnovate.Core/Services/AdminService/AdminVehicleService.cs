@@ -16,6 +16,15 @@ namespace SmartParkInnovate.Core.Services.AdminService
             this.repository = repository;
         }
 
+
+        /// <summary>
+        /// Allows the admin to check all the vehicles registered in the application
+        /// </summary>
+        /// <param name="licensePlate">license plate filter with contains in order to be more flexible</param>
+        /// <param name="ownerEmail">the email filter of the owner</param>
+        /// <param name="make">The make of the vehicle</param>
+        /// <param name="model">The model of the vehicle</param>
+        /// <returns></returns>
         public async Task<IEnumerable<AdminVehicleViewModel>> AllVehicles(string? licensePlate, string? ownerEmail, string? make, string? model)
         {
             IEnumerable<AdminVehicleViewModel> vehicles = await this.repository.AllAsReadOnly<Vehicle>()
@@ -53,6 +62,13 @@ namespace SmartParkInnovate.Core.Services.AdminService
             return vehicles;
         }
 
+
+        /// <summary>
+        /// Provides details about the vehicle
+        /// </summary>
+        /// <param name="id">the id of the vehicle</param>
+        /// <returns>a detailed vehicle model</returns>
+        /// <exception cref="ArgumentException">if the vehicle is invalid</exception>
         public async Task<AdminVehicleDetailsModel> Details(int id)
         {
             AdminVehicleDetailsModel? vehicle = await this.repository.AllAsReadOnly<Vehicle>()
@@ -78,6 +94,13 @@ namespace SmartParkInnovate.Core.Services.AdminService
             return vehicle;
         }
 
+
+        /// <summary>
+        /// returns a deleted vehicle
+        /// </summary>
+        /// <param name="id">the id of the vehicle that should be returned</param>
+        /// <exception cref="ArgumentException">if the vehicle is invalid</exception>
+        /// <exception cref="InvalidOperationException">is the vehicle was not deleted</exception>
         public async Task ReturnVehicle(int id)
         {
             Vehicle? vehicleToReturn = await this.repository.GetByIdAsync<Vehicle>(id);
@@ -98,6 +121,14 @@ namespace SmartParkInnovate.Core.Services.AdminService
             await this.repository.SaveChangesAsync();
         }
 
+
+
+        /// <summary>
+        /// Removes a selected vehicle
+        /// </summary>
+        /// <param name="id">vehicle id</param>
+        /// <exception cref="ArgumentException">if the vehicle is invalid</exception>
+        /// <exception cref="InvalidOperationException">if the vehicle is already deleted</exception>
         public async Task RemoveVehicle(int id)
         {
             Vehicle? vehicleToRemove = await this.repository.GetByIdAsync<Vehicle>(id);

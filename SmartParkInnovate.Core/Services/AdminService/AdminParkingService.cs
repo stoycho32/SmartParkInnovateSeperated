@@ -16,6 +16,11 @@ namespace SmartParkInnovate.Core.Services.AdminService
             this.repository = repository;
         }
 
+
+        /// <summary>
+        /// Gets general admin report for the parking spots. Free, Occupied, Total, Occupied from today and from yesterday
+        /// </summary>
+        /// <returns>general information detailed model</returns>
         public  GeneralAdminInformationModel GetAdminReport()
         {
             DateTime todayDate = DateTime.Today;
@@ -41,6 +46,12 @@ namespace SmartParkInnovate.Core.Services.AdminService
             return adminInfoModel;
         }
 
+
+
+        /// <summary>
+        /// Getting all the parking spots in order to manage them
+        /// </summary>
+        /// <returns>collection of the parking spots in the system</returns>
         public async Task<IEnumerable<ParkingSpotAdminViewModel>> ParkingSpots()
         {
             List<ParkingSpotAdminViewModel> spots = await repository.AllAsReadOnly<ParkingSpot>()
@@ -54,6 +65,10 @@ namespace SmartParkInnovate.Core.Services.AdminService
             return spots;
         }
 
+
+        /// <summary>
+        /// allows the admin to add a parking spot
+        /// </summary>
         public async Task AddParkingSpot()
         {
             ParkingSpot createdSpot = new ParkingSpot();
@@ -62,6 +77,14 @@ namespace SmartParkInnovate.Core.Services.AdminService
             await repository.SaveChangesAsync();
         }
 
+
+        /// <summary>
+        /// Getting all the occupations for all the parking spots
+        /// </summary>
+        /// <param name="id">using parking spot id as filter</param>
+        /// <param name="licensePlate">using license plate for specific vehicles</param>
+        /// <param name="userEmail">using user email in order to find a specific user in order to view his occupations</param>
+        /// <returns>collection of occupations</returns>
         public async Task<IEnumerable<ParkingOccupationsAdminViewModel>> AllOccupations(int? id, string? licensePlate, string? userEmail)
         {
             IEnumerable<ParkingOccupationsAdminViewModel> parkingOccupations = parkingOccupations = await this.repository.All<ParkingSpotOccupation>()
@@ -95,6 +118,14 @@ namespace SmartParkInnovate.Core.Services.AdminService
             return parkingOccupations;
         }
 
+
+
+        /// <summary>
+        /// Allows the admin to kick a user from a specific parking spot
+        /// </summary>
+        /// <param name="id">the id of the parking spot</param>
+        /// <exception cref="ArgumentException">If the parking spot is not available</exception>
+        /// <exception cref="InvalidOperationException">If the occupation cannot be found (not occupied)</exception>
         public async Task KickUserFromParkingSpot(int id)
         {
             ParkingSpot? parkingSpot = await this.repository.All<ParkingSpot>()
@@ -121,6 +152,14 @@ namespace SmartParkInnovate.Core.Services.AdminService
             await this.repository.SaveChangesAsync();
         }
 
+
+        /// <summary>
+        /// Allows the admin to enable selected parking spot
+        /// </summary>
+        /// <param name="id">id of the parking spot</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException">if the spot is invalid</exception>
+        /// <exception cref="InvalidOperationException">if the spot is not disabled</exception>
         public async Task EnableParkingSpot(int id)
         {
             ParkingSpot? spotToEnable = await repository.GetByIdAsync<ParkingSpot>(id);
@@ -139,6 +178,15 @@ namespace SmartParkInnovate.Core.Services.AdminService
             await repository.SaveChangesAsync();
         }
 
+
+
+        /// <summary>
+        /// Allows the admin to disable selected parking spot
+        /// </summary>
+        /// <param name="id">id of the parking spot</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException">if the spot is invalid</exception>
+        /// <exception cref="InvalidOperationException">if the spot is already disabled</exception>
         public async Task DisableParkingSpot(int id)
         {
             ParkingSpot? spotToEnable = await repository.GetByIdAsync<ParkingSpot>(id);

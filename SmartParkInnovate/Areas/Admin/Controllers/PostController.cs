@@ -41,11 +41,11 @@ namespace SmartParkInnovate.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ReturnPost(int id)
+        public async Task<IActionResult> ReturnPost(int postId)
         {
             try
             {
-                await this.adminPostService.ReturnPost(id);
+                await this.adminPostService.ReturnPost(postId);
                 return RedirectToAction(nameof(Posts));
             }
             catch (ArgumentException argException)
@@ -60,9 +60,9 @@ namespace SmartParkInnovate.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> PostComments()
+        public async Task<IActionResult> PostComments(int postId)
         {
-            IEnumerable<AdminCommentViewModel> comments = await this.adminPostService.Comments();
+            IEnumerable<AdminCommentViewModel> comments = await this.adminPostService.Comments(postId);
 
             return View(comments);
         }
@@ -73,7 +73,7 @@ namespace SmartParkInnovate.Areas.Admin.Controllers
             try
             {
                 await this.adminPostService.DeleteComment(workerId, postId, commentGuid);
-                return RedirectToAction(nameof(PostComments));
+                return RedirectToAction(nameof(PostComments), new { postId });
             }
             catch (ArgumentException argException)
             {
@@ -91,7 +91,7 @@ namespace SmartParkInnovate.Areas.Admin.Controllers
             try
             {
                 await this.adminPostService.ReturnComment(workerId, postId, commentGuid);
-                return RedirectToAction(nameof(PostComments));
+                return RedirectToAction(nameof(PostComments), new { postId });
             }
             catch (ArgumentException argException)
             {
