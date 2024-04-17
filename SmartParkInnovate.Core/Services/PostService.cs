@@ -46,12 +46,11 @@ namespace SmartParkInnovate.Core.Services
 
 
         /// <summary>
-        /// 
+        /// Add Post functionality. Every user is allowed to publish a post with specific details (Usually connected with a parking spot situation)
         /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentException"></exception>
+        /// <param name="userId">the id of the user</param>
+        /// <param name="model">post form model in order to get the post data</param>
+        /// <exception cref="ArgumentException">It throws the exception if the user is invalid</exception>
         public async Task Add(string userId, PostFormModel model)
         {
             Worker? worker = await this.repository.GetByIdAsync<Worker>(userId);
@@ -72,6 +71,14 @@ namespace SmartParkInnovate.Core.Services
             await this.repository.SaveChangesAsync();
         }
 
+
+        /// <summary>
+        /// Gets the details of the selected post
+        /// </summary>
+        /// <param name="userId">getting the user Id and adding it in the object in order to check if the post is his so he can edit it</param>
+        /// <param name="postId">the id of the selected post</param>
+        /// <returns>detail view object with more detailed post information</returns>
+        /// <exception cref="ArgumentException">throws the exception if the post is invalid</exception>
         public async Task<PostDetailModel> Details(string userId, int postId)
         {
             PostDetailModel? postModel = await this.repository.AllAsReadOnly<Post>()
@@ -112,6 +119,14 @@ namespace SmartParkInnovate.Core.Services
             return postModel;
         }
 
+
+        /// <summary>
+        /// This fuctionality allows the users to like the selected post
+        /// </summary>
+        /// <param name="postId">The selected post to like</param>
+        /// <param name="userId">the user that will like the post</param>
+        /// <exception cref="ArgumentException">throws an exception if the worker/post are invalid and also if the post is already deleted 
+        /// (not allowed to like a deleted post)</exception>
         public async Task LikePost(int postId, string userId)
         {
             Post? post = await this.repository.All<Post>()
@@ -158,6 +173,16 @@ namespace SmartParkInnovate.Core.Services
             }
         }
 
+
+
+        /// <summary>
+        /// This functionality allows the user to comment on a selected post
+        /// </summary>
+        /// <param name="postId">the id of the selected post</param>
+        /// <param name="userId">the id of the user that will comment the post</param>
+        /// <param name="comment">the comment details</param>
+        /// <exception cref="ArgumentException">throws an exception if the worker/post are invalid and also if the post is already deleted 
+        /// (not allowed to comment a deleted post)</exception>
         public async Task Comment(int postId, string userId, CommentFormModel comment)
         {
             Post? post = await this.repository.GetByIdAsync<Post>(postId);
@@ -192,6 +217,15 @@ namespace SmartParkInnovate.Core.Services
             await this.repository.SaveChangesAsync();
         }
 
+
+        /// <summary>
+        /// This functionality allows the user to edit a post published by him/her
+        /// </summary>
+        /// <param name="postId">the id of the post that will be edited</param>
+        /// <param name="currentUser">the user that will be editing the post</param>
+        /// <param name="model">the new post details</param>
+        /// <exception cref="ArgumentException">the exception is thrown if the selected post is invalid</exception>
+        /// <exception cref="InvalidOperationException">the exception is thrown if the worker is not the owner of the post or if the post is deleted</exception>
         public async Task Edit(int postId, string currentUser, PostFormModel model)
         {
             Post? postToEdit = await this.repository.All<Post>()
@@ -216,6 +250,13 @@ namespace SmartParkInnovate.Core.Services
             await this.repository.SaveChangesAsync();
         }
 
+
+        /// <summary>
+        /// This will get the post by Id in order to get the old post data that will be edited. 
+        /// This allows the user to get the current information and in this case, he will not write it all over again (can fix typos easily this way)
+        /// </summary>
+        /// <param name="id">the id of the post that will be deleted</param>
+        /// <exception cref="ArgumentException">If the post that is selected is invalid</exception>
         public async Task<PostFormModel> GetPostById(int id)
         {
             Post? post = await this.repository.GetByIdAsync<Post>(id);
