@@ -20,7 +20,11 @@ namespace SmartParkInnovate.Core.Services
         {
             this.repository = repository;
         }
-
+        /// <summary>
+        /// This is a use parking spot function which allows the user to use a specific parking spot.
+        /// </summary>
+        /// <exception cref="ArgumentException">It gets exception if an invalid object is passed for the operation</exception>
+        /// <exception cref="InvalidOperationException">It gets exception if a user makes an attempt to use already occupied parking spot</exception>
         public async Task Use(int id, string userId, UseSpotVehicleFormModel vehicleModel)
         {
             ParkingSpot? parkingSpot = await this.repository.All<ParkingSpot>()
@@ -85,6 +89,12 @@ namespace SmartParkInnovate.Core.Services
             await this.repository.SaveChangesAsync();
         }
 
+
+        /// <summary>
+        /// This is exit parking spot functionality which allows the user to leave the specified parking spot
+        /// </summary>
+        /// <exception cref="ArgumentException">It gets exception if an invalid object is passed for the operation</exception>
+        /// <exception cref="InvalidOperationException">It gets exception if the user tries to leave unoccupied parking spot</exception>
         public async Task Exit(int id, string userId)
         {
             ParkingSpot? parkingSpot = await this.repository.All<ParkingSpot>()
@@ -131,6 +141,12 @@ namespace SmartParkInnovate.Core.Services
             await this.repository.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// Provides details for the selected parking spot
+        /// </summary>
+        /// <param name="userId">The user id is used in order to add the current user to the view model so we can check if he can leave the spot (if decided)</param>
+        /// <returns>Parking Spot Details object</returns>
+        /// <exception cref="ArgumentException">It gets exception if the parking spot is invalid (Non existing)</exception>
         public async Task<ParkingSpotDetailsModel> Details(int id, string userId)
         {
             ParkingSpotDetailsModel? model = await this.repository.AllAsReadOnly<ParkingSpot>()
@@ -162,6 +178,11 @@ namespace SmartParkInnovate.Core.Services
             return model;
         }
 
+
+        /// <summary>
+        /// It gets all the parking spots that are added by the admin or seeded in the database as default.
+        /// </summary>
+        /// <returns>A collection of parking spots</returns>
         public async Task<IEnumerable<ParkingSpotViewModel>> ParkingSpots()
         {
             var parkingSpots = await this.repository.AllAsReadOnly<ParkingSpot>()
@@ -176,6 +197,12 @@ namespace SmartParkInnovate.Core.Services
             return parkingSpots;
         }
 
+
+        /// <summary>
+        /// This is the general parking spot information, it allows the user to know the total count, total free and total occupied spots. 
+        /// Also provides the user with today's date
+        /// </summary>
+        /// <returns>general information object</returns>
         public GeneralParkingInformationModel GeneralParkingSpotInformation()
         {
             int freeSpots =  repository.AllAsReadOnly<ParkingSpot>().Where(c => c.IsOccupied == false).Count();
