@@ -25,7 +25,7 @@ namespace SmartParkInnovate.Areas.Identity.Pages.Account
             this.userManager = userManager;
             this.logger = logger;
         }
-     
+
         [BindProperty]
         public InputModel Input { get; set; }
 
@@ -69,7 +69,7 @@ namespace SmartParkInnovate.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var result 
+                var result
                     = await signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
 
                 if (result.Succeeded)
@@ -77,14 +77,7 @@ namespace SmartParkInnovate.Areas.Identity.Pages.Account
                     var user = await this.userManager.FindByEmailAsync(Input.Email);
                     logger.LogInformation("User logged in.");
 
-                    if (await this.userManager.IsInRoleAsync(user, AdminRole))
-                    {
-                        return RedirectToAction("Dashboard", "Home", new { Area = AdminAreaName});
-                    }
-                    else
-                    {
-                        return LocalRedirect(returnUrl);
-                    }
+                    return LocalRedirect(returnUrl);
                 }
                 else
                 {
