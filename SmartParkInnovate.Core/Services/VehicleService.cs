@@ -17,6 +17,15 @@ namespace SmartParkInnovate.Core.Services
             this.repository = repository;
         }
 
+
+
+        /// <summary>
+        /// This functionality allows the user to add a vehicle to his collection of vehicles
+        /// </summary>
+        /// <param name="userId">id of the vehicle owner</param>
+        /// <param name="vehicleModel">vehicle details</param>
+        /// <exception cref="InvalidOperationException">The exception is thrown if the vehicle is already added</exception>
+        /// <exception cref="ArgumentException">if the user is invalid (Non existent)</exception>
         public async Task Add(string userId, VehicleFormModel vehicleModel)
         {
             bool isVehicleAlreadyAdded = await this.repository
@@ -48,6 +57,15 @@ namespace SmartParkInnovate.Core.Services
             await this.repository.SaveChangesAsync();
         }
 
+
+
+        /// <summary>
+        /// This functionality allows the user to check the details of his vehicle
+        /// </summary>
+        /// <param name="id">vehicle id</param>
+        /// <param name="userId">id of the user</param>
+        /// <returns>detailed vehicle model</returns>
+        /// <exception cref="ArgumentException">if the model is invalid</exception>
         public async Task<VehicleDetailsViewModel> Details(int id, string userId)
         {
             VehicleDetailsViewModel? model = await this.repository.AllAsReadOnly<Vehicle>()
@@ -82,6 +100,13 @@ namespace SmartParkInnovate.Core.Services
             return model;
         }
 
+
+
+        /// <summary>
+        /// This functionality allows the user to check his vehicles
+        /// </summary>
+        /// <param name="userId">the id of the vehicles owner</param>
+        /// <returns>collection of vehicles</returns>
         public async Task<IEnumerable<VehicleViewModel>> MyVehicles(string userId)
         {
             IEnumerable<VehicleViewModel> vehicles = await this.repository.AllAsReadOnly<Vehicle>()
